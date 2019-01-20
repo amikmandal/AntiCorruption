@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "gretel.com.linex"
+        applicationId "gretel.com.mendit"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
