@@ -15,10 +15,6 @@ import gretel.com.mendit.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> myNames = new ArrayList<String>();
-    private ArrayList<String> myProfilePhotos = new ArrayList<String>();
-    private ArrayList<String> myPayments = new ArrayList<String>();
-
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -46,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         getData();
@@ -55,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void getData(){
 
-        initRecyclerView();
+        Data data = new Data();
+        data.createDataFromFiles();
+        initRecyclerView(data);
     }
 
-    private void initRecyclerView()
+    private void initRecyclerView(Data d)
     {
-        //get data
-
         //call recyclerview
         RecyclerView recyclerView = findViewById(R.id.main_recycler_view);
-        MainActivityRecyclerViewAdapter adapter = new MainActivityRecyclerViewAdapter(myProfilePhotos, myNames, myPayments, this);
+        MainActivityRecyclerViewAdapter adapter = new MainActivityRecyclerViewAdapter(d.getData(),this);
         recyclerView.setAdapter(adapter);
 
         //check this

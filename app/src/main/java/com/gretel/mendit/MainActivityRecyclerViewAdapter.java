@@ -6,51 +6,44 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import gretel.com.mendit.R;
 
 public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainActivityRecyclerViewAdapter.ViewHolder>{
 
     private ArrayList<String> myProfilePhotos = new ArrayList<String>();
     private ArrayList<String> myRepairerNames = new ArrayList<String>();
-    private ArrayList<String> myRatings = new ArrayList<String>();
+    private ArrayList<Double> myRatings = new ArrayList<Double>();
+    private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public MainActivityRecyclerViewAdapter(ArrayList<String> profilePhotos, ArrayList<String> repairers, ArrayList ratings, Context context){
-        myProfilePhotos = profilePhotos;
-        myRepairerNames = repairers;
-        myRatings = ratings;
+    public MainActivityRecyclerViewAdapter(TreeMap<String, NameEntry> data, Context context){
+        for(String id: data.keySet()){
+            myProfilePhotos.add(data.get(id).getDisplayPicture());
+            myRepairerNames.add(data.get(id).getName());
+            myRatings.add(data.get(id).getRating());
+            mySpecialities.add(data.get(id).getSpeciality());
+        }
         myContext = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View mainView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_main, viewGroup, false);
-        ViewHolder holder = new ViewHolder(mainView);
-        return holder;
+        LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = mInflater.inflate(R.layout.mechanic_holder,viewGroup,false);
+        final MainActivityRecyclerViewAdapter.ViewHolder mechanicHolder = new MainActivityRecyclerViewAdapter.ViewHolder(row);
+        return  mechanicHolder;
     }
 
     @Override
@@ -61,26 +54,32 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
                 .into(viewHolder.profilePhoto);
 
         viewHolder.repairerName.setText(myRepairerNames.get(position));
-        viewHolder.repairerRatings.setText(myRepairerNames.get(position));
+        viewHolder.repairerRatings.setText(myRatings.get(position).toString());
+        viewHolder.repairerSpecialities.setText(mySpecialities.get(position));
     }
 
     //not meant to be 0. To be changed to a variable based on database.
     @Override
     public int getItemCount() {
-        return 0;
+        return myRepairerNames.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profilePhoto;
         TextView repairerName;
         TextView repairerRatings;
-        RelativeLayout parentLayout;
+        TextView repairerSpecialities;
+        RelativeLayout relativeLayout;
+        LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            relativeLayout=itemView.findViewById(R.id.main_relative_layout);
             profilePhoto=itemView.findViewById(R.id.repairer_profile_photo);
             repairerName=itemView.findViewById(R.id.repairer_name);
-            repairerRatings=itemView.findViewById(R.id.line_partner_text_view);
+            linearLayout=itemView.findViewById(R.id.rating_linear_layout);
+            repairerRatings=itemView.findViewById(R.id.repairer_rating);
+            repairerSpecialities=itemView.findViewById(R.id.repairer_speciality);
         }
     }
 }
