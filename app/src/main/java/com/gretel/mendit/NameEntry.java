@@ -18,13 +18,15 @@ public class NameEntry {
      * @param speciality The popularity of the current entry
      * @param displayPicture The rank of the current entry
      */
-    NameEntry(String name, double rating, String speciality, String displayPicture){
+    NameEntry(String displayPicture, String name, double rating, String speciality){
         myName = name;
         myRating = rating;
         mySpeciality = speciality;
         myDisplayPicture = displayPicture;
     }
 
+    NameEntry(){
+    }
     /**
      * This returns the name
      * @return the name of given entry

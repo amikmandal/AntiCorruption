@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1060976393961",
+    "firebase_url": "https://mendit-8fad8.firebaseio.com",
+    "project_id": "mendit-8fad8",
+    "storage_bucket": "mendit-8fad8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060976393961:android:f0c8dc6c444f83ab",
+        "android_client_info": {
+          "package_name": "gretel.com.mendit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060976393961-oucu0j3fs428arsk8nndh4rctj3h7135.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gretel.com.mendit",
+            "certificate_hash": "5ff3c9f08e619430124eedb7fb2c07519806b59c"
+          }
+        },
+        {
+          "client_id": "1060976393961-ukon6q7ipg458pu3nsemmdnm3gok9i6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkgbr1_BB7IwqmpiTr8XGh_6gQ_SzOW18"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060976393961-ukon6q7ipg458pu3nsemmdnm3gok9i6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

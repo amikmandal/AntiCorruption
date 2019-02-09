@@ -7,10 +7,11 @@ package com.gretel.mendit;
  * @version 1.0
  */
 
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Data {
-    private TreeMap<String, NameEntry> myData = new TreeMap<>();
+    private HashSet<NameEntry> myData = new HashSet<>();
     //private TreeMap<String, ArrayList<String>> myMetaData = new TreeMap<>();
 
     /**
@@ -18,18 +19,38 @@ public class Data {
      */
     public void createDataFromFiles() {
         String[] record1 = {"Mary","3.6","Computers","https://media.beliefnet.com/~/media/photos-with-attribution/faith/misc/marymother.jpg?as=1&w=400"};
-        storeInMap(Integer.toString(1),record1);
+        storeInMap(record1);
+        String[] record2 = {"Anna","4.1","Furniture","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU3OTIwMTk4MzkxNzY5MDM4/anna-faris-attends-the-22nd-annual-screen-actors-guild-awards-at-the-shrine-auditorium-on-january-30--in-los-angeles-california-photo-by-dan-macmedan_wireimage-square.jpg"};
+        storeInMap(record2);
+        String[] record3 = {"Emma","3.8","Cars","https://m.media-amazon.com/images/M/MV5BMTQ3ODE2NTMxMV5BMl5BanBnXkFtZTgwOTIzOTQzMjE@._V1_UY317_CR21,0,214,317_AL_.jpg"};
+        storeInMap(record3);
+        String[] record4 = {"Elizabeth","3.9","Cars","https://img1.thelist.com/img/gallery/the-untold-truth-of-elizabeth-taylor/intro-1533659497.jpg"};
+        storeInMap(record4);
+        String[] record5 = {"Minnie","4.5","Electrical","https://images-na.ssl-images-amazon.com/images/I/61WzQgJdUbL.jpg"};
+        storeInMap(record5);
+        String[] record6 = {"Margaret","4.2","Computers","https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Margaret_Qualley_by_Gage_Skidmore.jpg/220px-Margaret_Qualley_by_Gage_Skidmore.jpg"};
+        storeInMap(record6);
+        String[] record7 = {"Ida","4.9","Electronics","https://m.media-amazon.com/images/M/MV5BMmMxYTdlZDctMmZjMC00MjEyLWIwZWMtY2Y0MTg1YzQ1ZDIxXkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_.jpg"};
+        storeInMap(record7);
+        String[] record8 = {"Alice","3.5","Smartphones","https://www-tc.pbs.org/wgbh/americanexperience/media/filer_public_thumbnails/filer_public/25/c9/25c9ad10-5f28-441d-8857-cd9c2ea137e2/wilson-alice-paul-1919-loc.jpg__400x574_q85_crop_subsampling-2_upscale.jpg"};
+        storeInMap(record8);
     }
 
 
     /**
      * This method stores data in myData
-     * @param id This takes in the year which will act as key for myData
      * @param entry This takes in the string entry which will be converted manually into a NameEntry but it was never used
      */
-    private void storeInMap(String id, String[] entry){
-        NameEntry newEntry = new NameEntry(entry[0], Double.parseDouble(entry[1]), entry[2], entry[3]);
-        myData.put(id, newEntry);
+    public void storeInMap(String[] entry){
+        NameEntry newEntry = new NameEntry(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
+        //myData.add(newEntry);
+
+        FirebaseManager firebaseManager = new FirebaseManager();
+        firebaseManager.addRepairer(newEntry);
+    }
+
+    public void addMechanic(NameEntry n){
+        myData.add(n);
     }
 
     /**
@@ -134,7 +155,7 @@ public class Data {
      * This method returns myData created
      * @return the treemap myData for a given Data object
      */
-    public TreeMap<String, NameEntry> getData(){
+    public HashSet<NameEntry> getData(){
         return myData;
     }
 

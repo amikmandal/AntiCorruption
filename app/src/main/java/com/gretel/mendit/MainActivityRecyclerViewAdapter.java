@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,12 +28,12 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
     private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public MainActivityRecyclerViewAdapter(TreeMap<String, NameEntry> data, Context context){
-        for(String id: data.keySet()){
-            myProfilePhotos.add(data.get(id).getDisplayPicture());
-            myRepairerNames.add(data.get(id).getName());
-            myRatings.add(data.get(id).getRating());
-            mySpecialities.add(data.get(id).getSpeciality());
+    public MainActivityRecyclerViewAdapter(HashSet<NameEntry> data, Context context){
+        for(NameEntry temp: data){
+            myProfilePhotos.add(temp.getDisplayPicture());
+            myRepairerNames.add(temp.getName());
+            myRatings.add(temp.getRating());
+            mySpecialities.add(temp.getSpeciality());
         }
         myContext = context;
     }

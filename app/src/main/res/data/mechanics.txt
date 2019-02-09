@@ -1,8 +1,0 @@
-Mary,3.6,Computers,mary.jpg
-Anna,4.1,Furnitures,anna.jpeg
-Emma,3.8,Cars,emma.jpg
-Elizabeth,3.9,Cars,elizabeth.jpg
-Minnie,4.5,Electrical,minnie.png
-Margaret,4.2,Computers,margaret.jpg
-Ida,4.9,Electronics,ida.jpg
-Alice,3.5,Smartphones and Mobiles,alice.jpg
