@@ -1,13 +1,14 @@
 package com.gretel.mendit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,46 +20,49 @@ import gretel.com.mendit.R;
 
 public class RepairerListActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private Data myData;
     private RecyclerView myRecyclerView;
     private RepairerListAdapter myAdapter;
-    DatabaseReference databaseMechanics;
+    private DatabaseReference databaseMechanics;
+    private BottomNavigationView myBottomNavigationView;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repairer_list);
 
+        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(myIntent);
+                        break;
+                    case R.id.navigation_dashboard:
+                        break;
+                    case R.id.navigation_notifications:
+                        break;
+                }
+                return false;
+            }
+        };
+
         myData = new Data();
         //myData.createDataFromFiles();
-        mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        myBottomNavigationView = findViewById(R.id.navigation);
+        myBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Menu menu = myBottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
 
         databaseMechanics = FirebaseDatabase.getInstance().getReference("mechanics");
 
-        getData();
+        initRecyclerView(myData);
     }
 
     @Override
@@ -88,8 +92,7 @@ public class RepairerListActivity extends AppCompatActivity {
 
                     NameEntry temp = new NameEntry(dataPath,name,rating,speciality);
                     myData.addMechanic(temp);
-
-                    myAdapter = new RepairerListAdapter(myData.getData(), getApplicationContext());
+                    myAdapter = new RepairerListAdapter(myData.getRepairerList(), getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);
                 }
             }
@@ -102,15 +105,11 @@ public class RepairerListActivity extends AppCompatActivity {
 
     }
 
-    public void getData(){
-        initRecyclerView(myData);
-    }
-
     private void initRecyclerView(Data d)
     {
         //call RecyclerView
         myRecyclerView = findViewById(R.id.repairer_list_recycler_view);
-        RepairerListAdapter adapter = new RepairerListAdapter(d.getData(),this);
+        RepairerListAdapter adapter = new RepairerListAdapter(d.getRepairerList(),this);
         myRecyclerView.setAdapter(adapter);
 
         //check this

@@ -5,43 +5,47 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import gretel.com.mendit.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView myTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    myTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    Intent myIntent = new Intent(getApplicationContext(), RepairerListActivity.class);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_notifications:
-                    myTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
+    private BottomNavigationView myBottomNavigationView;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        break;
+                    case R.id.navigation_dashboard:
+                        Intent myIntent = new Intent(getApplicationContext(), RepairerListActivity.class);
+                        startActivity(myIntent);
+                        break;
+                    case R.id.navigation_notifications:
+                        myIntent = new Intent(getApplicationContext(), UserActivity.class);
+                        startActivity(myIntent);
+                        break;
+                }
+                return false;
+            }
+        };
+
+        myBottomNavigationView = findViewById(R.id.navigation);
+        myBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Menu menu = myBottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
     }
 
 }

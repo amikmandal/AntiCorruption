@@ -6,13 +6,19 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseManager {
     DatabaseReference databaseMechanics;
 
-    public void addRepairer(NameEntry n){
-        databaseMechanics = FirebaseDatabase.getInstance().getReference("mechanics");
+    FirebaseManager(String database){
+        databaseMechanics = FirebaseDatabase.getInstance().getReference(database);
+    }
 
+    public void addRepairer(NameEntry n){
         String id = databaseMechanics.push().getKey();
         NameEntry nameEntry = new NameEntry(n.getDisplayPicture(), n.getName(), n.getRating(), n.getSpeciality());
-
         databaseMechanics.child(id).setValue(nameEntry);
+    }
+
+    public void addUser(User u){
+        String id = databaseMechanics.push().getKey();
+        databaseMechanics.child(id).setValue(u);
     }
 
 }
