@@ -3,8 +3,6 @@ package com.gretel.mendit;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 public class FirebaseManager {
     DatabaseReference databaseMechanics;
 

@@ -14,13 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import gretel.com.mendit.R;
 
-public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainActivityRecyclerViewAdapter.ViewHolder>{
+public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapter.ViewHolder>{
 
     private ArrayList<String> myProfilePhotos = new ArrayList<String>();
     private ArrayList<String> myRepairerNames = new ArrayList<String>();
@@ -28,7 +27,7 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
     private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public MainActivityRecyclerViewAdapter(HashSet<NameEntry> data, Context context){
+    public RepairerListAdapter(HashSet<NameEntry> data, Context context){
         for(NameEntry temp: data){
             myProfilePhotos.add(temp.getDisplayPicture());
             myRepairerNames.add(temp.getName());
@@ -43,7 +42,7 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = mInflater.inflate(R.layout.mechanic_holder,viewGroup,false);
-        final MainActivityRecyclerViewAdapter.ViewHolder mechanicHolder = new MainActivityRecyclerViewAdapter.ViewHolder(row);
+        final RepairerListAdapter.ViewHolder mechanicHolder = new RepairerListAdapter.ViewHolder(row);
         return  mechanicHolder;
     }
 
@@ -75,7 +74,7 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            relativeLayout=itemView.findViewById(R.id.main_relative_layout);
+            relativeLayout=itemView.findViewById(R.id.repairer_list_relative_layout);
             profilePhoto=itemView.findViewById(R.id.repairer_profile_photo);
             repairerName=itemView.findViewById(R.id.repairer_name);
             linearLayout=itemView.findViewById(R.id.rating_linear_layout);
