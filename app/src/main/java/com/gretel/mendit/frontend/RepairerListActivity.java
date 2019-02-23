@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.gretel.mendit.frontend.adapters.RepairerListAdapter;
+import com.gretel.mendit.backend.NameEntry;
+import com.gretel.mendit.util.Data;
 
 import gretel.com.mendit.R;
 
@@ -45,6 +48,8 @@ public class RepairerListActivity extends AppCompatActivity {
                     case R.id.navigation_dashboard:
                         break;
                     case R.id.navigation_notifications:
+                        myIntent = new Intent(getApplicationContext(), UserActivity.class);
+                        startActivity(myIntent);
                         break;
                 }
                 return false;

@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(myIntent);
                         break;
                     case R.id.navigation_dashboard:
-                        Intent myIntent = new Intent(getApplicationContext(), RepairerListActivity.class);
+                        myIntent = new Intent(getApplicationContext(), RepairerListActivity.class);
                         startActivity(myIntent);
                         break;
                     case R.id.navigation_notifications:

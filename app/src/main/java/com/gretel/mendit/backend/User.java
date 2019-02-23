@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.backend;
 
 /**
  * This class implements storing a single line of the file (for example: Emma,F,19728) for easy access as a single object.
@@ -9,6 +9,7 @@ public class User {
     private String myEmail;
     private String myNumber;
     private String myAddress;
+    private String myid;
 
     /**
      * This constructs the class with name,gender,popularity and rank
@@ -18,15 +19,21 @@ public class User {
      * @param address The address of the user
      * @param displayPicture The rank of the current entry
      */
-    User(String displayPicture, String name, String email, String address, String number){
+    public User(String displayPicture, String name, String email, String address, String number, String id){
         myName = name;
         myNumber = number;
         myAddress = address;
         myEmail = email;
         myDisplayPicture = displayPicture;
+        myid = id;
     }
 
-    User(){
+    public User(String displayPicture, String name, String email, String address, String number){
+        myName = name;
+        myNumber = number;
+        myAddress = address;
+        myEmail = email;
+        myDisplayPicture = displayPicture;
     }
 
     /**
@@ -67,6 +74,10 @@ public class User {
      */
     public String getDisplayPicture(){
         return myDisplayPicture;
+    }
+
+    public String getID() {
+        return myid;
     }
 
 }

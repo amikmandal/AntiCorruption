@@ -1,23 +1,24 @@
-package com.gretel.mendit;
+package com.gretel.mendit.frontend;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.gretel.mendit.backend.User;
+import com.gretel.mendit.frontend.RepairerListActivity;
+import com.gretel.mendit.util.Data;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import gretel.com.mendit.R;
@@ -90,7 +91,7 @@ public class UserActivity extends AppCompatActivity {
 
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
                     int index = 0;
-                    String dataPath = "", name = "", email = "", number = "", address = "";
+                    String dataPath = "", name = "", email = "", number = "", address = "", id = "";
                     for (DataSnapshot e : d.getChildren()) {
                         if (index == 0) {
                             address = e.getValue(String.class);
@@ -98,30 +99,34 @@ public class UserActivity extends AppCompatActivity {
                             dataPath = e.getValue(String.class);
                         } else if (index == 2) {
                             email = e.getValue(String.class);
-                        } else if (index == 3) {
+                        } else if (index == 3){
+                            id = e.getValue(String.class);
+                        } else if(index == 4) {
                             name = e.getValue(String.class);
                         } else {
                             number = e.getValue(String.class);
                         }
                         index++;
                     }
-                    User temp = new User(dataPath,name,email,address,number);
+                    User temp = new User(dataPath,name,email,address,number,id);
                     myData.addUser(temp);
 
-                    int i=0;
                     for(User u: myData.getUserList()){
-                        if(i==1){
+                        if(u.getID().equals("-LYzBSZoPaCKcB8bl19H")){
                             myTextName.setText(u.getName());
                             myTextAddress.setText(u.getAddress());
                             myTextEmail.setText(u.getEmail());
                             myTextNumber.setText(u.getNumber());
 
-                            Glide.with(getApplicationContext())
-                                    .asBitmap()
+                            Picasso.get()
                                     .load(u.getDisplayPicture())
                                     .into(myProfilePhoto);
+
+//                            Glide.with(getApplicationContext())
+//                                    .asBitmap()
+//                                    .load(u.getDisplayPicture())
+//                                    .into(myProfilePhoto);
                         }
-                        i++;
                     }
 
                 }

@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.frontend.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+
+import com.gretel.mendit.backend.NameEntry;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,10 +47,14 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Glide.with(myContext)
-                .asBitmap()
+        Picasso.get()
                 .load(myProfilePhotos.get(position))
                 .into(viewHolder.profilePhoto);
+
+//        Glide.with(myContext)
+//                .asBitmap()
+//                .load(myProfilePhotos.get(position))
+//                .into(viewHolder.profilePhoto);
 
         viewHolder.repairerName.setText(myRepairerNames.get(position));
         viewHolder.repairerRatings.setText(myRatings.get(position).toString());

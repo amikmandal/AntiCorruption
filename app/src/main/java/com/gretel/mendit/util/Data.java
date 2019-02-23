@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.util;
 
 /**
  *This class implements making a treemap called myData to store all the source data in a treemap of string and arraylist
@@ -6,6 +6,10 @@ package com.gretel.mendit;
  * @author Amik Mandal
  * @version 1.0
  */
+
+import com.gretel.mendit.backend.FirebaseManager;
+import com.gretel.mendit.backend.NameEntry;
+import com.gretel.mendit.backend.User;
 
 import java.util.HashSet;
 

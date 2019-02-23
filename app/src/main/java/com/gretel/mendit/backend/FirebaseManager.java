@@ -1,4 +1,4 @@
-package com.gretel.mendit;
+package com.gretel.mendit.backend;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseManager {
     DatabaseReference databaseMechanics;
 
-    FirebaseManager(String database){
+    public FirebaseManager(String database){
         databaseMechanics = FirebaseDatabase.getInstance().getReference(database);
     }
 
@@ -18,7 +18,8 @@ public class FirebaseManager {
 
     public void addUser(User u){
         String id = databaseMechanics.push().getKey();
-        databaseMechanics.child(id).setValue(u);
+        User user = new User(u.getDisplayPicture(),u.getName(),u.getEmail(),u.getAddress(),u.getNumber(),id);
+        databaseMechanics.child(id).setValue(user);
     }
 
 }

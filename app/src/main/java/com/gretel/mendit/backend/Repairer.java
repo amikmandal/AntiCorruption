@@ -1,4 +1,6 @@
-package com.gretel.mendit;
+package com.gretel.mendit.backend;
+
+import com.gretel.mendit.backend.NameEntry;
 
 public class Repairer {
     private NameEntry myNameEntry;
