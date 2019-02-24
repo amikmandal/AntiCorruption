@@ -1,4 +1,4 @@
-package com.gretel.mendit.frontend;
+package com.gretel.mendit.frontend.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

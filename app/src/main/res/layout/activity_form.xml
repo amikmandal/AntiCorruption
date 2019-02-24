@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gretel.mendit.frontend.activities.FormActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/scrapknot_profile_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="65dp"
+        android:src="@drawable/user" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_profile_text_view"
+        android:layout_below="@+id/scrapknot_profile_photo"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:text="Create Profile"
+        android:textSize="45dp"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_profile_text_view"
+        android:id="@+id/info_text_view"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="28dp"
+        android:textColor="#aaaaaa"
+        android:text="We need some more info to get you started"
+        android:textSize="15dp"
+       />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_text_view"
+        android:id="@+id/form_input"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="65dp"
+        android:backgroundTint="#0f0940"
+        android:hint="wakjdsnglkdsnmlknlkdsnlkdsng"
+        android:autofillHints="" />
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_text_view"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="35dp"
+        app:ccp_countryPreference="us,in"
+        />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/next_button"
+        android:layout_toRightOf="@+id/form_input"
+        android:layout_below="@+id/info_text_view"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/next"
+        />
+
+</RelativeLayout>

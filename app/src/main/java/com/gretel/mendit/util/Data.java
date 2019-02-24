@@ -7,7 +7,6 @@ package com.gretel.mendit.util;
  * @version 1.0
  */
 
-import com.gretel.mendit.backend.FirebaseManager;
 import com.gretel.mendit.backend.NameEntry;
 import com.gretel.mendit.backend.User;
 
@@ -28,7 +27,7 @@ public class Data {
     /**
      * This method creates Data from Files
      */
-    public void createDataFromFiles() {
+    public void createSampleMechanicData() {
         String[] record1 = {"Mary","3.6","Computers","https://media.beliefnet.com/~/media/photos-with-attribution/faith/misc/marymother.jpg?as=1&w=400"};
         uploadMechanic(record1);
         String[] record2 = {"Anna","4.1","Furniture","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU3OTIwMTk4MzkxNzY5MDM4/anna-faris-attends-the-22nd-annual-screen-actors-guild-awards-at-the-shrine-auditorium-on-january-30--in-los-angeles-california-photo-by-dan-macmedan_wireimage-square.jpg"};
@@ -47,7 +46,7 @@ public class Data {
         uploadMechanic(record8);
     }
 
-    public void createUserFromFiles() {
+    public void createSampleUserData() {
         String[] record1 = {"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Liam_Hemsworth_June_2016.jpg/220px-Liam_Hemsworth_June_2016.jpg","Liam","liam.hemsworth@gmail.com","9th Street, 64th Block, Apt. 123, Los Angeles, CA, USA, 27708", "(919) 123 5674"};
         uploadUser(record1);
         String[] record2 = {"https://mondrian.mashable.com/uploads%252Fcard%252Fimage%252F778467%252F8e958b3f-4c0e-43bd-87dc-7b6d8fb616ae.jpg%252F950x534__filters%253Aquality%252890%2529.jpg?signature=3Z6t55sErP1hfO1pKwdBYcIBUxs=&source=https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com","Noah","noah.trevor@gmail.com","19th Street, 60th Block, Apt. 13, New York, NY, USA, 97708", "(919) 103 5074"};
@@ -70,7 +69,7 @@ public class Data {
     }
 
     public void uploadUser(String[] entry){
-        User user  = new User(entry[0], entry[1], entry[2], entry[3], entry[4]);
+        User user  = new User(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5]);
         //myData.add(newEntry);
 
         FirebaseManager firebaseManager = new FirebaseManager("user");

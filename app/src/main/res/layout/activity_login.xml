@@ -4,16 +4,17 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.mendit.frontend.LoginActivity">
+    android:background=	"#375065"
+    tools:context="com.gretel.mendit.frontend.activities.LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login_text_view"
-        android:layout_above="@+id/login_button"
-        android:layout_marginBottom="50dp"
-        android:gravity="center"
-        android:text="hello12i409321i4qnofnewng32jt0j42t42t42tgrsg9i429jg42jgjc420gw"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_alignBottom="@+id/login_button"
+        android:id="@+id/scrapknot_profile_photo"
+        android:src="@drawable/logo"
+        android:layout_margin="5dp" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"

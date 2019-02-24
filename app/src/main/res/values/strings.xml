@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="facebook_app_id">354591461930250</string>
     <string name="fb_login_protocol_scheme">fb354591461930250</string>
+    <string name="title_activity_form">FormActivity</string>
 </resources>

@@ -1,11 +1,10 @@
-package com.gretel.mendit.frontend;
+package com.gretel.mendit.frontend.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gretel.mendit.backend.User;
-import com.gretel.mendit.frontend.RepairerListActivity;
+import com.gretel.mendit.backend.UserForm;
 import com.gretel.mendit.util.Data;
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +26,6 @@ public class UserActivity extends AppCompatActivity {
 
     private BottomNavigationView myBottomNavigationView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
-    private RecyclerView myRecyclerView;
     private DatabaseReference databaseUsers;
     private Data myData;
     private TextView myTextName;
@@ -61,6 +59,13 @@ public class UserActivity extends AppCompatActivity {
 
         myBottomNavigationView = findViewById(R.id.navigation);
         myBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //createUser
+        UserForm userForm = new UserForm();
+        if(getIntent().getExtras().containsKey("index") && getIntent().getExtras().get("index").equals(Integer.toString(userForm.getRequirementsSize()))){
+            userForm.makeUser(getIntent().getExtras());
+        }
+
 
         Menu menu = myBottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);

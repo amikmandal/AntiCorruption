@@ -4,34 +4,34 @@ package com.gretel.mendit.backend;
  * This class implements storing a single line of the file (for example: Emma,F,19728) for easy access as a single object.
  */
 public class User {
+
     private String myName;
-    private String myDisplayPicture;
+    private String myFacebookID;
+    private String myID;
     private String myEmail;
     private String myNumber;
     private String myAddress;
-    private String myid;
+    private String myDisplayPicture;
 
     /**
      * This constructs the class with name,gender,popularity and rank
-     * @param name The name for the current entry
-     * @param number The gender for the current entry
-     * @param email The popularity of the current entry
-     * @param address The address of the user
-     * @param displayPicture The rank of the current entry
+     * @param user The name for the current entry
      */
-    public User(String displayPicture, String name, String email, String address, String number, String id){
-        myName = name;
-        myNumber = number;
-        myAddress = address;
-        myEmail = email;
-        myDisplayPicture = displayPicture;
-        myid = id;
+    public User(User user, String id){
+        myName = user.getName();
+        myNumber = user.getNumber();
+        myAddress = user.getAddress();
+        myEmail = user.getEmail();
+        myFacebookID = user.getFacebookID();
+        myDisplayPicture = user.getDisplayPicture();
+        myID = id;
     }
 
-    public User(String displayPicture, String name, String email, String address, String number){
+    public User(String displayPicture, String name, String facebookID, String email, String address, String number){
         myName = name;
         myNumber = number;
         myAddress = address;
+        myFacebookID = facebookID;
         myEmail = email;
         myDisplayPicture = displayPicture;
     }
@@ -77,7 +77,9 @@ public class User {
     }
 
     public String getID() {
-        return myid;
+        return myID;
     }
+
+    public String getFacebookID() {return myFacebookID;}
 
 }

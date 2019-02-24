@@ -47,4 +47,8 @@ dependencies {
 
     //facebook
     implementation 'com.facebook.android:facebook-login:[4,5)'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //country
+    implementation 'com.hbb20:ccp:2.2.4'
 }
