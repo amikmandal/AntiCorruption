@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.gretel.mendit.backend.User;
 import com.gretel.mendit.backend.UserForm;
+import com.gretel.mendit.util.LocalStorage;
 import com.hbb20.CountryCodePicker;
 
 import gretel.com.mendit.R;
@@ -24,16 +26,13 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        int checkIndex = getIntent().getIntExtra("index",-2);
-        System.out.println("logIndex"+Integer.toString(checkIndex));
-
         myInfo = findViewById(R.id.form_input);
         myCcp = findViewById(R.id.ccp);
         myNextButton = findViewById(R.id.next_button);
 
 
 
-        UserForm userForm = new UserForm();
+        UserForm userForm = new UserForm(getApplicationContext());
 
         //get Country Code
 //        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
@@ -68,7 +67,7 @@ public class FormActivity extends AppCompatActivity {
 
     private void refreshPage() {
 
-        UserForm tempUserForm = new UserForm();
+        UserForm tempUserForm = new UserForm(getApplicationContext());
 
         Integer index = 0;
         Bundle userData = getIntent().getExtras();
@@ -90,11 +89,16 @@ public class FormActivity extends AppCompatActivity {
         } else {
 
             tempUserForm.makeUser(userData);
+            User u = tempUserForm.getUser();
+
+            LocalStorage localStorage = new LocalStorage(getApplicationContext());
+            localStorage.saveUser(u);
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
         }
 
     }
+
 
 }

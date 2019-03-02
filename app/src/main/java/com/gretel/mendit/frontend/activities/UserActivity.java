@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.gretel.mendit.backend.User;
 import com.gretel.mendit.backend.UserForm;
 import com.gretel.mendit.util.Data;
+import com.gretel.mendit.util.LocalStorage;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -61,7 +62,7 @@ public class UserActivity extends AppCompatActivity {
         myBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //createUser
-        UserForm userForm = new UserForm();
+        UserForm userForm = new UserForm(getApplicationContext());
         if(getIntent().getExtras().containsKey("index") && getIntent().getExtras().get("index").equals(Integer.toString(userForm.getRequirementsSize()))){
             userForm.makeUser(getIntent().getExtras());
         }
@@ -89,66 +90,19 @@ public class UserActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
-        databaseUsers.addValueEventListener(new ValueEventListener() {
+        LocalStorage localStorage = new LocalStorage(getApplicationContext());
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        User u = localStorage.loadUser();
 
-                for(DataSnapshot d: dataSnapshot.getChildren()) {
-                    int index = 0;
-                    String dataPath = "", name = "", email = "", number = "", address = "", id = "";
-                    for (DataSnapshot e : d.getChildren()) {
-                        if (index == 0) {
-                            address = e.getValue(String.class);
-                        } else if (index == 1) {
-                            dataPath = e.getValue(String.class);
-                        } else if (index == 2) {
-                            email = e.getValue(String.class);
-                        } else if (index == 3){
-                            id = e.getValue(String.class);
-                        } else if(index == 4) {
-                            name = e.getValue(String.class);
-                        } else {
-                            number = e.getValue(String.class);
-                        }
-                        index++;
-                    }
-                    User temp = new User(dataPath,name,email,address,number,id);
-                    myData.addUser(temp);
+        System.out.println("Email----------->"+u.getEmail());
 
-                    for(User u: myData.getUserList()){
-                        if(u.getID().equals("-LYzBSZoPaCKcB8bl19H")){
-                            myTextName.setText(u.getName());
-                            myTextAddress.setText(u.getAddress());
-                            myTextEmail.setText(u.getEmail());
-                            myTextNumber.setText(u.getNumber());
-
-                            Picasso.get()
-                                    .load(u.getDisplayPicture())
-                                    .into(myProfilePhoto);
-
-//                            Glide.with(getApplicationContext())
-//                                    .asBitmap()
-//                                    .load(u.getDisplayPicture())
-//                                    .into(myProfilePhoto);
-                        }
-                    }
-
-                }
+        myTextName.setText(u.getName());
+        myTextAddress.setText(u.getAddress());
+        myTextEmail.setText(u.getEmail());
+        myTextNumber.setText(u.getNumber());
+        Picasso.get().load(u.getDisplayPicture()).into(myProfilePhoto);
 
 
-
-
-//                    myAdapter = new RepairerListAdapter(myData.getRepairerList(), getApplicationContext());
-//                    myRecyclerView.setAdapter(myAdapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
 
     }
 

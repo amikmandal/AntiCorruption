@@ -64,16 +64,16 @@ public class Data {
         NameEntry newEntry = new NameEntry(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
         //myData.add(newEntry);
 
-        FirebaseManager firebaseManager = new FirebaseManager("mechanic");
-        firebaseManager.addRepairer(newEntry);
+//        FirebaseManager firebaseManager = new FirebaseManager("mechanic",);
+//        firebaseManager.addRepairer(newEntry);
     }
 
     public void uploadUser(String[] entry){
         User user  = new User(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5]);
         //myData.add(newEntry);
 
-        FirebaseManager firebaseManager = new FirebaseManager("user");
-        firebaseManager.addUser(user);
+//        FirebaseManager firebaseManager = new FirebaseManager("user");
+//        firebaseManager.addUser(user, "facebook");
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.gretel.mendit.util;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import org.json.JSONException;
@@ -9,7 +8,11 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+/**
+ * This class is responsible for parsing JSON objects.
+ * @author Amik Mandal
+ * @date 2/22/2019
+ */
 public class JSONParser {
 
     private static final String EMAIL = "email";
@@ -17,7 +20,12 @@ public class JSONParser {
     private static final String LAST_NAME = "last_name";
     private static final String ID = "id";
 
-    public URL readURL(JSONObject userData){
+    /**
+     * This method reads a URL from a JSON object. This is currently used for getting facebook profiles.
+     * @param userData specifies the JSON object
+     * @return the URL read
+     */
+    private URL readURL(JSONObject userData){
         URL readURL = null;
         try{
             readURL = new URL("https://graph.facebook.com/"+userData.getString(ID)+"/picture?width=250&height=250");
@@ -29,7 +37,13 @@ public class JSONParser {
         return readURL;
     }
 
-    public String readString(JSONObject userData,String field){
+    /**
+     * This method reads the string of a particular field in a JSON Object
+     * @param userData specifies the JSON Object
+     * @param field specifies the field whose String we want
+     * @return the string read
+     */
+    private String readString(JSONObject userData,String field){
         String readString = "";
         try{
             readString = userData.getString(field);
@@ -39,7 +53,12 @@ public class JSONParser {
         return readString;
     }
 
-    public Long readLong(JSONObject userData){
+    /**
+     * This method reads Long in a JSON Object. THis method currently is just used for reading ID.
+     * @param userData specifies the JSON object
+     * @return the ID read
+     */
+    private Long readLong(JSONObject userData){
         Long readLong = (long) 0;
         try{
             readLong = userData.getLong(ID);
@@ -49,6 +68,29 @@ public class JSONParser {
         return readLong;
     }
 
+    /**
+     * This method reads ID from a JSON object and returns a String version of it. A separate method
+     * for this was developed to better handle the case of returning users.
+     * @param userData specifies the JSON object
+     * @return the string version of the ID if available, if not then return empty string.
+     */
+    public String readID(JSONObject userData){
+
+        //Exceptions can be added here
+        try{
+            String test = Long.toString(userData.getLong(ID));
+            return test;
+        } catch (JSONException e){
+            return "Failed";
+        }
+    }
+
+    /**
+     * This method makes the initial set of data for user.
+     * @param userData specifies the JSON Object
+     * @return the Bundle containing key, value pair for every detail of User that can be retrieved
+     * from the JSON Object.
+     */
     public Bundle makePreliminaryUserData(JSONObject userData) {
 
         Bundle userBundle = new Bundle();
