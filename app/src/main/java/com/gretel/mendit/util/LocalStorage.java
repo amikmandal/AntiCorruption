@@ -11,13 +11,14 @@ import com.gretel.mendit.backend.User;
  * @author Amik Mandal
  */
 public class LocalStorage {
+
     private SharedPreferences myStorage;
     private SharedPreferences.Editor myEditor;
     private Context myContext;
 
     /**
      * Constructor to initialize instance variables
-     * @param context the context of the activity called from
+     * @param context specifies the context of the activity called from
      */
     public LocalStorage(Context context){
         myContext = context;
@@ -28,8 +29,8 @@ public class LocalStorage {
 
     /**
      * Method to save a string locally
-     * @param key key used to save
-     * @param value value to be stored
+     * @param key specifies the key used to save
+     * @param value specifies the value to be stored
      */
     public void saveString(String key, String value){
         myEditor.putString(key,value);
@@ -45,18 +46,27 @@ public class LocalStorage {
         return myStorage.getString(key, "");
     }
 
-    public void saveUser(User u) {
+    /**
+     * Method to store an user locally
+     * @param u specifies the user to be saved
+     * @param loginType specifies the login method used by user
+     */
+    public void saveUser(User u, String loginType) {
         saveString("name",u.getName());
         saveString("address",u.getAddress());
         saveString("number",u.getNumber());
         saveString("id",u.getFacebookID());
         saveString("email",u.getEmail());
         saveString("displayPicture",u.getDisplayPicture());
+
+        saveString("loginType",loginType);
     }
 
+    /**
+     * Method to retrieve an user that is saved locally
+     * @return the user stored locally
+     */
     public User loadUser(){
-
-        System.out.println("We trying---------->"+loadString("galapagos"));
 
         return new User (loadString("displayPicture"),
                         loadString("name"),
@@ -64,5 +74,21 @@ public class LocalStorage {
                         loadString("email"),
                         loadString("address"),
                         loadString("number"));
+    }
+
+    /**
+     * Method to delete saved data of User
+     */
+    public void removeUser(){
+
+        myStorage.edit().remove("displayPicture").apply();
+        myStorage.edit().remove("name").apply();
+        myStorage.edit().remove("id").apply();
+        myStorage.edit().remove("email").apply();
+        myStorage.edit().remove("address").apply();
+        myStorage.edit().remove("number").apply();
+
+        myStorage.edit().remove("loginType").apply();
+
     }
 }

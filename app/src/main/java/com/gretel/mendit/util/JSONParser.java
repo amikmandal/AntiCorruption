@@ -11,7 +11,6 @@ import java.net.URL;
 /**
  * This class is responsible for parsing JSON objects.
  * @author Amik Mandal
- * @date 2/22/2019
  */
 public class JSONParser {
 
@@ -91,7 +90,7 @@ public class JSONParser {
      * @return the Bundle containing key, value pair for every detail of User that can be retrieved
      * from the JSON Object.
      */
-    public Bundle makePreliminaryUserData(JSONObject userData) {
+    public Bundle makePreliminaryUserData(JSONObject userData, String loginType) {
 
         Bundle userBundle = new Bundle();
 
@@ -100,6 +99,8 @@ public class JSONParser {
         userBundle.putString("id", readLong(userData).toString());
         userBundle.putString("profilePicture", readURL(userData).toString());
         userBundle.putString("email", readString(userData,EMAIL));
+
+        userBundle.putString("loginType", loginType);
 
         return userBundle;
 

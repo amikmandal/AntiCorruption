@@ -2,22 +2,22 @@ package com.gretel.mendit.util;
 
 /**
  *This class implements making a treemap called myData to store all the source data in a treemap of string and arraylist
- * of NameEntry and a hashmap called myMetData to store some key information from myData to be used later.
+ * of Repairer and a hashmap called myMetData to store some key information from myData to be used later.
  * @author Amik Mandal
  * @version 1.0
  */
 
-import com.gretel.mendit.backend.NameEntry;
+import com.gretel.mendit.backend.Repairer;
 import com.gretel.mendit.backend.User;
 
 import java.util.HashSet;
 
 public class Data {
-    private HashSet<NameEntry> myRepairerList = new HashSet<>();
+    private HashSet<Repairer> myRepairerList = new HashSet<>();
     private HashSet<User> myUserList = new HashSet<>();
     //private TreeMap<String, ArrayList<String>> myMetaData = new TreeMap<>();
 
-    public void addMechanic(NameEntry n){
+    public void addMechanic(Repairer n){
         myRepairerList.add(n);
     }
 
@@ -58,10 +58,10 @@ public class Data {
 
     /**
      * This method stores data in myData
-     * @param entry This takes in the string entry which will be converted manually into a NameEntry but it was never used
+     * @param entry This takes in the string entry which will be converted manually into a Repairer but it was never used
      */
     public void uploadMechanic(String[] entry){
-        NameEntry newEntry = new NameEntry(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
+        Repairer newEntry = new Repairer(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
         //myData.add(newEntry);
 
 //        FirebaseManager firebaseManager = new FirebaseManager("mechanic",);
@@ -80,7 +80,7 @@ public class Data {
      * This method returns myData created
      * @return the treemap myData for a given Data object
      */
-    public HashSet<NameEntry> getRepairerList(){
+    public HashSet<Repairer> getRepairerList(){
         return myRepairerList;
     }
 

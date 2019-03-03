@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gretel.mendit.backend.NameEntry;
+import com.gretel.mendit.backend.Repairer;
 import com.gretel.mendit.backend.User;
 
 /**
@@ -29,10 +29,10 @@ public class FirebaseManager {
         myContext = context;
     }
 
-    public void addRepairer(NameEntry n){
+    public void addRepairer(Repairer n){
         String id = databaseReference.push().getKey();
-        NameEntry nameEntry = new NameEntry(n.getDisplayPicture(), n.getName(), n.getRating(), n.getSpeciality());
-        databaseReference.child(id).setValue(nameEntry);
+        Repairer repairer = new Repairer(n.getDisplayPicture(), n.getName(), n.getRating(), n.getSpeciality());
+        databaseReference.child(id).setValue(repairer);
     }
 
     /**
@@ -49,7 +49,7 @@ public class FirebaseManager {
      * @param loginType specifies the type user used to login
      * @param id specifies the unique id of the user in the login type
      */
-    public void getUser(String loginType, String id){
+    public void getUser(final String loginType, String id){
 
         databaseReference = databaseReference.child(loginType).child(id);
 
@@ -80,7 +80,7 @@ public class FirebaseManager {
                 User u = new User(displayPicture,name,id,email,address,number);
 
                 LocalStorage localStorage = new LocalStorage(myContext);
-                localStorage.saveUser(u);
+                localStorage.saveUser(u,loginType);
 
             }
 

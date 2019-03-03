@@ -44,8 +44,6 @@ public class FormActivity extends AppCompatActivity {
         if(userBundle.containsKey("index"))
             i = Integer.parseInt(userBundle.getString("index"));
 
-        System.out.println("indexChecking"+i);
-
         myCcp.setVisibility(View.GONE);
         myInfo.setHint(userForm.getRequirement(i));
 
@@ -92,7 +90,7 @@ public class FormActivity extends AppCompatActivity {
             User u = tempUserForm.getUser();
 
             LocalStorage localStorage = new LocalStorage(getApplicationContext());
-            localStorage.saveUser(u);
+            localStorage.saveUser(u, userData.getString("loginType"));
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
