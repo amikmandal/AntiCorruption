@@ -16,16 +16,34 @@
         <!-- android:theme="@style/AppTheme"> -->
         <activity
             android:name="com.gretel.mendit.frontend.activities.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.gretel.mendit.frontend.activities.RepairerListActivity"
+            >
+
+        </activity>
+        <activity
+            android:name="com.gretel.mendit.frontend.activities.LoginActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.gretel.mendit.frontend.activities.RepairerListActivity"></activity>
-        <activity android:name="com.gretel.mendit.frontend.activities.LoginActivity"></activity>
-        <activity android:name="com.gretel.mendit.frontend.activities.UserActivity"></activity>
+        <activity
+            android:name="com.gretel.mendit.frontend.activities.UserActivity"
+           >
+
+        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

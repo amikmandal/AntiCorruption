@@ -1,9 +1,7 @@
 package com.gretel.mendit.frontend.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gretel.mendit.backend.UserForm;
 import com.gretel.mendit.util.FirebaseManager;
 import com.gretel.mendit.util.JSONParser;
 import com.gretel.mendit.util.LocalStorage;
@@ -29,8 +26,6 @@ import com.gretel.mendit.util.LocalStorage;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-
-import javax.xml.datatype.Duration;
 
 import gretel.com.mendit.R;
 
@@ -48,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
         myCallbackManager = CallbackManager.Factory.create();
 
+        checkIfLoggedIn();
+
         myLoginButton = findViewById(R.id.login_button);
 
         //get permissions
@@ -62,15 +59,13 @@ public class LoginActivity extends AppCompatActivity {
                 myLoginButton.setVisibility(View.GONE);
 
                 GraphRequest loginGraphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-
 
                         JSONParser jsonParser = new JSONParser();
                         final JSONObject jsonObject = object;
                         final String id = jsonParser.readID(jsonObject);
-
-                        System.out.println("I found first!!!" + id);
 
                         DatabaseReference databaseUsers = FirebaseDatabase.getInstance().getReference("user");
                         databaseUsers = databaseUsers.child("facebook");
@@ -80,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                             public void onDataChange(DataSnapshot snapshot) {
 
                                 if (snapshot.hasChild(id)) {
-                                    System.out.println("I found it!!!! Yayyy! " + id);
 
                                     FirebaseManager firebaseManager = new FirebaseManager("user",getApplicationContext());
                                     firebaseManager.getUser("facebook", id);
@@ -127,6 +121,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkIfLoggedIn() {
+        LocalStorage localStorage = new LocalStorage(getApplicationContext());
+        String id = localStorage.loadString("id");
+
+        if(!id.equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Login Cancelled.", Toast.LENGTH_SHORT);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

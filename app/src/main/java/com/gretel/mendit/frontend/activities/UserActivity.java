@@ -9,11 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.gretel.mendit.backend.User;
 import com.gretel.mendit.backend.UserForm;
 import com.gretel.mendit.util.Data;
@@ -91,10 +88,7 @@ public class UserActivity extends AppCompatActivity {
         super.onStart();
 
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
-
         User u = localStorage.loadUser();
-
-        System.out.println("Email----------->"+u.getEmail());
 
         myTextName.setText(u.getName());
         myTextAddress.setText(u.getAddress());
@@ -104,17 +98,6 @@ public class UserActivity extends AppCompatActivity {
 
 
 
-    }
-
-    private void initUserRecyclerView(Data d)
-    {
-        //call RecyclerView
-//        myRecyclerView = findViewById(R.id.user_recycler_view);
-//        RepairerListAdapter adapter = new RepairerListAdapter(d.getRepairerList(),this);
-//        myRecyclerView.setAdapter(adapter);
-
-        //check this
-//        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

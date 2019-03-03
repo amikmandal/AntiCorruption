@@ -55,6 +55,9 @@ public class LocalStorage {
     }
 
     public User loadUser(){
+
+        System.out.println("We trying---------->"+loadString("galapagos"));
+
         return new User (loadString("displayPicture"),
                         loadString("name"),
                         loadString("id"),
