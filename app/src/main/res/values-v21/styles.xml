@@ -6,12 +6,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/ScrapKnotActivityAnimation</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -23,6 +27,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/ScrapKnotActivityAnimation</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
     <style name="ScrapKnotActivityAnimation" parent="@android:style/Animation.Activity">
@@ -30,5 +36,13 @@
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">serif-monospace</item>
     </style>
 </resources>

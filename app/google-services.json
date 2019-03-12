@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1060976393961:android:f0c8dc6c444f83ab",
+        "mobilesdk_app_id": "1:1060976393961:android:f89931e380969cb8",
         "android_client_info": {
-          "package_name": "gretel.com.mendit"
+          "package_name": "com.gretel.scrapknot"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "1060976393961-oucu0j3fs428arsk8nndh4rctj3h7135.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "gretel.com.mendit",
-            "certificate_hash": "5ff3c9f08e619430124eedb7fb2c07519806b59c"
-          }
-        },
         {
           "client_id": "1060976393961-ukon6q7ipg458pu3nsemmdnm3gok9i6n.apps.googleusercontent.com",
           "client_type": 3
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1060976393961-ukon6q7ipg458pu3nsemmdnm3gok9i6n.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

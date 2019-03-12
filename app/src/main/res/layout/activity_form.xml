@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.mendit.frontend.activities.FormActivity">
+    tools:context="com.gretel.scrapknot.frontend.activities.FormActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/scrapknot_profile_photo"

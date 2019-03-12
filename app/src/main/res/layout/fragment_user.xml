@@ -4,7 +4,7 @@
     android:id="@+id/user_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.mendit.frontend.activities.MainActivity">
+    tools:context="com.gretel.scrapknot.frontend.activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,8 @@
             android:layout_height="125dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
@@ -27,8 +28,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/user_profile_photo">
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_profile_photo">
 
             <TextView
                 android:id="@+id/user_name"
