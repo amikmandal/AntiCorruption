@@ -49,17 +49,15 @@ public class LocalStorage {
     /**
      * Method to store an user locally
      * @param u specifies the user to be saved
-     * @param loginType specifies the login method used by user
      */
-    public void saveUser(User u, String loginType) {
+    public void saveUser(User u) {
         saveString("name",u.getName());
         saveString("address",u.getAddress());
         saveString("number",u.getNumber());
         saveString("id",u.getFacebookID());
         saveString("email",u.getEmail());
         saveString("displayPicture",u.getDisplayPicture());
-
-        saveString("loginType",loginType);
+        saveString("loginType",u.getLoginType());
     }
 
     /**
@@ -73,7 +71,8 @@ public class LocalStorage {
                         loadString("id"),
                         loadString("email"),
                         loadString("address"),
-                        loadString("number"));
+                        loadString("number"),
+                        loadString("loginType"));
     }
 
     /**
@@ -90,5 +89,10 @@ public class LocalStorage {
 
         myStorage.edit().remove("loginType").apply();
 
+    }
+
+    public void editUser(User user){
+        removeUser();
+        saveUser(user);
     }
 }

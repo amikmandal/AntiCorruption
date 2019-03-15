@@ -1,6 +1,8 @@
 package com.gretel.scrapknot.util;
 
 import android.content.Context;
+import android.text.Editable;
+import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,7 +61,7 @@ public class FirebaseManager {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 int index = 0;
-                String displayPicture = "", name = "", email = "", number = "", address = "", id = "";
+                String displayPicture = "", name = "", email = "", number = "", address = "", id = "", loginType ="";
                 for (DataSnapshot e : dataSnapshot.getChildren()) {
                     if (index == 0) {
                         address = e.getValue(String.class);
@@ -69,7 +71,9 @@ public class FirebaseManager {
                         email = e.getValue(String.class);
                     } else if (index == 3){
                         id = e.getValue(String.class);
-                    } else if(index == 4) {
+                    } else if (index == 4) {
+                        loginType = e.getValue(String.class);
+                    } else if(index == 5) {
                         name = e.getValue(String.class);
                     } else {
                         number = e.getValue(String.class);
@@ -77,10 +81,10 @@ public class FirebaseManager {
                     index++;
                 }
 
-                User u = new User(displayPicture,name,id,email,address,number);
+                User u = new User(displayPicture,name,id,email,address,number,loginType);
 
                 LocalStorage localStorage = new LocalStorage(myContext);
-                localStorage.saveUser(u,loginType);
+                localStorage.saveUser(u);
 
             }
 
@@ -91,4 +95,9 @@ public class FirebaseManager {
         });
     }
 
+    public User editUser(User user){
+        databaseReference.child(user.getLoginType()).child(user.getFacebookID()).removeValue();
+        addUser(user,user.getLoginType());
+        return user;
+    }
 }

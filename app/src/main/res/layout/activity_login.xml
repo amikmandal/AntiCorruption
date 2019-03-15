@@ -4,7 +4,7 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=	"@color/logo"
+    android:background=	"@color/colorScrapknot"
     tools:context="com.gretel.scrapknot.frontend.activities.LoginActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView

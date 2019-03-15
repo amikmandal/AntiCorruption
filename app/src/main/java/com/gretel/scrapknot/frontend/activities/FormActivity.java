@@ -89,7 +89,7 @@ public class FormActivity extends AppCompatActivity {
             User u = tempUserForm.getUser();
 
             LocalStorage localStorage = new LocalStorage(getApplicationContext());
-            localStorage.saveUser(u, userData.getString("loginType"));
+            localStorage.saveUser(u);
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);

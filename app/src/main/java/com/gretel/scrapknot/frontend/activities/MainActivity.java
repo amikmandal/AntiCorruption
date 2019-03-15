@@ -12,13 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
+import com.google.common.collect.HashBiMap;
 import com.gretel.scrapknot.backend.User;
 import com.gretel.scrapknot.frontend.fragments.CallMechanicFragment;
 import com.gretel.scrapknot.frontend.fragments.ContactUsFragment;
@@ -29,6 +29,16 @@ import com.gretel.scrapknot.frontend.fragments.RepairerListFragment;
 import com.gretel.scrapknot.frontend.fragments.UserFragment;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.R;
+import com.gretel.scrapknot.util.EditButtonListener;
+import com.gretel.scrapknot.util.UserLoader;
+
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.CALL_MECHANIC;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.CONTACT_US;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.HOME;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.ORDER_LIST;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.ORDER_TRACKER;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.REPAIRER_LIST;
+import static com.gretel.scrapknot.frontend.activities.MainActivity.FragmentType.USER;
 
 /**
  * This is the main activity of the app and hosts all the fragments related to BottomNavigationBar
@@ -37,28 +47,26 @@ import com.gretel.scrapknot.R;
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
+    enum FragmentType {
+        HOME,REPAIRER_LIST,ORDER_TRACKER,USER,ORDER_LIST,CALL_MECHANIC,CONTACT_US
+    }
+
+    enum TransitionType {
+        SLIDE_LEFT,SLIDE_RIGHT,SLIDE_BOTTOM
+    }
+
     private BottomNavigationView myBottomNavigationView;
     private DrawerLayout myDrawer;
     private NavigationView myDrawerNavigationView;
     private Fragment myPrevFragment;
-
-    private LocalStorage myLocalStorage;
-    private User myUser;
-    private Integer myCurrentFragmentID;
-    private Integer myPrevFragmentID;
+    private Button myToolbarButton;
     private TextView myNavUser;
 
-    private final static Integer HOME = 0;
-    private final static Integer REPAIRER_LIST = 1;
-    private final static Integer ORDER_TRACKER = 2;
-    private final static Integer USER = -1;
-    private final static Integer ORDER_LIST = -2;
-    private final static Integer CALL_MECHANIC = -3;
-    private final static Integer CONTACT_US = -4;
+    private Integer myCurrentFragmentID;
+    private Integer myPrevFragmentID;
+    private EditButtonListener myEditButtonListener;
 
-    private final static Integer SLIDE_RIGHT = 1;
-    private final static Integer SLIDE_LEFT = -1;
-    private final static Integer SLIDE_VERTICAL = 0;
+    private HashBiMap<FragmentType,Integer> myFragmentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,36 +74,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initialize all the backend variables
-        myLocalStorage = new LocalStorage(getApplicationContext());
-        myUser = myLocalStorage.loadUser();
+        //initialize variables
+        // //initialize all the local variables
+        myFragmentID = HashBiMap.create();
+        myFragmentID.put(HOME,0);
+        myFragmentID.put(REPAIRER_LIST,1);
+        myFragmentID.put(ORDER_TRACKER,2);
+        myFragmentID.put(USER,-1);
+        myFragmentID.put(ORDER_LIST,-2);
+        myFragmentID.put(CALL_MECHANIC,-3);
+        myFragmentID.put(CONTACT_US,-4);
 
-        //initialize all the frontend variables and do the necessary
-        //toolbar frontend
+        // //initialize all the backend variables
+        UserLoader userLoader = new UserLoader(this,getApplicationContext());
+        userLoader.execute();
+
+        // //initialize all the frontend variables and do the necessary
+        // // //toolbar frontend
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        myToolbarButton = findViewById(R.id.menu_button);
 
-        //drawer fronted
+        // // //drawer fronted
         myDrawer = findViewById(R.id.main_container_drawer);
         myDrawerNavigationView = findViewById(R.id.main_nav_view);
         View headerView =  myDrawerNavigationView.getHeaderView(0);
         myNavUser = headerView.findViewById(R.id.header_greetings);
-        myNavUser.setText("Hello"+myUser.getName()+"!");
+//        myNavUser.setText("Hello"+myUser.getName()+"!");
         myDrawerNavigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,myDrawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         myDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //navigation view frontend
+        // // //navigation view frontend
         myBottomNavigationView = findViewById(R.id.navigation);
         myBottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         //start with Home Fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).addToBackStack(HOME.toString()).commit();
         myPrevFragment = new HomeFragment();
-        myPrevFragmentID = HOME;
+        myPrevFragmentID = myFragmentID.get(HOME);
         myCurrentFragmentID = myPrevFragmentID;
 
+        myToolbarButton.setVisibility(View.GONE);
+        myToolbarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (myFragmentID.inverse().get(myCurrentFragmentID)){
+                    case USER:
+                        myEditButtonListener.onEditButtonSelect(myToolbarButton);
+                        break;
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if(fragment instanceof EditButtonListener){
+            myEditButtonListener = (EditButtonListener) fragment;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myEditButtonListener = null;
     }
 
     @Override
@@ -112,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+
         } else {
             myBottomNavigationView.setVisibility(View.VISIBLE);
 
@@ -133,31 +180,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(item.getItemId()){
             case R.id.nav_user:
                 beforeOpeningDrawerFragment(item);
-                createFragment(R.id.content_frame,USER,new UserFragment(),USER.toString());
+                createFragment(R.id.content_frame,myFragmentID.get(USER),new UserFragment(),USER.toString());
                 break;
             case R.id.nav_order:
                 beforeOpeningDrawerFragment(item);
-                createFragment(R.id.content_frame,ORDER_LIST,new OrderListFragment(),ORDER_LIST.toString());
+                createFragment(R.id.content_frame,myFragmentID.get(ORDER_LIST),new OrderListFragment(),ORDER_LIST.toString());
                 break;
             case R.id.nav_contact_mechanic:
                 beforeOpeningDrawerFragment(item);
-                createFragment(R.id.content_frame,CALL_MECHANIC,new CallMechanicFragment(),CALL_MECHANIC.toString());
+                createFragment(R.id.content_frame,myFragmentID.get(CALL_MECHANIC),new CallMechanicFragment(),CALL_MECHANIC.toString());
                 break;
             case R.id.nav_contact_us:
                 beforeOpeningDrawerFragment(item);
-                createFragment(R.id.content_frame,CONTACT_US,new ContactUsFragment(),CONTACT_US.toString());
+                createFragment(R.id.content_frame,myFragmentID.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());
                 break;
             case R.id.navigation_home:
-                beforeOpeningNavFragment(new HomeFragment(), HOME);
-                createFragment(R.id.content_frame_small,HOME,new HomeFragment(),HOME.toString());
+                beforeOpeningNavFragment(new HomeFragment(), myFragmentID.get(HOME));
+                createFragment(R.id.content_frame_small,myFragmentID.get(HOME),new HomeFragment(),HOME.toString());
                 break;
             case R.id.navigation_repairer:
-                beforeOpeningNavFragment(new RepairerListFragment(), REPAIRER_LIST);
-                createFragment(R.id.content_frame_small,REPAIRER_LIST,new RepairerListFragment(),REPAIRER_LIST.toString());
+                beforeOpeningNavFragment(new RepairerListFragment(), myFragmentID.get(REPAIRER_LIST));
+                createFragment(R.id.content_frame_small,myFragmentID.get(REPAIRER_LIST),new RepairerListFragment(),REPAIRER_LIST.toString());
                 break;
             case R.id.navigation_tracker:
-                beforeOpeningNavFragment(new OrderTrackerFragment(), ORDER_TRACKER);
-                createFragment(R.id.content_frame_small,ORDER_TRACKER,new OrderTrackerFragment(),ORDER_TRACKER.toString());
+                beforeOpeningNavFragment(new OrderTrackerFragment(), myFragmentID.get(ORDER_TRACKER));
+                createFragment(R.id.content_frame_small,myFragmentID.get(ORDER_TRACKER),new OrderTrackerFragment(),ORDER_TRACKER.toString());
                 break;
             case R.id.nav_review:
                 break;
@@ -177,16 +224,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * @param newFragmentID specifies the id of the new fragment
      * @return the transition type
      */
-    private int determineTransition(int newFragmentID) {
+    private TransitionType determineTransition(int newFragmentID) {
 
         if(myCurrentFragmentID>=0 && newFragmentID<0){
-            return SLIDE_VERTICAL;
+            return TransitionType.SLIDE_BOTTOM;
         } else if(myCurrentFragmentID>=0 && newFragmentID>myCurrentFragmentID){
-            return SLIDE_RIGHT;
+            return TransitionType.SLIDE_RIGHT;
         } else if(myCurrentFragmentID>=0 && newFragmentID < myCurrentFragmentID){
-            return SLIDE_LEFT;
+            return TransitionType.SLIDE_LEFT;
         }
-        return SLIDE_VERTICAL;
+        return TransitionType.SLIDE_BOTTOM;
     }
 
     /**
@@ -197,20 +244,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     private void createFragment(int fragmentContainer, int fragmentID, Fragment fragment, String fragmentName){
 
-        int transitionType = determineTransition(fragmentID);
+        TransitionType transitionType = determineTransition(fragmentID);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if(transitionType > 0)
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
-        else if(transitionType < 0)
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
-        else
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_top,R.anim.slide_out_bottom,R.anim.slide_in_bottom,R.anim.slide_out_top);
+
+        switch (transitionType){
+            case SLIDE_LEFT:
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
+                break;
+            case SLIDE_RIGHT:
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case SLIDE_BOTTOM:
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_top,R.anim.slide_out_bottom,R.anim.slide_in_bottom,R.anim.slide_out_top);
+                break;
+
+        }
 
         fragmentTransaction.replace(fragmentContainer,fragment).addToBackStack(fragmentName).commit();
 
         myCurrentFragmentID = fragmentID;
 
+        makeConstantUIChanges();
+
+    }
+
+    private void makeConstantUIChanges() {
+        if(myCurrentFragmentID==myFragmentID.get(USER)){
+            myToolbarButton.setVisibility(View.VISIBLE);
+            myToolbarButton.setBackgroundResource(R.drawable.ic_edit);
+        }else {
+            if(myToolbarButton.getVisibility()==View.VISIBLE)
+                myToolbarButton.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -240,8 +306,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * This method is used to delete user data from shared preference and log out a user.
      */
     private void logOutUser() {
-        String loginType = myLocalStorage.loadString("loginType");
-        myLocalStorage.removeUser();
+        LocalStorage localStorage = new LocalStorage(getApplicationContext());
+
+        String loginType = localStorage.loadString("loginType");
+        localStorage.removeUser();
 
         if(loginType.equals("facebook")){
             LoginManager.getInstance().logOut();
@@ -249,6 +317,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Getter method to send textview for displaying username in Navigation Drawer upon completion of Local Storage.
+     * @return
+     */
+    public TextView getNavHeaderTextView(){
+        return myNavUser;
     }
 
 }

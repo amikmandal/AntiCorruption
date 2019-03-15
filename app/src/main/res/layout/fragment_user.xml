@@ -1,77 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gretel.scrapknot.frontend.activities.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/user_info"
-        android:layout_below="@+id/navigation">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_profile_photo"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            />
+            android:background="@drawable/default_user"
+            app:civ_border_color="@color/colorAlternateDark"
+            app:civ_border_width="1dp"
+            app:civ_fill_color="@color/colorSilverLight"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/text_profile"
             android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Your Profile"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/secondary_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_photo" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@id/secondary_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/user_profile_photo">
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile">
 
             <TextView
-                android:id="@+id/user_name"
-                android:layout_width="170dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="5dp"
-                android:text="John Smith"
-                android:textSize="20sp" />
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Name"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:text="Unknown"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:text="Unknown What"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
 
             <TextView
-                android:id="@+id/user_username"
-                android:layout_width="170dp"
-                android:layout_height="17dp"
-                android:layout_below="@+id/user_name"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="johnsmith@gmail.com"
-                android:textSize="13sp" />
+                android:id="@+id/text_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Email"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_switcher_name" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_email">
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:text="Unknown"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:text="Unknown What"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
 
             <TextView
-                android:id="@+id/user_phone_number"
-                android:layout_width="170dp"
-                android:layout_height="17dp"
-                android:layout_below="@+id/user_username"
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="5dp"
-                android:text="(919) 980 2891"
-                android:textSize="13sp" />
+                android:id="@+id/text_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Phone Number"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_switcher_email" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_number">
+
+                <TextView
+                    android:id="@+id/user_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:text="Unknown"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:text="Unknown What"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
 
             <TextView
-                android:id="@+id/user_address"
-                android:layout_width="170dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/user_phone_number"
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="5dp"
-                android:text="101 Wannamaker Drive, Keohane 4B 606, Durham, NC, USA, 27708"
-                android:textSize="13sp" />
+                android:id="@+id/text_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Address"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_switcher_phone_number" />
 
-        </RelativeLayout>
+            <ViewSwitcher
+                android:id="@+id/view_switcher_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_address">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/user_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:text="Unknown"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
 
-</RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edit_user_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:text="Unknown What"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="100dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_switcher_address">
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_silver"
+                    android:text="Cancel"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/cancel_button"
+                    android:background="@drawable/button_blue"
+                    android:text="Save" />
+
+            </RelativeLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

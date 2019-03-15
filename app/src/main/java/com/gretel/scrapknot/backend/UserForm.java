@@ -61,6 +61,7 @@ public class UserForm {
         String facebookID = data.getString("id");
         String email = data.getString("email");
         String displayPicture = data.getString("profilePicture");
+        String loginType = data.getString("loginType");
 
         String number = "";
         String streetAddress = "";
@@ -97,7 +98,7 @@ public class UserForm {
         }
 
         String address = streetAddress + ", " + apartment + ", " + city + ", " + state + ", " + country + ", " + zip;
-        myUser = new User(displayPicture,name,facebookID,email,address,number);
+        myUser = new User(displayPicture,name,facebookID,email,address,number,loginType);
 
     }
 

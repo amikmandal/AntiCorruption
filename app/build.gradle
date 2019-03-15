@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //added to enable multi packages. maybe removable.
+        multiDexEnabled="true"
     }
     buildTypes {
         release {
@@ -28,6 +31,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Google Guava for BiMaps
+    api 'com.google.guava:guava:27.1-android'
 
     //recyclerview
     implementation 'com.android.support:support-fragment:28.0.0'

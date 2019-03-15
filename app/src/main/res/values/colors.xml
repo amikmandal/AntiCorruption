@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2F54C8</color>
-    <color name="colorPrimaryDark">#2F54C8</color>
-    <color name="colorAccent">#DCC6E0</color>
-    <color name="colorAlternate">#ffffff</color>
+    <color name="colorPrimary">#00a4a6</color>
+    <color name="colorPrimaryDark">#00a4a6</color>
+    <color name="colorAccent">#00a4a6</color>
+    <color name="colorAlternate">#FFFFFF</color>
     <color name="colorAlternateDark">#000036</color>
-    <color name="logo">#375065</color>
+
+    <color name="colorScrapknot">#375065</color>
+    <color name="colorScrapknotAlternate">#3B131E</color>
+
+    <color name="colorSilverDark">#808080</color>
+    <color name="colorSilverLight">#A9A9A9</color>
+    <color name="colorSilverDarkExtra">#505050</color>
+
+    <color name="backup1">#3B131E</color>
+    <color name="backup2">#2F54C8</color>
 </resources>

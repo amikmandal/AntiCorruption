@@ -13,6 +13,7 @@ public class User {
     private String myNumber;
     private String myAddress;
     private String myDisplayPicture;
+    private String myLoginType;
 
     /**
      * Constructor to fill details for User
@@ -23,15 +24,33 @@ public class User {
      * @param address address of User
      * @param number phone number of User
      */
-    public User(String displayPicture, String name, String facebookID, String email, String address, String number){
+    public User(String displayPicture, String name, String facebookID, String email, String address, String number,String loginType){
         myName = name;
         myNumber = number;
         myAddress = address;
         myFacebookID = facebookID;
         myEmail = email;
         myDisplayPicture = displayPicture;
+        myLoginType = loginType;
     }
 
+    public boolean equals (User other){
+        if(!this.myName.equals(other.myName))
+            return false;
+        if(!this.myNumber.equals(other.myNumber))
+            return false;
+        if(!this.myAddress.equals(other.myAddress))
+            return false;
+        if(!this.myFacebookID.equals(other.myFacebookID))
+            return false;
+        if(!this.myEmail.equals(other.myEmail))
+            return false;
+        if(!this.myDisplayPicture.equals(other.myDisplayPicture))
+            return false;
+        if(!this.myLoginType.equals(other.myLoginType))
+            return false;
+        return true;
+    }
     /**
      * This returns the name of User
      * @return the name
@@ -77,5 +96,11 @@ public class User {
      * @return
      */
     public String getFacebookID() {return myFacebookID;}
+
+    /**
+     * This returns the loginType of User
+     * @return
+     */
+    public String getLoginType() {return myLoginType;}
 
 }
