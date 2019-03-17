@@ -5,7 +5,7 @@
     android:id="@+id/user_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.scrapknot.frontend.activities.MainActivity">
+    tools:context="com.gretel.scrapknot.frontend.activities.PrimaryActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/user_info"
@@ -17,8 +17,6 @@
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:background="@drawable/default_user"
-            app:civ_border_color="@color/colorAlternateDark"
-            app:civ_border_width="1dp"
             app:civ_fill_color="@color/colorSilverLight"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -35,7 +33,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Your Profile"
+            android:text="User Profile"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="#000000"
@@ -93,7 +91,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_round"
                     android:padding="10dp"
-                    android:text="Unknown"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -104,7 +101,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_blue"
                     android:padding="10dp"
-                    android:text="Unknown What"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -146,7 +142,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_round"
                     android:padding="10dp"
-                    android:text="Unknown"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -157,7 +152,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_blue"
                     android:padding="10dp"
-                    android:text="Unknown What"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -199,7 +193,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_round"
                     android:padding="10dp"
-                    android:text="Unknown"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -210,7 +203,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_blue"
                     android:padding="10dp"
-                    android:text="Unknown What"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -252,7 +244,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_round"
                     android:padding="10dp"
-                    android:text="Unknown"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -263,7 +254,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_blue"
                     android:padding="10dp"
-                    android:text="Unknown What"
                     android:textSize="15sp"
                     android:typeface="serif" />
 

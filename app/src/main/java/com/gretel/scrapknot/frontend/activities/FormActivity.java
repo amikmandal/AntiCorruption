@@ -91,7 +91,7 @@ public class FormActivity extends AppCompatActivity {
             LocalStorage localStorage = new LocalStorage(getApplicationContext());
             localStorage.saveUser(u);
 
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(),PrimaryActivity.class);
             startActivity(intent);
         }
 

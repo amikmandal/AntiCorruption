@@ -26,8 +26,6 @@ import com.gretel.scrapknot.R;
 
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 /**
@@ -92,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                     FirebaseManager firebaseManager = new FirebaseManager("user",getApplicationContext());
                                     firebaseManager.getUser("facebook", id);
 
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), PrimaryActivity.class);
                                     startActivity(intent);
                                 } else {
 
@@ -152,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         String id = localStorage.loadString("id");
 
         if(!id.equals("")){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), PrimaryActivity.class);
             startActivity(intent);
         }
     }

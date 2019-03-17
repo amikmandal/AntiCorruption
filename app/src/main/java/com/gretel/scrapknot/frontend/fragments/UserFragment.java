@@ -21,7 +21,6 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.gretel.scrapknot.backend.User;
-import com.gretel.scrapknot.frontend.activities.MainActivity;
 import com.gretel.scrapknot.util.FirebaseManager;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.R;
@@ -30,11 +29,18 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.gretel.scrapknot.frontend.fragments.UserFragment.FragmentMode.EDIT;
+import static com.gretel.scrapknot.frontend.fragments.UserFragment.FragmentMode.VIEW;
+
 /**
  * This fragment helps display the information of the logged in user.
  * @author Amik Mandal
  */
 public class UserFragment extends Fragment implements EditButtonListener {
+
+    public enum FragmentMode{
+        VIEW,EDIT
+    }
 
     private ViewSwitcher mySwitcherName;
     private TextView myTextName;
@@ -53,6 +59,8 @@ public class UserFragment extends Fragment implements EditButtonListener {
     private Button myToolbarButton;
     private CircleImageView myProfilePhoto;
 
+    private FragmentMode myCurrentFragmentMode;
+    private User myNewUser;
     private Context myContext;
 
     @Nullable
@@ -96,20 +104,18 @@ public class UserFragment extends Fragment implements EditButtonListener {
             }
         });
 
+        myCurrentFragmentMode = VIEW;
+
         return view;
     }
 
     private void handleSaveButton(View view) {
-        switchToViewMode();
-        LocalStorage localStorage = new LocalStorage(myContext);
-        User oldUser = localStorage.loadUser();
-        User newUser = new User(oldUser.getDisplayPicture(),myTextName.getText().toString(),oldUser.getFacebookID(),myTextEmail.getText().toString(),myTextAddress.getText().toString(),myTextNumber.getText().toString(),oldUser.getLoginType());
-        if(!oldUser.equals(newUser)){
+        if(changesMade()){
             hideKeyBoard(view);
             scrollUp(view);
             switchToViewMode();
             myToolbarButton.setVisibility(View.VISIBLE);
-            saveProfile(newUser);
+            saveProfile(myNewUser);
             Toast.makeText(myContext,"Your changes have been saved",Toast.LENGTH_SHORT).show();
         } else {
             scrollUp(view);
@@ -120,12 +126,7 @@ public class UserFragment extends Fragment implements EditButtonListener {
     }
 
     public void handleCancelButton(final View view) {
-        handleCancelButton(view);
-        switchToViewMode();
-        LocalStorage localStorage = new LocalStorage(myContext);
-        User oldUser = localStorage.loadUser();
-        User newUser = new User(oldUser.getDisplayPicture(),myTextName.getText().toString(),oldUser.getFacebookID(),myTextEmail.getText().toString(),myTextAddress.getText().toString(),myTextNumber.getText().toString(),oldUser.getLoginType());
-        if(!oldUser.equals(newUser)){
+        if(changesMade()){
             new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog))
                     .setTitle("Cancel Changes")
                     .setMessage("Are you sure you want to cancel editing your profile?")
@@ -153,6 +154,18 @@ public class UserFragment extends Fragment implements EditButtonListener {
         }
     }
 
+    public boolean changesMade() {
+        switchToViewMode();
+
+        LocalStorage localStorage = new LocalStorage(myContext);
+        User oldUser = localStorage.loadUser();
+        User newUser = new User(oldUser.getDisplayPicture(),myTextName.getText().toString(),oldUser.getFacebookID(),myTextEmail.getText().toString(),myTextAddress.getText().toString(),myTextNumber.getText().toString(),oldUser.getLoginType());
+        myNewUser = newUser;
+
+        return !oldUser.equals(newUser);
+
+    }
+
     private void scrollUp(View v) {
         final ScrollView sv = v.findViewById(R.id.user_container);
         sv.post(new Runnable() {
@@ -174,7 +187,6 @@ public class UserFragment extends Fragment implements EditButtonListener {
     }
 
     private void hideKeyBoard(View view) {
-        System.out.println("trying hard to hide");
         InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
@@ -217,6 +229,8 @@ public class UserFragment extends Fragment implements EditButtonListener {
 
         mySaveButton.setVisibility(View.GONE);
         myCancelButton.setVisibility(View.GONE);
+
+        myCurrentFragmentMode = VIEW;
     }
 
     private void switchToEditMode(){
@@ -226,6 +240,8 @@ public class UserFragment extends Fragment implements EditButtonListener {
         switchInEditText(mySwitcherNumber, myEditNumber,myTextNumber);
 
         myToolbarButton.setVisibility(View.GONE);
+
+        myCurrentFragmentMode = EDIT;
     }
 
     private void switchInEditText(ViewSwitcher switcher, EditText editText, TextView textView) {
@@ -250,4 +266,7 @@ public class UserFragment extends Fragment implements EditButtonListener {
         myCancelButton.setVisibility(View.VISIBLE);
     }
 
+    public FragmentMode getCurrentMode(){
+        return myCurrentFragmentMode;
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.gretel.scrapknot.frontend.activities.MainActivity;
+import com.gretel.scrapknot.frontend.activities.PrimaryActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -12,7 +13,7 @@ public class UserLoader extends AsyncTask<Void,Void,String> {
     private WeakReference<MainActivity> myMainActivityWeakReference;
     private LocalStorage myLocalStorage;
 
-    public UserLoader(MainActivity mainActivity,Context context){
+    public UserLoader(MainActivity mainActivity, Context context){
         myMainActivityWeakReference = new WeakReference<>(mainActivity);
         myLocalStorage = new LocalStorage(context);
     }
@@ -31,7 +32,7 @@ public class UserLoader extends AsyncTask<Void,Void,String> {
         super.onPostExecute(s);
 
         MainActivity mainActivity = myMainActivityWeakReference.get();
-        if(mainActivity==null||mainActivity.isFinishing()){
+        if(mainActivity ==null|| mainActivity.isFinishing()){
             return;
         }
 
