@@ -66,7 +66,7 @@ public class Data {
     }
 
     public void uploadUser(String[] entry){
-        User user  = new User(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5],"facebook");
+        //User user  = new User(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5],"facebook");
         //myData.add(newEntry);
 
 //        FirebaseManager firebaseManager = new FirebaseManager("user");

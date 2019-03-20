@@ -8,7 +8,6 @@
     tools:context="com.gretel.scrapknot.frontend.activities.PrimaryActivity">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,13 +15,13 @@
             android:id="@+id/user_profile_photo"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:background="@drawable/default_user"
-            app:civ_fill_color="@color/colorSilverLight"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:background="@drawable/default_user"
+            app:civ_fill_color="@color/colorSilverLight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,28 +30,29 @@
             android:id="@+id/text_profile"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="User Profile"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/secondary_container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_photo" />
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@id/secondary_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:text="User Profile"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_profile_photo" />
+
+        <LinearLayout
+            android:id="@id/secondary_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/text_profile">
 
             <TextView
@@ -65,9 +65,7 @@
                 android:text="Name"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:typeface="sans" />
 
             <ViewSwitcher
                 android:id="@+id/view_switcher_name"
@@ -77,13 +75,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_name">
+                android:layout_marginRight="32dp">
 
                 <TextView
                     android:id="@+id/user_name"
@@ -116,9 +108,7 @@
                 android:text="Email"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_switcher_name" />
+                android:typeface="sans" />
 
             <ViewSwitcher
                 android:id="@+id/view_switcher_email"
@@ -128,13 +118,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_email">
+                android:layout_marginRight="32dp">
 
                 <TextView
                     android:id="@+id/user_email"
@@ -167,9 +151,7 @@
                 android:text="Phone Number"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_switcher_email" />
+                android:typeface="sans" />
 
             <ViewSwitcher
                 android:id="@+id/view_switcher_phone_number"
@@ -179,13 +161,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_number">
+                android:layout_marginRight="32dp">
 
                 <TextView
                     android:id="@+id/user_phone_number"
@@ -209,37 +185,29 @@
             </ViewSwitcher>
 
             <TextView
-                android:id="@+id/text_address"
+                android:id="@+id/text_street_address1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
-                android:text="Address"
+                android:text="Street Address 1"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_switcher_phone_number" />
+                android:typeface="sans" />
 
             <ViewSwitcher
-                android:id="@+id/view_switcher_address"
+                android:id="@+id/view_switcher_street_address1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_address">
+                android:layout_marginRight="32dp">
 
                 <TextView
-                    android:id="@+id/user_address"
+                    android:id="@+id/user_street_address1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_round"
@@ -249,7 +217,7 @@
 
 
                 <EditText
-                    android:id="@+id/edit_user_address"
+                    android:id="@+id/edit_user_street_address1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_blue"
@@ -259,45 +227,264 @@
 
             </ViewSwitcher>
 
-            <RelativeLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/text_street_address2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Street Address 2"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_street_address2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp">
+
+                <TextView
+                    android:id="@+id/user_street_address2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_street_address2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <TextView
+                android:id="@+id/text_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="City"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp">
+
+                <TextView
+                    android:id="@+id/user_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <TextView
+                android:id="@+id/text_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="State"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp">
+
+                <TextView
+                    android:id="@+id/user_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <TextView
+                android:id="@+id/text_ZIP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="ZIP"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_ZIP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp">
+
+                <TextView
+                    android:id="@+id/user_ZIP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_ZIP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <TextView
+                android:id="@+id/text_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Country"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ViewSwitcher
+                android:id="@+id/view_switcher_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp">
+
+                <TextView
+                    android:id="@+id/user_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_round"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_user_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_blue"
+                    android:padding="10dp"
+                    android:textSize="15sp"
+                    android:typeface="serif" />
+
+            </ViewSwitcher>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/button_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="96dp"
                 android:gravity="center_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_switcher_address">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
 
                 <Button
                     android:id="@+id/cancel_button"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginRight="10dp"
                     android:background="@drawable/button_silver"
+                    android:textSize="14sp"
                     android:text="Cancel"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintDimensionRatio="2"/>
 
                 <Button
                     android:id="@+id/save_button"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/cancel_button"
                     android:background="@drawable/button_blue"
-                    android:text="Save" />
+                    android:textSize="14sp"
+                    android:text="Save"
+                    app:layout_constraintDimensionRatio="2.5"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-            </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="52dp"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 

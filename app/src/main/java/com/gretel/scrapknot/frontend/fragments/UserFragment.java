@@ -42,18 +42,14 @@ public class UserFragment extends Fragment implements EditButtonListener {
         VIEW,EDIT
     }
 
-    private ViewSwitcher mySwitcherName;
-    private TextView myTextName;
-    private EditText myEditName;
-    private ViewSwitcher mySwitcherEmail;
-    private TextView myTextEmail;
-    private EditText myEditEmail;
-    private ViewSwitcher mySwitcherNumber;
-    private TextView myTextNumber;
-    private EditText myEditNumber;
-    private ViewSwitcher mySwitcherAddress;
-    private TextView myTextAddress;
-    private EditText myEditAddress;
+    private ViewSwitcher[] myViewSwitchers;
+    private TextView[] myTextViews;
+    private EditText[] myEditTexts;
+
+    private static final int[] SWITCHER_LAYOUTS = {R.id.view_switcher_name,R.id.view_switcher_email,R.id.view_switcher_phone_number,R.id.view_switcher_street_address1,R.id.view_switcher_street_address2,R.id.view_switcher_city,R.id.view_switcher_state,R.id.view_switcher_ZIP,R.id.view_switcher_country};
+    private static final int[] TEXT_VIEW_LAYOUTS = {R.id.user_name,R.id.user_email,R.id.user_phone_number,R.id.user_street_address1,R.id.user_street_address2,R.id.user_city,R.id.user_state,R.id.user_ZIP,R.id.user_country};
+    private static final int[] EDIT_TEXT_LAYOUTS = {R.id.edit_user_name,R.id.edit_user_email,R.id.edit_user_phone_number,R.id.edit_user_street_address1,R.id.edit_user_street_address2,R.id.edit_user_city,R.id.edit_user_state,R.id.edit_user_ZIP,R.id.edit_user_country};
+
     private Button mySaveButton;
     private Button myCancelButton;
     private Button myToolbarButton;
@@ -71,21 +67,17 @@ public class UserFragment extends Fragment implements EditButtonListener {
 
         myContext = getActivity().getApplicationContext();
 
-        mySwitcherName = view.findViewById(R.id.view_switcher_name);
-        mySwitcherEmail = view.findViewById(R.id.view_switcher_email);
-        mySwitcherNumber = view.findViewById(R.id.view_switcher_phone_number);
-        mySwitcherAddress = view.findViewById(R.id.view_switcher_address);
-
-        myTextName = view.findViewById(R.id.user_name);
-        myTextEmail = view.findViewById(R.id.user_email);
-        myTextAddress = view.findViewById(R.id.user_address);;
-        myTextNumber = view.findViewById(R.id.user_phone_number);;
         myProfilePhoto = view.findViewById(R.id.user_profile_photo);
 
-        myEditName = view.findViewById(R.id.edit_user_name);
-        myEditEmail = view.findViewById(R.id.edit_user_email);
-        myEditNumber = view.findViewById(R.id.edit_user_phone_number);
-        myEditAddress = view.findViewById(R.id.edit_user_address);
+        myViewSwitchers = new ViewSwitcher[SWITCHER_LAYOUTS.length];
+        myTextViews = new TextView[SWITCHER_LAYOUTS.length];
+        myEditTexts = new EditText[SWITCHER_LAYOUTS.length];
+
+        for(int i=0; i<SWITCHER_LAYOUTS.length; i++){
+            myViewSwitchers[i] = view.findViewById(SWITCHER_LAYOUTS[i]);
+            myTextViews[i] = view.findViewById(TEXT_VIEW_LAYOUTS[i]);
+            myEditTexts[i] = view.findViewById(EDIT_TEXT_LAYOUTS[i]);
+        }
 
         mySaveButton = view.findViewById(R.id.save_button);
         myCancelButton = view.findViewById(R.id.cancel_button);
@@ -116,11 +108,11 @@ public class UserFragment extends Fragment implements EditButtonListener {
             switchToViewMode();
             myToolbarButton.setVisibility(View.VISIBLE);
             saveProfile(myNewUser);
-            Toast.makeText(myContext,"Your changes have been saved",Toast.LENGTH_SHORT).show();
+            Toast.makeText(myContext,"" + "Your changes have been saved",Toast.LENGTH_SHORT).show();
         } else {
             scrollUp(view);
             switchToEditMode();
-            activateEditText(myEditName);
+            activateEditText(myEditTexts[0]);
             Toast.makeText(myContext,"Nothing to update",Toast.LENGTH_SHORT).show();
         }
     }
@@ -158,12 +150,22 @@ public class UserFragment extends Fragment implements EditButtonListener {
         switchToViewMode();
 
         LocalStorage localStorage = new LocalStorage(myContext);
+        String firstName = User.makeFirstName(myTextViews[0].getText().toString());
+        String lastName = User.makeLastName(myTextViews[0].getText().toString());
+        String email = myTextViews[1].getText().toString();
+        String number = myTextViews[2].getText().toString();
+        
+        String streetAddress1 = myTextViews[3].getText().toString();
+        String streetAddress2 = myTextViews[4].getText().toString();
+        String city = myTextViews[5].getText().toString();
+        String state = myTextViews[6].getText().toString();
+        String ZIP = myTextViews[7].getText().toString();
+        String country = myTextViews[8].getText().toString();
         User oldUser = localStorage.loadUser();
-        User newUser = new User(oldUser.getDisplayPicture(),myTextName.getText().toString(),oldUser.getFacebookID(),myTextEmail.getText().toString(),myTextAddress.getText().toString(),myTextNumber.getText().toString(),oldUser.getLoginType());
+        User newUser = new User(oldUser.getDisplayPicture(),firstName,lastName,oldUser.getFacebookID(),email,streetAddress1,streetAddress2,city,state,ZIP,country,number,oldUser.getLoginType());
+
         myNewUser = newUser;
-
         return !oldUser.equals(newUser);
-
     }
 
     private void scrollUp(View v) {
@@ -179,10 +181,16 @@ public class UserFragment extends Fragment implements EditButtonListener {
         LocalStorage localStorage = new LocalStorage(getActivity().getApplicationContext());
         User u = localStorage.loadUser();
 
-        myTextName.setText(u.getName());
-        myTextAddress.setText(u.getAddress());
-        myTextEmail.setText(u.getEmail());
-        myTextNumber.setText(u.getNumber());
+        myTextViews[0].setText(u.getName());
+        myTextViews[1].setText(u.getEmail());
+        myTextViews[2].setText(u.getNumber());
+        myTextViews[3].setText(u.getStreetAddress1());
+        myTextViews[4].setText(u.getStreetAddress2());
+        myTextViews[5].setText(u.getCity());
+        myTextViews[6].setText(u.getState());
+        myTextViews[7].setText(u.getZIP());
+        myTextViews[8].setText(u.getCountry());
+
         Picasso.get().load(u.getDisplayPicture()).into(myProfilePhoto);
     }
 
@@ -218,14 +226,14 @@ public class UserFragment extends Fragment implements EditButtonListener {
         switchToEditMode();
 
         //set Name to be editable by default
-        activateEditText(myEditName);
+        activateEditText(myEditTexts[0]);
     }
 
     private void switchToViewMode(){
-        switchInTextView(mySwitcherName,myTextName,myEditName);
-        switchInTextView(mySwitcherEmail,myTextEmail,myEditEmail);
-        switchInTextView(mySwitcherNumber,myTextNumber,myEditNumber);
-        switchInTextView(mySwitcherAddress,myTextAddress,myEditAddress);
+
+        for(int i=0; i<SWITCHER_LAYOUTS.length; i++){
+            switchInTextView(myViewSwitchers[i],myTextViews[i],myEditTexts[i]);
+        }
 
         mySaveButton.setVisibility(View.GONE);
         myCancelButton.setVisibility(View.GONE);
@@ -234,10 +242,10 @@ public class UserFragment extends Fragment implements EditButtonListener {
     }
 
     private void switchToEditMode(){
-        switchInEditText(mySwitcherName,myEditName,myTextName);
-        switchInEditText(mySwitcherEmail,myEditEmail, myTextEmail);
-        switchInEditText(mySwitcherAddress, myEditAddress, myTextAddress);
-        switchInEditText(mySwitcherNumber, myEditNumber,myTextNumber);
+
+        for(int i=0; i<SWITCHER_LAYOUTS.length; i++){
+            switchInEditText(myViewSwitchers[i],myEditTexts[i],myTextViews[i]);
+        }
 
         myToolbarButton.setVisibility(View.GONE);
 

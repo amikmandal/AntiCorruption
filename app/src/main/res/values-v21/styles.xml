@@ -40,11 +40,11 @@
     </style>
 
     <style name="AppTextViewFont" parent="android:Widget.TextView">
-        <item name="android:fontFamily">serif</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="AppButtonFont" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
     <style name="myDialog" parent="Theme.AppCompat.Dialog">

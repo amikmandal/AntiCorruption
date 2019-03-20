@@ -64,23 +64,24 @@ public class UserForm {
         String loginType = data.getString("loginType");
 
         String number = "";
-        String streetAddress = "";
-        String apartment = "";
+        String streetAddress1 = "";
+        String streetAddress2 = "";
         String city = "";
         String state = "";
         String country = "";
         String zip = "";
 
+        //data made from FormActivity
         for(int i=0; i<myRequirements.length; i++){
             switch (i){
                 case 0:
                     number = data.getString(Integer.toString(i));
                     break;
                 case 1:
-                    streetAddress = data.getString(Integer.toString(i));
+                    streetAddress1 = data.getString(Integer.toString(i));
                     break;
                 case 2:
-                    apartment = data.getString(Integer.toString(i));
+                    streetAddress2 = data.getString(Integer.toString(i));
                     break;
                 case 3:
                     city = data.getString(Integer.toString(i));
@@ -97,8 +98,7 @@ public class UserForm {
             }
         }
 
-        String address = streetAddress + ", " + apartment + ", " + city + ", " + state + ", " + country + ", " + zip;
-        myUser = new User(displayPicture,name,facebookID,email,address,number,loginType);
+        myUser = new User(displayPicture,firstName,lastName,facebookID,email,streetAddress1,streetAddress2,city,state,zip,country,number,loginType);
 
     }
 

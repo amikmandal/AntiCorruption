@@ -69,7 +69,8 @@
         <activity
             android:name=".frontend.activities.FormActivity"
             android:label="@string/title_activity_form"
-            android:parentActivityName=".frontend.activities.LoginActivity">
+            android:parentActivityName=".frontend.activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".frontend.activities.LoginActivity" />

@@ -7,39 +7,60 @@ package com.gretel.scrapknot.backend;
  */
 public class User {
 
-    private String myName;
+    private String myFirstName;
+    private String myLastName;
     private String myFacebookID;
     private String myEmail;
     private String myNumber;
-    private String myAddress;
+    private String myStreetAddress1;
+    private String myStreetAddress2;
+    private String myCity;
+    private String myState;
+    private String myCountry;
+    private String myZIP;
     private String myDisplayPicture;
     private String myLoginType;
 
     /**
      * Constructor to fill details for User
-     * @param displayPicture URL for displayPicture
-     * @param name name of User
-     * @param facebookID facebook id of User
-     * @param email email of User
-     * @param address address of User
-     * @param number phone number of User
      */
-    public User(String displayPicture, String name, String facebookID, String email, String address, String number,String loginType){
-        myName = name;
+    public User(String displayPicture, String firstName, String lastName, String facebookID, String email, String streetAddress1, String streetAddress2, String city, String state, String zip, String country, String number,String loginType){
+
+        myFirstName = firstName;
+        myLastName = lastName;
         myNumber = number;
-        myAddress = address;
         myFacebookID = facebookID;
         myEmail = email;
         myDisplayPicture = displayPicture;
         myLoginType = loginType;
+
+        myStreetAddress1 = streetAddress1;
+        myStreetAddress2 = streetAddress2;
+        myCity = city;
+        myState = state;
+        myCountry = country;
+        myZIP = zip;
+
     }
 
     public boolean equals (User other){
-        if(!this.myName.equals(other.myName))
+        if(!this.myFirstName.equals(other.getFirstName()))
+            return false;
+        if(!this.myLastName.equals(other.getLastName()))
             return false;
         if(!this.myNumber.equals(other.myNumber))
             return false;
-        if(!this.myAddress.equals(other.myAddress))
+        if(!this.myStreetAddress1.equals(other.getStreetAddress1()))
+            return false;
+        if(!this.myStreetAddress2.equals(other.getStreetAddress2()))
+            return false;
+        if(!this.myCity.equals(other.getCity()))
+            return false;
+        if(!this.myState.equals(other.getState()))
+            return false;
+        if(!this.myZIP.equals(other.getZIP()))
+            return false;
+        if(!this.myCountry.equals(other.myCountry))
             return false;
         if(!this.myFacebookID.equals(other.myFacebookID))
             return false;
@@ -51,56 +72,56 @@ public class User {
             return false;
         return true;
     }
-    /**
-     * This returns the name of User
-     * @return the name
-     */
-    public String getName(){
-        return myName;
+
+    public static String makeFirstName(String name){
+        return name.split(" ")[0];
     }
 
-    /**
-     * This returns the number of User
-     * @return the number
-     */
+    public static String makeLastName(String name){
+        return name.replaceAll(makeFirstName(name)+" ","");
+    }
+
+    public String getName(){
+        return myFirstName + " " + myLastName;
+    }
+
     public String getNumber(){
         return myNumber;
     }
 
-    /**
-     * This returns the address of User
-     * @return the address
-     */
     public String getAddress(){
-        return myAddress;
+        return myStreetAddress1 + ", "+ myStreetAddress2 + ", " + myCity + ", " + myState + ", " + myZIP + ", " + myCountry;
     }
 
-    /**
-     * This returns the email of User
-     * @return the email
-     */
     public String getEmail(){
         return myEmail;
     }
 
-    /**
-     * This returns the displayPicture of User
-     * @return the displayPicture
-     */
     public String getDisplayPicture(){
         return myDisplayPicture;
     }
 
-    /**
-     * This returns the facebookID of User
-     * @return
-     */
     public String getFacebookID() {return myFacebookID;}
 
-    /**
-     * This returns the loginType of User
-     * @return
-     */
     public String getLoginType() {return myLoginType;}
 
+    public String getFirstName() {
+        return myFirstName;
+    }
+
+    public String getLastName() {
+        return myLastName;
+    }
+
+    public String getStreetAddress1() {return myStreetAddress1;}
+
+    public String getStreetAddress2() {return myStreetAddress2;}
+
+    public String getCity() { return myCity; }
+
+    public String getCountry() { return myCountry; }
+
+    public String getState() { return myState; }
+
+    public String getZIP() { return myZIP; }
 }

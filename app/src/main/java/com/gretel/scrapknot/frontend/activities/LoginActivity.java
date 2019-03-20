@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.gretel.scrapknot.backend.User;
 import com.gretel.scrapknot.util.FirebaseManager;
 import com.gretel.scrapknot.util.JSONParser;
 import com.gretel.scrapknot.util.LocalStorage;
@@ -147,9 +148,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void checkIfLoggedIn() {
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
-        String id = localStorage.loadString("id");
 
-        if(!id.equals("")){
+        if(localStorage.checkIfUserPresent()){
             Intent intent = new Intent(getApplicationContext(), PrimaryActivity.class);
             startActivity(intent);
         }

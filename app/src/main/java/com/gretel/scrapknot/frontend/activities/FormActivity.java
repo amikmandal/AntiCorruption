@@ -71,9 +71,10 @@ public class FormActivity extends AppCompatActivity {
         if(userData.containsKey("index"))
             index = Integer.parseInt(userData.getString("index"));
         if(tempUserForm.getPhoneNumber()==tempUserForm.getRequirement(index)){
-            userData.putString(Integer.toString(-1),myCcp.getSelectedCountryCode());
+            userData.putString(index.toString(),"+"+myCcp.getSelectedCountryCode()+" "+myInfo.getText().toString());
+        } else {
+            userData.putString(index.toString(), myInfo.getText().toString());
         }
-        userData.putString(index.toString(),myInfo.getText().toString());
 
         index++;
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
 import com.gretel.scrapknot.backend.User;
 
 /**
@@ -33,8 +34,7 @@ public class LocalStorage {
      * @param value specifies the value to be stored
      */
     public void saveString(String key, String value){
-        myEditor.putString(key,value);
-        myEditor.apply();
+        myEditor.putString(key,value).apply();
     }
 
     /**
@@ -51,13 +51,11 @@ public class LocalStorage {
      * @param u specifies the user to be saved
      */
     public void saveUser(User u) {
-        saveString("name",u.getName());
-        saveString("address",u.getAddress());
-        saveString("number",u.getNumber());
-        saveString("id",u.getFacebookID());
-        saveString("email",u.getEmail());
-        saveString("displayPicture",u.getDisplayPicture());
-        saveString("loginType",u.getLoginType());
+
+        Gson gson = new Gson();
+        String json = gson.toJson(u);
+        saveString("myUser", json);
+
     }
 
     /**
@@ -66,13 +64,14 @@ public class LocalStorage {
      */
     public User loadUser(){
 
-        return new User (loadString("displayPicture"),
-                        loadString("name"),
-                        loadString("id"),
-                        loadString("email"),
-                        loadString("address"),
-                        loadString("number"),
-                        loadString("loginType"));
+        Gson gson = new Gson();
+        String json = loadUserJSON();
+        return gson.fromJson(json, User.class);
+
+    }
+
+    public String loadUserJSON() {
+        return loadString("myUser");
     }
 
     /**
@@ -80,19 +79,20 @@ public class LocalStorage {
      */
     public void removeUser(){
 
-        myStorage.edit().remove("displayPicture").apply();
-        myStorage.edit().remove("name").apply();
-        myStorage.edit().remove("id").apply();
-        myStorage.edit().remove("email").apply();
-        myStorage.edit().remove("address").apply();
-        myStorage.edit().remove("number").apply();
-
-        myStorage.edit().remove("loginType").apply();
+        myEditor.remove("myUser").apply();
 
     }
 
     public void editUser(User user){
         removeUser();
         saveUser(user);
+    }
+
+    public boolean checkIfUserPresent(){
+        String checkJSON = loadUserJSON();
+        if (checkJSON.equals("")){
+            return false;
+        }
+        return true;
     }
 }
