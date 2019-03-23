@@ -6,11 +6,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/ScrapKnotActivityAnimation</item>
+        <item name="android:textViewStyle">@style/AppTextViewFont</item>
+        <item name="buttonStyle">@style/AppButtonFont</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textViewStyle">@style/AppTextViewFont</item>
+        <item name="buttonStyle">@style/AppButtonFont</item>
     </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -22,6 +27,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/ScrapKnotActivityAnimation</item>
+        <item name="android:textViewStyle">@style/AppTextViewFont</item>
+        <item name="android:editTextStyle">@style/AppTextViewFont</item>
+        <item name="buttonStyle">@style/AppButtonFont</item>
     </style>
 
     <style name="ScrapKnotActivityAnimation" parent="@android:style/Animation.Activity">
@@ -31,9 +39,16 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+    <style name="AppTextViewFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppButtonFont" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
     <style name="myDialog" parent="Theme.AppCompat.Dialog">
         <item name="android:windowNoTitle">true</item>
         ...
     </style>
-
 </resources>

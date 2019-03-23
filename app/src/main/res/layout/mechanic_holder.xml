@@ -9,7 +9,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:id="@+id/repairer_profile_photo"
-        android:src="@drawable/john_smith"
         android:layout_margin="5dp" />
 
     <TextView
