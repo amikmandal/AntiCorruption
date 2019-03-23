@@ -2,8 +2,6 @@ package com.gretel.scrapknot.util;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.Editable;
-import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,7 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.gretel.scrapknot.backend.Repairer;
+import com.gretel.scrapknot.backend.Mechanic;
 import com.gretel.scrapknot.backend.User;
 
 /**
@@ -33,10 +31,10 @@ public class FirebaseManager {
         myContext = context;
     }
 
-    public void addRepairer(Repairer n){
+    public void addRepairer(Mechanic n){
         String id = databaseReference.push().getKey();
-        Repairer repairer = new Repairer(n.getDisplayPicture(), n.getName(), n.getRating(), n.getSpeciality());
-        databaseReference.child(id).setValue(repairer);
+        Mechanic mechanic = new Mechanic(n.getDisplayPicture(), n.getName(), n.getRating(), n.getSpeciality());
+        databaseReference.child(id).setValue(mechanic);
     }
 
     /**

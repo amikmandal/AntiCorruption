@@ -2,7 +2,7 @@ package com.gretel.scrapknot.backend;
 
 /**
  *This class implements making a treemap called myData to store all the source data in a treemap of string and arraylist
- * of Repairer and a hashmap called myMetData to store some key information from myData to be used later.
+ * of Mechanic and a hashmap called myMetData to store some key information from myData to be used later.
  * @author Amik Mandal
  * @version 1.0
  */
@@ -10,12 +10,12 @@ package com.gretel.scrapknot.backend;
 import java.util.HashSet;
 
 public class Data {
-    private HashSet<Repairer> myRepairerList = new HashSet<>();
+    private HashSet<Mechanic> myMechanicList = new HashSet<>();
     private HashSet<User> myUserList = new HashSet<>();
     //private TreeMap<String, ArrayList<String>> myMetaData = new TreeMap<>();
 
-    public void addMechanic(Repairer n){
-        myRepairerList.add(n);
+    public void addMechanic(Mechanic n){
+        myMechanicList.add(n);
     }
 
     public void addUser(User u){
@@ -55,10 +55,10 @@ public class Data {
 
     /**
      * This method stores data in myData
-     * @param entry This takes in the string entry which will be converted manually into a Repairer but it was never used
+     * @param entry This takes in the string entry which will be converted manually into a Mechanic but it was never used
      */
     public void uploadMechanic(String[] entry){
-        Repairer newEntry = new Repairer(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
+        Mechanic newEntry = new Mechanic(entry[3], entry[0], Double.parseDouble(entry[1]), entry[2]);
         //myData.add(newEntry);
 
 //        FirebaseManager firebaseManager = new FirebaseManager("mechanic",);
@@ -77,8 +77,8 @@ public class Data {
      * This method returns myData created
      * @return the treemap myData for a given Data object
      */
-    public HashSet<Repairer> getRepairerList(){
-        return myRepairerList;
+    public HashSet<Mechanic> getRepairerList(){
+        return myMechanicList;
     }
 
     /**

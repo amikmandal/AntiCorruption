@@ -4,9 +4,6 @@
         android:state_pressed="true"
         android:drawable="@drawable/button2_pressed"/>
     <item
-        android:state_enabled="false"
-        android:drawable="@drawable/button2_disabled"/>
-    <item
         android:drawable="@drawable/button2_default"/>
 
 </selector>

@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gretel.scrapknot.backend.Repairer;
+import com.gretel.scrapknot.backend.Mechanic;
 import com.gretel.scrapknot.frontend.adapters.RepairerListAdapter;
 import com.gretel.scrapknot.backend.Data;
 import com.gretel.scrapknot.R;
@@ -70,7 +70,7 @@ public class RepairerListFragment extends Fragment {
                         index++;
                     }
 
-                    Repairer temp = new Repairer(dataPath,name,rating,speciality);
+                    Mechanic temp = new Mechanic(dataPath,name,rating,speciality);
                     myData.addMechanic(temp);
                     myAdapter = new RepairerListAdapter(myData.getRepairerList(), getActivity().getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);

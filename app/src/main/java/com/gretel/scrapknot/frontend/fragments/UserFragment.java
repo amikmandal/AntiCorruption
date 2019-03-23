@@ -154,7 +154,7 @@ public class UserFragment extends Fragment implements EditButtonListener {
         String lastName = User.makeLastName(myTextViews[0].getText().toString());
         String email = myTextViews[1].getText().toString();
         String number = myTextViews[2].getText().toString();
-        
+
         String streetAddress1 = myTextViews[3].getText().toString();
         String streetAddress2 = myTextViews[4].getText().toString();
         String city = myTextViews[5].getText().toString();

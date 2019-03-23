@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gretel.scrapknot.backend.Repairer;
+import com.gretel.scrapknot.backend.Mechanic;
 import com.gretel.scrapknot.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,8 +26,8 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public RepairerListAdapter(HashSet<Repairer> data, Context context){
-        for(Repairer temp: data){
+    public RepairerListAdapter(HashSet<Mechanic> data, Context context){
+        for(Mechanic temp: data){
             myProfilePhotos.add(temp.getDisplayPicture());
             myRepairerNames.add(temp.getName());
             myRatings.add(temp.getRating());
