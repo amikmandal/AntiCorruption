@@ -79,7 +79,7 @@ public class ChatFragment extends Fragment {
         StringText text = new StringText(myTextMessage.getText().toString(),Calendar.getInstance().getTime(),myIDs.get(USER));
         myChat.addText(text);
         myChatAdapter.updateChat(text);
-
+        myTextMessage.setText("");
     }
 
     /**
@@ -90,7 +90,7 @@ public class ChatFragment extends Fragment {
     {
         //call RecyclerView
         myChatRecyclerView = v.findViewById(R.id.recycler_view_chat);
-        myChatAdapter = new ChatAdapter(myChat.getChat(),getActivity().getApplicationContext());
+        myChatAdapter = new ChatAdapter(myChat.getChat(),myIDs.get(USER),getActivity().getApplicationContext());
         myChatRecyclerView.setAdapter(myChatAdapter);
 
         //check this

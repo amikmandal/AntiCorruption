@@ -3,12 +3,12 @@ package com.gretel.scrapknot.frontend.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gretel.scrapknot.R;
 import com.gretel.scrapknot.backend.Chat.StringText;
@@ -36,12 +36,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
     private ArrayList<Date> myDates = new ArrayList<>();
     private Context myContext;
     private String myCurrSender;
+    private String myUser;
     private PrevTextType myPrevTextType;
     private LinearLayout myCurrLinearLayout;
+    private CircleImageView myCurrProfilePhoto;
     private TextView myPrevTextView;
     private Text myCurrentText;
 
-    public ChatAdapter(ArrayList<ArrayList<Text>> textSets, Context context){
+    public ChatAdapter(ArrayList<ArrayList<Text>> textSets, String userID, Context context){
         myCurrSender = "";
         myPrevTextType = FINAL;
         for(ArrayList<Text> textSet: textSets){
@@ -49,6 +51,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
                 updateChat(text);
             }
         }
+        myUser = userID;
         myContext = context;
     }
 
@@ -63,16 +66,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Picasso.get()
-                .load(myProfilePhotos.get(myCurrSender))
-                .into(viewHolder.profilePhoto);
 
         myCurrLinearLayout = viewHolder.linearLayout;
+        myCurrProfilePhoto = viewHolder.profilePhoto;
+
+        Picasso.get()
+                .load(myProfilePhotos.get(myCurrSender))
+                .into(myCurrProfilePhoto);
+
+        viewHolder.textDate.setText(myCurrentText.getDate().toString());
 
         if(myCurrentText instanceof StringText){
             addTextView(myCurrentText);
         }
-        //viewHolder.textDate.setText(myDates.get(position).toString());
     }
 
     @Override
@@ -82,13 +88,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profilePhoto;
-        //TextView textDate;
+        TextView textDate;
         LinearLayout linearLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayout=itemView.findViewById(R.id.linear_layout_text);
             profilePhoto=itemView.findViewById(R.id.profile_photo_sender);
+            textDate=itemView.findViewById(R.id.sender_date);
         }
     }
 
@@ -98,7 +105,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
                 addTextView(text);
             }
         } else {
-            System.out.println("bruhhh it is making a new row");
             addTextSetToList(text);
             this.notifyDataSetChanged();
         }
@@ -111,35 +117,55 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
         String newSender = newText.getSender();
         myCurrSender = newSender;
         if(!myProfilePhotos.containsKey(newSender)){
-            myProfilePhotos.put(newSender,"https://cdn.shopify.com/s/files/1/1061/1924/products/Woman_Saying_Hi_Emoji_Icon_ios10_grande.png?v=1542436004");
+            if(!myUser.equals(newText.getSender()))
+                myProfilePhotos.put(newSender,"https://cdn.shopify.com/s/files/1/1061/1924/products/Woman_Saying_Hi_Emoji_Icon_ios10_grande.png?v=1542436004");
+            else
+                myProfilePhotos.put(newSender,"https://openclipart.org/image/2400px/svg_to_png/263304/Checkered1.png");
         }
         myDates.add(newText.getDate());
     }
 
     private void addTextView(Text text) {
 
+        int textNormal, textInitial, textMiddle, textLast, textAlignment;
         TextView toAdd = new TextView(myContext);
         toAdd.setText((String) text.getMessage());
         toAdd.setPadding(24,8,24,8);
         toAdd.setTextSize(16);
 
+        if(!myUser.equals(text.getSender())){
+            textNormal = R.drawable.text_user;
+            textInitial = R.drawable.text_user_initial;
+            textMiddle = R.drawable.text_user_middle;
+            textLast = R.drawable.text_user_last;
+            textAlignment = Gravity.END;
+            myCurrProfilePhoto.setVisibility(View.GONE);
+        } else {
+            textNormal = R.drawable.text_other;
+            textInitial = R.drawable.text_other_initial;
+            textMiddle = R.drawable.text_other_middle;
+            textLast = R.drawable.text_other_last;
+            textAlignment = Gravity.START;
+        }
+
         switch (myPrevTextType) {
             case NONE:
-                toAdd.setBackgroundResource(R.drawable.text_other);
+                toAdd.setBackgroundResource(textNormal);
                 myPrevTextType = INITIAL;
                 break;
             case INITIAL:
-                myPrevTextView.setBackgroundResource(R.drawable.text_other_initial);
-                toAdd.setBackgroundResource(R.drawable.text_other_last);
+                myPrevTextView.setBackgroundResource(textInitial);
+                toAdd.setBackgroundResource(textLast);
                 myPrevTextType = FINAL;
                 break;
             case FINAL:
-                myPrevTextView.setBackgroundResource(R.drawable.text_other_middle);
-                toAdd.setBackgroundResource(R.drawable.text_other_last);
+                myPrevTextView.setBackgroundResource(textMiddle);
+                toAdd.setBackgroundResource(textLast);
         }
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(2,2,2,2);
+        params.gravity = textAlignment;
         toAdd.setLayoutParams(params);
         myCurrLinearLayout.addView(toAdd);
         myPrevTextView = toAdd;
