@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gretel.scrapknot.backend.Mechanic;
+import com.gretel.scrapknot.backend.User.Mechanic;
 import com.gretel.scrapknot.R;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +40,7 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = mInflater.inflate(R.layout.mechanic_holder,viewGroup,false);
+        View row = mInflater.inflate(R.layout.holder_repairer,viewGroup,false);
         final RepairerListAdapter.ViewHolder mechanicHolder = new RepairerListAdapter.ViewHolder(row);
         return  mechanicHolder;
     }
@@ -50,12 +50,6 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
         Picasso.get()
                 .load(myProfilePhotos.get(position))
                 .into(viewHolder.profilePhoto);
-
-//        Glide.with(myContext)
-//                .asBitmap()
-//                .load(myProfilePhotos.get(position))
-//                .into(viewHolder.profilePhoto);
-
         viewHolder.repairerName.setText(myRepairerNames.get(position));
         viewHolder.repairerRatings.setText(myRatings.get(position).toString());
         viewHolder.repairerSpecialities.setText(mySpecialities.get(position));

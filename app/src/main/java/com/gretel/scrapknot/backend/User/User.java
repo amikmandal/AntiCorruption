@@ -1,4 +1,4 @@
-package com.gretel.scrapknot.backend;
+package com.gretel.scrapknot.backend.User;
 
 /**
  * This class represents the user.
@@ -9,7 +9,7 @@ public class User {
 
     private String myFirstName;
     private String myLastName;
-    private String myFacebookID;
+    private String myID;
     private String myEmail;
     private String myNumber;
     private String myStreetAddress1;
@@ -29,7 +29,7 @@ public class User {
         myFirstName = firstName;
         myLastName = lastName;
         myNumber = number;
-        myFacebookID = facebookID;
+        myID = facebookID;
         myEmail = email;
         myDisplayPicture = displayPicture;
         myLoginType = loginType;
@@ -62,7 +62,7 @@ public class User {
             return false;
         if(!this.myCountry.equals(other.myCountry))
             return false;
-        if(!this.myFacebookID.equals(other.myFacebookID))
+        if(!this.myID.equals(other.myID))
             return false;
         if(!this.myEmail.equals(other.myEmail))
             return false;
@@ -101,7 +101,7 @@ public class User {
         return myDisplayPicture;
     }
 
-    public String getFacebookID() {return myFacebookID;}
+    public String getID() {return myID;}
 
     public String getLoginType() {return myLoginType;}
 

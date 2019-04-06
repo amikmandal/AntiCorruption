@@ -9,8 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.gretel.scrapknot.backend.Mechanic;
-import com.gretel.scrapknot.backend.User;
+import com.gretel.scrapknot.backend.Chat.Chat;
+import com.gretel.scrapknot.backend.User.Mechanic;
+import com.gretel.scrapknot.backend.User.User;
 
 /**
  * This class is responsible of most of the Firebase tasks that can be done outside an activity.
@@ -45,7 +46,7 @@ public class FirebaseManager {
     public void addUser(User u,String loginType){
         Gson gson = new Gson();
         String json = gson.toJson(u);
-        databaseReference.child(loginType).child(u.getFacebookID()).setValue(json);
+        databaseReference.child(loginType).child(u.getID()).setValue(json);
     }
 
     /**
@@ -78,8 +79,11 @@ public class FirebaseManager {
     }
 
     public User editUser(User user){
-        databaseReference.child(user.getLoginType()).child(user.getFacebookID()).removeValue();
+        databaseReference.child(user.getLoginType()).child(user.getID()).removeValue();
         addUser(user,user.getLoginType());
         return user;
+    }
+
+    public void addChat(Chat chat){
     }
 }

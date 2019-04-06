@@ -1,4 +1,6 @@
-package com.gretel.scrapknot.backend;
+package com.gretel.scrapknot.backend.User;
+
+import com.gretel.scrapknot.backend.User.User;
 
 public class Repairer extends User {
 

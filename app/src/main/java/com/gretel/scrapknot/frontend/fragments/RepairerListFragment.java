@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gretel.scrapknot.backend.Mechanic;
+import com.gretel.scrapknot.backend.User.Mechanic;
 import com.gretel.scrapknot.frontend.adapters.RepairerListAdapter;
 import com.gretel.scrapknot.backend.Data;
 import com.gretel.scrapknot.R;

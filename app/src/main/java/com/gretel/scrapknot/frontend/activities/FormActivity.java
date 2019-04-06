@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.gretel.scrapknot.backend.User;
+import com.gretel.scrapknot.backend.User.User;
 import com.gretel.scrapknot.backend.UserForm;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.R;

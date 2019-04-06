@@ -3,9 +3,8 @@ package com.gretel.scrapknot.util;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.gretel.scrapknot.backend.User;
+import com.gretel.scrapknot.backend.User.User;
 import com.gretel.scrapknot.frontend.activities.MainActivity;
-import com.gretel.scrapknot.frontend.activities.PrimaryActivity;
 
 import java.lang.ref.WeakReference;
 

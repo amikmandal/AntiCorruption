@@ -1,0 +1,61 @@
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/relative_layout_chat"
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/profile_photo_sender"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_layout_text"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginRight="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_toRightOf="@+id/profile_photo_sender"
+        android:layout_toEndOf="@+id/profile_photo_sender"
+        >
+
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/sender_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_marginLeft="6dp"-->
+        <!--android:layout_marginStart="6dp"-->
+        <!--android:paddingTop="6dp"-->
+        <!--android:paddingBottom="6dp"-->
+        <!--android:paddingLeft="8dp"-->
+        <!--android:paddingRight="8dp"-->
+        <!--android:layout_marginRight="72dp"-->
+        <!--android:layout_marginEnd="72dp"-->
+        <!--android:layout_toRightOf="@+id/profile_photo_sender"-->
+        <!--android:layout_toEndOf="@+id/profile_photo_sender"-->
+        <!--android:background="@drawable/text_user"-->
+        <!--android:textSize="16sp" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sender_date"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@id/linear_layout_text"
+        android:text="Other"
+        android:textSize="12sp"
+        android:layout_toEndOf="@+id/profile_photo_sender"
+        android:layout_toRightOf="@+id/profile_photo_sender" />
+
+</RelativeLayout>
