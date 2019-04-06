@@ -9,7 +9,8 @@ import android.view.View;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.scrapknot.R;
-import com.gretel.scrapknot.frontend.fragments.CallMechanicFragment;
+import com.gretel.scrapknot.frontend.fragments.CallRepairerFragment;
+import com.gretel.scrapknot.frontend.fragments.ChatFragment;
 import com.gretel.scrapknot.frontend.fragments.ContactUsFragment;
 import com.gretel.scrapknot.frontend.fragments.OrderListFragment;
 import com.gretel.scrapknot.frontend.fragments.UserFragment;
@@ -52,7 +53,7 @@ public class SecondaryActivity extends MainActivity {
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(ORDER_LIST),new OrderListFragment(),ORDER_LIST.toString());
                 break;
             case CALL_MECHANIC:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CALL_MECHANIC),new CallMechanicFragment(),CALL_MECHANIC.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CALL_MECHANIC),new CallRepairerFragment(),CALL_MECHANIC.toString());
                 break;
             case CONTACT_US:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());
@@ -92,11 +93,11 @@ public class SecondaryActivity extends MainActivity {
                 break;
             case R.id.nav_order:
                 prepareForNewFragment(item);
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(ORDER_LIST),new OrderListFragment(),ORDER_LIST.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(ORDER_LIST),new ChatFragment(),ORDER_LIST.toString());
                 break;
             case R.id.nav_contact_mechanic:
                 prepareForNewFragment(item);
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new CallMechanicFragment(),CALL_MECHANIC.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new CallRepairerFragment(),CALL_MECHANIC.toString());
                 break;
             case R.id.nav_contact_us:
                 prepareForNewFragment(item);

@@ -3,6 +3,7 @@ package com.gretel.scrapknot.backend;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.gretel.scrapknot.backend.User.User;
 import com.gretel.scrapknot.util.FirebaseManager;
 
 /**

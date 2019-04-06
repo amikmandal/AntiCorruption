@@ -1,4 +1,4 @@
-package com.gretel.scrapknot.backend;
+package com.gretel.scrapknot.backend.User;
 
 /**
  * This class implements storing a single line of the file (for example: Emma,F,19728) for easy access as a single object.

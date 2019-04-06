@@ -7,6 +7,9 @@ package com.gretel.scrapknot.backend;
  * @version 1.0
  */
 
+import com.gretel.scrapknot.backend.User.Mechanic;
+import com.gretel.scrapknot.backend.User.User;
+
 import java.util.HashSet;
 
 public class Data {

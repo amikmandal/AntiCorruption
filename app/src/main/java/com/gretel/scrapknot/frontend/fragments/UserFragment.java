@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.gretel.scrapknot.backend.User;
+import com.gretel.scrapknot.backend.User.User;
 import com.gretel.scrapknot.util.FirebaseManager;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.R;
@@ -162,7 +162,7 @@ public class UserFragment extends Fragment implements EditButtonListener {
         String ZIP = myTextViews[7].getText().toString();
         String country = myTextViews[8].getText().toString();
         User oldUser = localStorage.loadUser();
-        User newUser = new User(oldUser.getDisplayPicture(),firstName,lastName,oldUser.getFacebookID(),email,streetAddress1,streetAddress2,city,state,ZIP,country,number,oldUser.getLoginType());
+        User newUser = new User(oldUser.getDisplayPicture(),firstName,lastName,oldUser.getID(),email,streetAddress1,streetAddress2,city,state,ZIP,country,number,oldUser.getLoginType());
 
         myNewUser = newUser;
         return !oldUser.equals(newUser);

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.gretel.scrapknot.backend.User;
+import com.gretel.scrapknot.backend.User.User;
 
 /**
  * This class is used to store files locally in Android. Uses SharedPreference.
