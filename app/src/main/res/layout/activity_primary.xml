@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.gretel.scrapknot.frontend.activities.PrimaryActivity"
+    tools:context="com.gretel.scrapknot.view.activities.MainActivity.PrimaryActivity"
     tools:openDrawer="start">
 
     <android.support.constraint.ConstraintLayout

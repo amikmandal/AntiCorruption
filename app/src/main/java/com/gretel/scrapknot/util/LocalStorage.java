@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.gretel.scrapknot.backend.User.User;
+import com.gretel.scrapknot.model.Agent.User;
 
 /**
  * This class is used to store files locally in Android. Uses SharedPreference.
@@ -15,14 +15,12 @@ public class LocalStorage {
 
     private SharedPreferences myStorage;
     private SharedPreferences.Editor myEditor;
-    private Context myContext;
 
     /**
      * Constructor to initialize instance variables
      * @param context specifies the context of the activity called from
      */
     public LocalStorage(Context context){
-        myContext = context;
         myStorage = PreferenceManager.getDefaultSharedPreferences(context);
         myEditor = myStorage.edit();
         myEditor.apply();
@@ -95,4 +93,5 @@ public class LocalStorage {
         }
         return true;
     }
+
 }

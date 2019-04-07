@@ -5,7 +5,7 @@
     android:id="@+id/user_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.scrapknot.frontend.activities.PrimaryActivity">
+    tools:context="com.gretel.scrapknot.view.activities.MainActivity.PrimaryActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

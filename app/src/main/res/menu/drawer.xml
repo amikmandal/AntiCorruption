@@ -18,6 +18,14 @@
             android:title="Contact Us"/>
     </group>
 
+    <item android:title="Join Us">
+        <menu>
+            <item android:id = "@+id/nav_become_repairer"
+            android:icon="@drawable/ic_repairer"
+            android:title="Become A Repairer"/>
+         </menu>
+    </item>
+
     <item android:title = "More">
         <menu>
             <item android:id = "@+id/nav_review"
