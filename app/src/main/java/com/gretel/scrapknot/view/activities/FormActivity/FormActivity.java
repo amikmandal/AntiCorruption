@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.gretel.scrapknot.model.Agent.Agent;
+import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
 import com.gretel.scrapknot.model.FormData.FormData;
 import com.gretel.scrapknot.model.FormData.RepairerForm;
 import com.gretel.scrapknot.model.FormData.UserForm;
-import com.gretel.scrapknot.view.activities.MainActivity.PrimaryActivity;
+import com.gretel.scrapknot.view.activities.MainActivity.RepairerPrimaryActivity;
+import com.gretel.scrapknot.view.activities.MainActivity.UserPrimaryActivity;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.R;
 
-import static com.gretel.scrapknot.view.activities.FormActivity.FormActivity.FormType.REPAIRER_FORM;
 import static com.gretel.scrapknot.view.activities.FormActivity.FormActivity.FormType.USER_FORM;
 
 abstract public class FormActivity extends AppCompatActivity {
@@ -58,6 +60,7 @@ abstract public class FormActivity extends AppCompatActivity {
 
         userData.putString("index",index.toString());
 
+        //still requirements left
         if(index<tempFormData.getRequirementsSize()){
             Intent intent;
             if(myFormType==USER_FORM){
@@ -67,18 +70,23 @@ abstract public class FormActivity extends AppCompatActivity {
             }
             intent.putExtras(userData);
             startActivity(intent);
+        //done with requirements
         } else {
+
+            tempFormData.makeAgent(userData);
+            Agent a = tempFormData.getAgent();
+
+            LocalStorage localStorage = new LocalStorage(getApplicationContext());
+
             if(myFormType == USER_FORM){
-                tempFormData.makeAgent(userData);
-                User u = (User) tempFormData.getAgent();
+                localStorage.saveUser((User) a);
 
-                LocalStorage localStorage = new LocalStorage(getApplicationContext());
-                localStorage.saveUser(u);
-
-                Intent intent = new Intent(getApplicationContext(),PrimaryActivity.class);
+                Intent intent = new Intent(getApplicationContext(),UserPrimaryActivity.class);
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(getApplicationContext(),PrimaryActivity.class);
+                localStorage.saveRepairer((Repairer) a);
+
+                Intent intent = new Intent(getApplicationContext(),RepairerPrimaryActivity.class);
                 startActivity(intent);
             }
 

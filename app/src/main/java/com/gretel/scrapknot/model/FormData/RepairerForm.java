@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
+import com.gretel.scrapknot.util.BackEndManager.FirebaseManager;
 
 public class RepairerForm extends FormData {
 
@@ -16,6 +17,11 @@ public class RepairerForm extends FormData {
         super("user",context);
         String[] requirements = {REGISTRATION_NUMBER,EXPERIENCE,SPECIALITY};
         myRequirements = requirements;
+    }
+
+    @Override
+    protected FirebaseManager getFirebaseDatabase(Context context) {
+        return new FirebaseManager("repairer", context);
     }
 
     @Override

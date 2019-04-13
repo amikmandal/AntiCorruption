@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gretel.scrapknot.view.activities.FormActivity.UserFormActivity;
-import com.gretel.scrapknot.view.activities.MainActivity.PrimaryActivity;
+import com.gretel.scrapknot.view.activities.MainActivity.UserPrimaryActivity;
 import com.gretel.scrapknot.util.BackEndManager.FirebaseManager;
 import com.gretel.scrapknot.util.JSONParser;
 import com.gretel.scrapknot.util.LocalStorage;
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                     FirebaseManager firebaseManager = new FirebaseManager("user",getApplicationContext());
                                     firebaseManager.getUser("facebook", id);
 
-                                    Intent intent = new Intent(getApplicationContext(), PrimaryActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), UserPrimaryActivity.class);
                                     startActivity(intent);
                                 } else {
 
@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
 
         if(localStorage.checkIfUserPresent()){
-            Intent intent = new Intent(getApplicationContext(), PrimaryActivity.class);
+            Intent intent = new Intent(getApplicationContext(), UserPrimaryActivity.class);
             startActivity(intent);
         }
     }

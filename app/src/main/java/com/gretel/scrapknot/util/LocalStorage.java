@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
 
 /**
@@ -76,9 +77,7 @@ public class LocalStorage {
      * Method to delete saved data of User
      */
     public void removeUser(){
-
         myEditor.remove("myUser").apply();
-
     }
 
     public void editUser(User user){
@@ -88,6 +87,54 @@ public class LocalStorage {
 
     public boolean checkIfUserPresent(){
         String checkJSON = loadUserJSON();
+        if (checkJSON.equals("")){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Method to store an repairer locally
+     * @param r specifies the repairer to be saved
+     */
+    public void saveRepairer(Repairer r) {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(r);
+        saveString("myRepairer", json);
+
+    }
+
+    /**
+     * Method to retrieve an user that is saved locally
+     * @return the repairer stored locally
+     */
+    public Repairer loadRepairer(){
+
+        Gson gson = new Gson();
+        String json = loadRepairerJSON();
+        return gson.fromJson(json, Repairer.class);
+
+    }
+
+    public String loadRepairerJSON() {
+        return loadString("myRepairer");
+    }
+
+    /**
+     * Method to delete saved data of Repairer
+     */
+    public void removeRepairer(){
+        myEditor.remove("myRepairer").apply();
+    }
+
+    public void editRepairer(Repairer r){
+        removeUser();
+        saveRepairer(r);
+    }
+
+    public boolean checkIfRepairerPresent(){
+        String checkJSON = loadRepairerJSON();
         if (checkJSON.equals("")){
             return false;
         }

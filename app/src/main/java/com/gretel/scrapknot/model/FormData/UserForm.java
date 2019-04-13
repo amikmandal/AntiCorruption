@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
+import com.gretel.scrapknot.util.BackEndManager.FirebaseManager;
 
 /**
  * This class helps in keeping track of all the additional data we need for User which we are unable
@@ -26,6 +27,11 @@ public class UserForm extends FormData {
        super("user",context);
        String[] requirements = {PHONE_NUMBER,ADDRESS,ROOM_NUMBER,CITY,STATE,ZIP,COUNTRY};
        myRequirements = requirements;
+    }
+
+    @Override
+    protected FirebaseManager getFirebaseDatabase(Context context) {
+        return new FirebaseManager("user",context);
     }
 
     public void setAgent(Bundle data){

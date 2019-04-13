@@ -25,9 +25,11 @@ abstract public class FormData {
      */
     public void makeAgent(Bundle data){
         setAgent(data);
-        FirebaseManager firebaseManager = new FirebaseManager(myDatabaseRoot, myContext);
+        FirebaseManager firebaseManager = getFirebaseDatabase(myContext);
         firebaseManager.addUser(myAgent,myAgent.getLoginType());
     }
+
+    protected abstract FirebaseManager getFirebaseDatabase(Context context);
 
     protected User setCommon(Bundle data){
         String firstName = data.getString("firstName");

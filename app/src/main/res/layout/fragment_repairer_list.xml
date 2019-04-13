@@ -4,7 +4,7 @@
     android:id="@+id/repairer_list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gretel.scrapknot.view.activities.MainActivity.PrimaryActivity">
+    tools:context="com.gretel.scrapknot.view.activities.MainActivity.UserPrimaryActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
