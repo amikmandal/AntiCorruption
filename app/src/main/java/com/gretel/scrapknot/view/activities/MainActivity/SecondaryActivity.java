@@ -1,7 +1,6 @@
 package com.gretel.scrapknot.view.activities.MainActivity;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.view.MenuItem;

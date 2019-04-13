@@ -30,9 +30,7 @@ abstract public class FormActivity extends AppCompatActivity {
     protected EditText myInfo;
 
     protected void makeNextButton(){
-
         Button nextButton = findViewById(R.id.next_button);
-
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +70,7 @@ abstract public class FormActivity extends AppCompatActivity {
             startActivity(intent);
         //done with requirements
         } else {
-
+            tempFormData.setAgent(userData);
             tempFormData.makeAgent(userData);
             Agent a = tempFormData.getAgent();
 

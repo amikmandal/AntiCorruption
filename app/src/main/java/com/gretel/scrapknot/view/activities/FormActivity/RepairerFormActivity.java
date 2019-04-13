@@ -1,10 +1,9 @@
 package com.gretel.scrapknot.view.activities.FormActivity;
 
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.gretel.scrapknot.R;
 import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
@@ -43,48 +42,19 @@ public class RepairerFormActivity extends FormActivity {
 
     private void storeUserInBundle(Bundle userBundle) {
 
-        int size = new UserForm(getApplicationContext()).getRequirementsSize();
+        //int size = new UserForm(getApplicationContext()).getRequirementsSize();
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
         User u = localStorage.loadUser();
 
-        userBundle.putString("firstName",u.getFirstName());
-        userBundle.putString("lastName",u.getLastName());
-        userBundle.putString("id",u.getID());
-        userBundle.putString("email",u.getEmail());
-        userBundle.putString("profilePicture",u.getDisplayPicture());
-        userBundle.putString("loginType",u.getLoginType());
-
-        for(int i=0; i<size; i++){
-            switch (i){
-                case 0:
-                    userBundle.putString(Integer.toString(i),u.getNumber());
-                    break;
-                case 1:
-                    userBundle.putString(Integer.toString(i),u.getStreetAddress1());
-                    break;
-                case 2:
-                    userBundle.putString(Integer.toString(i),u.getStreetAddress2());
-                    break;
-                case 3:
-                    userBundle.putString(Integer.toString(i),u.getCity());
-                    break;
-                case 4:
-                    userBundle.putString(Integer.toString(i),u.getState());
-                    break;
-                case 5:
-                    userBundle.putString(Integer.toString(i),u.getCountry());
-                    break;
-                case 6:
-                    userBundle.putString(Integer.toString(i),u.getZIP());
-                    break;
-            }
-        }
+        Gson gson = new Gson();
+        String json = gson.toJson(u);
+        userBundle.putString("userData", json);
 
         getIntent().putExtras(userBundle);
     }
 
     @Override
     protected void doNecessary(FormData tempFormData, Integer index, Bundle userData) {
-        ;
+        userData.putString(index.toString(), myInfo.getText().toString());
     }
 }

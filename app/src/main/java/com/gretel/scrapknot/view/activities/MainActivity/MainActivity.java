@@ -62,9 +62,19 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch(item.getItemId()) {
+            case R.id.nav_switch_to_user:
+                intent = new Intent(getApplicationContext(),UserPrimaryActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_switch_to_repairer:
-                Intent intent = new Intent(getApplicationContext(), RepairerFormActivity.class);
+                LocalStorage localStorage = new LocalStorage(getApplicationContext());
+                if(!localStorage.checkIfRepairerPresent()){
+                    intent = new Intent(getApplicationContext(), RepairerFormActivity.class);
+                } else {
+                    intent = new Intent(getApplicationContext(), RepairerPrimaryActivity.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.nav_review:
@@ -150,6 +160,7 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
 
         String loginType = localStorage.loadString("loginType");
         localStorage.removeUser();
+        localStorage.removeRepairer();
 
         if(loginType.equals("facebook")){
             LoginManager.getInstance().logOut();

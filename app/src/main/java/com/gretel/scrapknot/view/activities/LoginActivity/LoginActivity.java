@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gretel.scrapknot.view.activities.FormActivity.UserFormActivity;
+import com.gretel.scrapknot.view.activities.MainActivity.RepairerPrimaryActivity;
 import com.gretel.scrapknot.view.activities.MainActivity.UserPrimaryActivity;
 import com.gretel.scrapknot.util.BackEndManager.FirebaseManager;
 import com.gretel.scrapknot.util.JSONParser;
@@ -94,6 +95,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Intent intent = new Intent(getApplicationContext(), UserPrimaryActivity.class);
                                     startActivity(intent);
+
+
+                                    //gotta check if Repairer
+
                                 } else {
 
                                     JSONParser jsonParser = new JSONParser();
@@ -150,7 +155,10 @@ public class LoginActivity extends AppCompatActivity {
     private void checkIfLoggedIn() {
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
 
-        if(localStorage.checkIfUserPresent()){
+        if(localStorage.checkIfRepairerPresent()){
+            Intent intent = new Intent(getApplicationContext(),RepairerPrimaryActivity.class);
+            startActivity(intent);
+        } else if(localStorage.checkIfUserPresent()){
             Intent intent = new Intent(getApplicationContext(), UserPrimaryActivity.class);
             startActivity(intent);
         }

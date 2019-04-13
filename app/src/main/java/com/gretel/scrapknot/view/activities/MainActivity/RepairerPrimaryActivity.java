@@ -18,7 +18,6 @@ import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.Fra
 
 public class RepairerPrimaryActivity extends PrimaryActivity {
 
-
     @Override
     protected void createFragmentTypeMap() {
         myFragmentIDs = HashBiMap.create();

@@ -1,11 +1,9 @@
 package com.gretel.scrapknot.view.activities.MainActivity;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.scrapknot.R;
@@ -19,7 +17,6 @@ import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.Fra
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.ORDER_LIST;
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.USER;
-import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.TransitionType.SLIDE_BOTTOM;
 import static com.gretel.scrapknot.view.fragments.UserFragment.FragmentMode.EDIT;
 
 public class UserSecondaryActivity extends SecondaryActivity {

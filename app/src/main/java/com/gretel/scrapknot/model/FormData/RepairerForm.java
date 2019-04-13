@@ -3,6 +3,7 @@ package com.gretel.scrapknot.model.FormData;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.gretel.scrapknot.model.Agent.Repairer;
 import com.gretel.scrapknot.model.Agent.User;
 import com.gretel.scrapknot.util.BackEndManager.FirebaseManager;
@@ -26,7 +27,24 @@ public class RepairerForm extends FormData {
 
     @Override
     public void setAgent(Bundle data) {
-        User u = setCommon(data);
-        myAgent = new Repairer(u,data.getString("registrationNumber"),data.getString("experience"),data.getDouble("rating"),data.getString("speciality"));
+        String userJson = data.getString("userData");
+        Gson gson = new Gson();
+        User u = gson.fromJson(userJson,User.class);
+        String registrationNumber = "", experience = "", speciality = "";
+        Double rating = data.getDouble("rating");
+        for(int i=0; i<myRequirements.length; i++){
+            switch (i){
+                case 0:
+                    registrationNumber = data.getString(Integer.toString(i));
+                    break;
+                case 1:
+                    experience = data.getString(Integer.toString(i));
+                    break;
+                case 2:
+                    speciality = data.getString(Integer.toString(i));
+                    break;
+            }
+        }
+        myAgent = new Repairer(u,registrationNumber,experience,rating,speciality);
     }
 }

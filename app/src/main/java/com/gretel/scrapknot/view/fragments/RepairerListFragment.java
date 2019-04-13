@@ -15,10 +15,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gretel.scrapknot.model.Agent.Mechanic;
+import com.google.gson.Gson;
+import com.gretel.scrapknot.model.Agent.Repairer;
+import com.gretel.scrapknot.model.Agent.User;
 import com.gretel.scrapknot.view.adapters.RepairerListAdapter;
-import com.gretel.scrapknot.model.Data;
 import com.gretel.scrapknot.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This implements the Fragment to display a list of Repairers.
@@ -30,17 +34,17 @@ public class RepairerListFragment extends Fragment {
     private RepairerListAdapter myAdapter;
 
     private DatabaseReference myDatabaseMechanics;
-    private Data myData;
+    private List<Repairer> myRepairerList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repairer_list,container,false);
 
-        myData = new Data();
-        myDatabaseMechanics = FirebaseDatabase.getInstance().getReference("mechanics");
+        myRepairerList = new ArrayList<>();
+        myDatabaseMechanics = FirebaseDatabase.getInstance().getReference("repairer");
 
-        initRecyclerView(myData,view);
+        initRecyclerView(myRepairerList,view);
 
         return view;
     }
@@ -54,25 +58,13 @@ public class RepairerListFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
-                    int index=0;
-                    String dataPath="", name="", speciality="";
-                    Double rating=0.0;
-                    for(DataSnapshot e: d.getChildren()){
-                        if(index==0){
-                            dataPath = e.getValue(String.class);
-                        }else if(index==1){
-                            name = e.getValue(String.class);
-                        }else if(index==2){
-                            rating = e.getValue(Double.class);
-                        }else{
-                            speciality = e.getValue(String.class);
-                        }
-                        index++;
-                    }
 
-                    Mechanic temp = new Mechanic(dataPath,name,rating,speciality);
-                    myData.addMechanic(temp);
-                    myAdapter = new RepairerListAdapter(myData.getRepairerList(), getActivity().getApplicationContext());
+                    Gson gson = new Gson();
+                    String json = d.getValue(String.class);
+                    Repairer r = gson.fromJson(json, Repairer.class);
+
+                    myRepairerList.add(r);
+                    myAdapter = new RepairerListAdapter(myRepairerList, getActivity().getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);
                 }
             }
@@ -90,11 +82,11 @@ public class RepairerListFragment extends Fragment {
      * @param d specifies the data object to be used to display the list of repairers
      * @param v specifies the view to which the recycler view for the list will be attached
      */
-    private void initRecyclerView(Data d, View v)
+    private void initRecyclerView(List<Repairer> repairers, View v)
     {
         //call RecyclerView
         myRecyclerView = v.findViewById(R.id.repairer_list_recycler_view);
-        RepairerListAdapter adapter = new RepairerListAdapter(d.getRepairerList(),getActivity().getApplicationContext());
+        RepairerListAdapter adapter = new RepairerListAdapter(myRepairerList,getActivity().getApplicationContext());
         myRecyclerView.setAdapter(adapter);
 
         //check this

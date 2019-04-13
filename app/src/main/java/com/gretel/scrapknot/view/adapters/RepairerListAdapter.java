@@ -10,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gretel.scrapknot.model.Agent.Mechanic;
 import com.gretel.scrapknot.R;
+import com.gretel.scrapknot.model.Agent.Repairer;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapter.ViewHolder>{
@@ -26,8 +28,8 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public RepairerListAdapter(HashSet<Mechanic> data, Context context){
-        for(Mechanic temp: data){
+    public RepairerListAdapter(List<Repairer> data, Context context){
+        for(Repairer temp: data){
             myProfilePhotos.add(temp.getDisplayPicture());
             myRepairerNames.add(temp.getName());
             myRatings.add(temp.getRating());

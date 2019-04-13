@@ -31,7 +31,10 @@ public class FirebaseManager implements BackEndManager {
     public void addUser(Agent a, String loginType){
         Gson gson = new Gson();
         String json = gson.toJson(a);
-        databaseReference.child(loginType).child(a.getID()).setValue(json);
+        if(a instanceof User)
+            databaseReference.child(loginType).child(a.getID()).setValue(json);
+        else
+            databaseReference.child(a.getID()).setValue(json);
     }
 
     public void getUser(String loginType, String id){
