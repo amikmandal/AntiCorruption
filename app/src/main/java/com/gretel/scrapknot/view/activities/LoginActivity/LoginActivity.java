@@ -1,4 +1,4 @@
-package com.gretel.scrapknot.view.activities;
+package com.gretel.scrapknot.view.activities.LoginActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

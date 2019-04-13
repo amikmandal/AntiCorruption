@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id = "@+id/nav_user"
+        <item android:id = "@+id/nav_repairer"
             android:icon="@drawable/ic_user"
             android:title="User Profile"/>
-        <item android:id = "@+id/nav_contact_mechanic"
+        <item android:id = "@+id/nav_contact_customer"
             android:icon="@drawable/ic_call"
             android:title="Contact Customer"/>
         <item android:id = "@+id/nav_contact_us"
@@ -17,9 +17,9 @@
 
     <item android:title="Join Us">
         <menu>
-            <item android:id = "@+id/nav_become_repairer"
-            android:icon="@drawable/ic_repairer"
-            android:title="Order Requests"/>
+            <item android:id = "@+id/nav_switch_to_user"
+            android:icon="@drawable/ic_work"
+            android:title="Switch to User Mode"/>
          </menu>
     </item>
 

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.gretel.scrapknot.R;
 import com.gretel.scrapknot.util.AppSupport;
 
-public class CallRepairerFragment extends Fragment {
+public class ContactRepairerFragment extends Fragment {
 
     private ImageView myRepairerImage;
     private TextView myRepairerName;
@@ -30,7 +30,7 @@ public class CallRepairerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_call_mechanic,container,false);
+        View view = inflater.inflate(R.layout.fragment_contact_repairer,container,false);
 
         myRepairerHolder = view.findViewById(R.id.repairer_holder);
         myRepairerImage = view.findViewById(R.id.repairer_image);

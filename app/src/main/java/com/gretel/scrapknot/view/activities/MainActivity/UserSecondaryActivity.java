@@ -1,20 +1,19 @@
 package com.gretel.scrapknot.view.activities.MainActivity;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.scrapknot.R;
-import com.gretel.scrapknot.view.fragments.CallRepairerFragment;
+import com.gretel.scrapknot.view.fragments.ContactRepairerFragment;
 import com.gretel.scrapknot.view.fragments.ChatFragment;
 import com.gretel.scrapknot.view.fragments.ContactUsFragment;
 import com.gretel.scrapknot.view.fragments.OrderListFragment;
 import com.gretel.scrapknot.view.fragments.UserFragment;
-import com.gretel.scrapknot.util.EditButtonListener;
 
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.CALL_MECHANIC;
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
@@ -23,24 +22,20 @@ import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.Fra
 import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.TransitionType.SLIDE_BOTTOM;
 import static com.gretel.scrapknot.view.fragments.UserFragment.FragmentMode.EDIT;
 
-public class UserSecondaryActivity extends MainActivity {
-
-    private EditButtonListener myEditButtonListener;
+public class UserSecondaryActivity extends SecondaryActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        setContentView(R.layout.activity_secondary_user);
-
+    protected void createFragmentTypeMap() {
         myFragmentIDs = HashBiMap.create();
         myFragmentIDs.put(USER,0);
         myFragmentIDs.put(ORDER_LIST,1);
         myFragmentIDs.put(CALL_MECHANIC,2);
         myFragmentIDs.put(CONTACT_US,3);
+    }
 
-        addUIElements();
+    @Override
+    protected void setLayout() {
+        setContentView(R.layout.activity_secondary_user);
     }
 
     @Override
@@ -53,19 +48,13 @@ public class UserSecondaryActivity extends MainActivity {
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(ORDER_LIST),new OrderListFragment(),ORDER_LIST.toString());
                 break;
             case CALL_MECHANIC:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CALL_MECHANIC),new CallRepairerFragment(),CALL_MECHANIC.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CALL_MECHANIC),new ContactRepairerFragment(),CALL_MECHANIC.toString());
                 break;
             case CONTACT_US:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());
                 break;
         }
     }
-
-    @Override
-    protected TransitionType determineTransition(int fragmentID) {
-        return SLIDE_BOTTOM;
-    }
-
 
     @Override
     protected void addToolBarButton() {
@@ -97,7 +86,7 @@ public class UserSecondaryActivity extends MainActivity {
                 break;
             case R.id.nav_contact_mechanic:
                 prepareForNewFragment(item);
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new CallRepairerFragment(),CALL_MECHANIC.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactRepairerFragment(),CALL_MECHANIC.toString());
                 break;
             case R.id.nav_contact_us:
                 prepareForNewFragment(item);
@@ -108,58 +97,7 @@ public class UserSecondaryActivity extends MainActivity {
         return super.onNavigationItemSelected(item);
     }
 
-    private void prepareForNewFragment(MenuItem item) {
-        item.setChecked(true);
-        for (Fragment fragment:getSupportFragmentManager().getFragments()) {
-            if (fragment!=null) {
-                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-            }
-        }
-        //hideKeyboard();
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        if(fragment instanceof EditButtonListener){
-            myEditButtonListener = (EditButtonListener) fragment;
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        myEditButtonListener = null;
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-
-        if(myDrawer.isDrawerOpen(GravityCompat.START)){
-            myDrawer.closeDrawer(GravityCompat.START);
-        } else if (count == 0) {
-            super.onBackPressed();
-        } else {
-            //uncheck selected item from navigation drawer
-            int size = myDrawerNavigationView.getMenu().size();
-            for (int i = 0; i < size; i++) {
-                myDrawerNavigationView.getMenu().getItem(i).setChecked(false);
-            }
-            handleSpecializedBackPress();
-            //remove all fragments
-            for (Fragment fragment:getSupportFragmentManager().getFragments()) {
-                if (fragment!=null) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
-            }
-            finish();
-            UserSecondaryActivity.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-        }
-    }
-
-    private void handleSpecializedBackPress() {
+    protected void handleSpecializedBackPress() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.secondary_fragment_container);
         switch (myFragmentIDs.inverse().get(myCurrentFragmentID)){
             case USER:
@@ -170,4 +108,5 @@ public class UserSecondaryActivity extends MainActivity {
                 break;
         }
     }
+
 }

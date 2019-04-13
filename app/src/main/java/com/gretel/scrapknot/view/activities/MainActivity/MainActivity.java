@@ -19,14 +19,14 @@ import com.facebook.login.LoginManager;
 import com.google.common.collect.HashBiMap;
 import com.gretel.scrapknot.R;
 import com.gretel.scrapknot.view.activities.FormActivity.RepairerFormActivity;
-import com.gretel.scrapknot.view.activities.LoginActivity;
+import com.gretel.scrapknot.view.activities.LoginActivity.LoginActivity;
 import com.gretel.scrapknot.util.LocalStorage;
 import com.gretel.scrapknot.util.UserLoader;
 
 public abstract class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected enum FragmentType{
-        HOME,REPAIRER_LIST,ORDER_TRACKER,USER,ORDER_LIST,CALL_MECHANIC,CONTACT_US
+        HOME,REPAIRER_LIST,ORDER_TRACKER,USER,ORDER_LIST,CALL_MECHANIC,CONTACT_US,DASHBOARD,REQUEST_LIST,UPDATE_PROGRESS,CONTACT_CUSTOMER,REPAIRER,
     }
 
     protected enum TransitionType {
@@ -63,7 +63,7 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.nav_become_repairer:
+            case R.id.nav_switch_to_repairer:
                 Intent intent = new Intent(getApplicationContext(), RepairerFormActivity.class);
                 startActivity(intent);
                 break;
@@ -166,4 +166,14 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
     public TextView getNavHeaderTextView(){
         return myNavUser;
     }
+
+    /**
+     * Setter method to set the appropriate layout file
+     */
+    protected abstract void setLayout();
+
+    /**
+     * Creates the fragment map to deal with different fragments
+     */
+    protected abstract void createFragmentTypeMap();
 }

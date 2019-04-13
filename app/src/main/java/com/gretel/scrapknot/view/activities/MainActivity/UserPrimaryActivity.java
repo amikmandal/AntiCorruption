@@ -1,5 +1,6 @@
 package com.gretel.scrapknot.view.activities.MainActivity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
@@ -23,6 +24,19 @@ import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.Fra
  * @author Amik Mandal
  */
 public class UserPrimaryActivity extends PrimaryActivity  {
+
+    @Override
+    protected void createFragmentTypeMap() {
+        myFragmentIDs = HashBiMap.create();
+        myFragmentIDs.put(HOME,0);
+        myFragmentIDs.put(REPAIRER_LIST,1);
+        myFragmentIDs.put(ORDER_TRACKER,2);
+    }
+
+    @Override
+    protected void setLayout() {
+        setContentView(R.layout.activity_primary_user);
+    }
 
     @Override
     protected void initializeFragment() {
@@ -73,15 +87,8 @@ public class UserPrimaryActivity extends PrimaryActivity  {
     }
 
     @Override
-    protected void setLayout() {
-        setContentView(R.layout.activity_primary_user);
+    protected Intent getSecondaryActivity() {
+        return new Intent(getApplicationContext(),UserSecondaryActivity.class);
     }
 
-    @Override
-    protected void createFragmentTypeMap() {
-        myFragmentIDs = HashBiMap.create();
-        myFragmentIDs.put(HOME,0);
-        myFragmentIDs.put(REPAIRER_LIST,1);
-        myFragmentIDs.put(ORDER_TRACKER,2);
-    }
 }

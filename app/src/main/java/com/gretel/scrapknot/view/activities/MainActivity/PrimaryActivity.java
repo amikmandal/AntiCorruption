@@ -2,6 +2,7 @@ package com.gretel.scrapknot.view.activities.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -9,28 +10,19 @@ import android.view.MenuItem;
 
 import com.gretel.scrapknot.R;
 
+import static com.gretel.scrapknot.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
+
 abstract public class PrimaryActivity extends MainActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-        createFragmentTypeMap();
-
         super.onCreate(savedInstanceState);
-
+        createFragmentTypeMap();
         setLayout();
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
         addUIElements();
-
     }
-
-    protected abstract void setLayout();
-
-    protected abstract void createFragmentTypeMap();
-
 
     @Override
     protected void addToolBarButton() {
@@ -63,15 +55,36 @@ abstract public class PrimaryActivity extends MainActivity implements BottomNavi
         }
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item){
+
+        switch(item.getItemId()){
+            case R.id.nav_contact_us:
+                openDrawerFragment(item,CONTACT_US);
+                break;
+            case R.id.nav_review:
+                break;
+            case R.id.nav_logout:
+                logOutUser();
+                break;
+
+        }
+
+        return super.onNavigationItemSelected(item);
+
+    }
+
     /**
      * This method is called before opening another Drawer Fragment while one Fragment is already open.
      */
     protected void openDrawerFragment(MenuItem item, FragmentType type){
         item.setChecked(true);
-        Intent intent = new Intent(getApplicationContext(),UserSecondaryActivity.class);
+        Intent intent = getSecondaryActivity();
         intent.putExtra("openFragment",type);
         startActivity(intent);
     }
+
+    protected abstract Intent getSecondaryActivity();
 
     /**
      * This method is called before opening any Navigation Fragment while one Fragment is open

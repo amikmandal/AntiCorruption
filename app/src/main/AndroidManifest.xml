@@ -38,6 +38,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.activities.MainActivity.RepairerSecondaryActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".view.activities.MainActivity.UserSecondaryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
@@ -49,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.LoginActivity"
+            android:name=".view.activities.LoginActivity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,20 +92,20 @@
         <activity
             android:name=".view.activities.FormActivity.RepairerFormActivity"
             android:label="@string/title_activity_form"
-            android:parentActivityName=".view.activities.LoginActivity"
+            android:parentActivityName=".view.activities.LoginActivity.LoginActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.activities.LoginActivity" />
+                android:value=".view.activities.LoginActivity.LoginActivity" />
         </activity>
         <activity
             android:name=".view.activities.FormActivity.UserFormActivity"
             android:label="@string/title_activity_form"
-            android:parentActivityName=".view.activities.LoginActivity"
+            android:parentActivityName=".view.activities.LoginActivity.LoginActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.activities.LoginActivity" />
+                android:value=".view.activities.LoginActivity.LoginActivity" />
         </activity>
     </application>
 
