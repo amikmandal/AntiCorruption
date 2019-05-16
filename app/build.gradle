@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.gretel.scrapknot"
+        applicationId "com.gretel.anticorruption"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -12,7 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //added to enable multi packages. maybe removable.
-        multiDexEnabled="true"
+        multiDexEnabled = "true"
     }
     buildTypes {
         release {
@@ -51,13 +51,14 @@ dependencies {
     //circular imageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-    implementation 'com.google.firebase:firebase-database:16.0.6'
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-
     //facebook
     implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     //country
     implementation 'com.hbb20:ccp:2.2.4'
+
+    ///firebase
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
 }
