@@ -13,7 +13,7 @@ import com.gretel.anticorruption.model.Agent.User;
 import com.gretel.anticorruption.model.FormData.FormData;
 import com.gretel.anticorruption.model.FormData.AuthorityForm;
 import com.gretel.anticorruption.model.FormData.UserForm;
-import com.gretel.anticorruption.view.activities.MainActivity.RepairerPrimaryActivity;
+import com.gretel.anticorruption.view.activities.MainActivity.AuthorityPrimaryActivity;
 import com.gretel.anticorruption.view.activities.MainActivity.UserPrimaryActivity;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.R;
@@ -84,7 +84,7 @@ abstract public class FormActivity extends AppCompatActivity {
             } else {
                 localStorage.saveRepairer((Authority) a);
 
-                Intent intent = new Intent(getApplicationContext(),RepairerPrimaryActivity.class);
+                Intent intent = new Intent(getApplicationContext(),AuthorityPrimaryActivity.class);
                 startActivity(intent);
             }
 

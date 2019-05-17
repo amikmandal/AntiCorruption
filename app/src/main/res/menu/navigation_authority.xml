@@ -5,15 +5,9 @@
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_home"
         android:title="Dashboard" />
-
     <item
         android:id="@+id/navigation_request_list"
         android:icon="@drawable/ic_repairer"
-        android:title="Requests" />
-
-    <item
-        android:id="@+id/navigation_update_progress"
-        android:icon="@drawable/ic_track"
-        android:title="Update Progress" />
+        android:title="Concerns"/>
 
 </menu>

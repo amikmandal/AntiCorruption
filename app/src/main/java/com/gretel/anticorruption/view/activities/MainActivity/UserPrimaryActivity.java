@@ -6,16 +6,16 @@ import android.view.MenuItem;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.view.fragments.HomeFragment;
-import com.gretel.anticorruption.view.fragments.OrderTrackerFragment;
-import com.gretel.anticorruption.view.fragments.RepairerListFragment;
+import com.gretel.anticorruption.view.fragments.FriendsFragment;
+import com.gretel.anticorruption.view.fragments.AuthorityListFragment;
 import com.gretel.anticorruption.R;
 
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CALL_MECHANIC;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.AUTHORITIES;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.COMPLAINT_TRACKER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.FIND_FRIENDS;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.FRIENDS;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.HOME;
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.ORDER_LIST;
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.ORDER_TRACKER;
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.REPAIRER_LIST;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.USER;
 
 /**
@@ -29,8 +29,8 @@ public class UserPrimaryActivity extends PrimaryActivity  {
     protected void createFragmentTypeMap() {
         myFragmentIDs = HashBiMap.create();
         myFragmentIDs.put(HOME,0);
-        myFragmentIDs.put(REPAIRER_LIST,1);
-        myFragmentIDs.put(ORDER_TRACKER,2);
+        myFragmentIDs.put(AUTHORITIES,1);
+        myFragmentIDs.put(FRIENDS,2);
     }
 
     @Override
@@ -53,26 +53,26 @@ public class UserPrimaryActivity extends PrimaryActivity  {
             case R.id.nav_user:
                 openDrawerFragment(item,USER);
                 break;
-            case R.id.nav_order:
-                openDrawerFragment(item,ORDER_LIST);
-                break;
-            case R.id.nav_contact_mechanic:
-                openDrawerFragment(item,CALL_MECHANIC);
-                break;
             case R.id.nav_contact_us:
                 openDrawerFragment(item,CONTACT_US);
+                break;
+            case R.id.nav_complaint_tracker:
+                openDrawerFragment(item,COMPLAINT_TRACKER);
+                break;
+            case R.id.nav_find_friends:
+                openDrawerFragment(item,FIND_FRIENDS);
                 break;
             case R.id.navigation_home:
                 openNavFragment(new HomeFragment(), myFragmentIDs.get(HOME));
                 createFragment(R.id.primary_fragment_container,myFragmentIDs.get(HOME),new HomeFragment(),HOME.toString());
                 break;
-            case R.id.navigation_repairer:
-                openNavFragment(new RepairerListFragment(), myFragmentIDs.get(REPAIRER_LIST));
-                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(REPAIRER_LIST),new RepairerListFragment(),REPAIRER_LIST.toString());
+            case R.id.authorities:
+                openNavFragment(new AuthorityListFragment(), myFragmentIDs.get(AUTHORITIES));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(AUTHORITIES),new AuthorityListFragment(),AUTHORITIES.toString());
                 break;
-            case R.id.navigation_tracker:
-                openNavFragment(new OrderTrackerFragment(), myFragmentIDs.get(ORDER_TRACKER));
-                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(ORDER_TRACKER),new OrderTrackerFragment(),ORDER_TRACKER.toString());
+            case R.id.navigation_friends:
+                openNavFragment(new FriendsFragment(), myFragmentIDs.get(FRIENDS));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(FRIENDS),new FriendsFragment(),FRIENDS.toString());
                 break;
             case R.id.nav_review:
                 break;

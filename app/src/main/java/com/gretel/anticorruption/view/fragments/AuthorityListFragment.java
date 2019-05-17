@@ -27,7 +27,7 @@ import java.util.List;
  * This implements the Fragment to display a list of Repairers.
  * @author Amik Mandal
  */
-public class RepairerListFragment extends Fragment {
+public class AuthorityListFragment extends Fragment {
 
     private RecyclerView myRecyclerView;
     private RepairerListAdapter myAdapter;

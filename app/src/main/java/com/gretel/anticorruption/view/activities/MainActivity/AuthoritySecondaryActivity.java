@@ -4,16 +4,16 @@ import android.view.View;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.view.fragments.ContactCustomerFragment;
+import com.gretel.anticorruption.view.fragments.ComplaintTrackerFragment;
 import com.gretel.anticorruption.view.fragments.ContactUsFragment;
-import com.gretel.anticorruption.view.fragments.RepairerFragment;
+import com.gretel.anticorruption.view.fragments.AuthorityFragment;
 
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_CUSTOMER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.REPAIRER;
 
 
-public class RepairerSecondaryActivity extends SecondaryActivity{
+public class AuthoritySecondaryActivity extends SecondaryActivity{
 
     @Override
     protected void createFragmentTypeMap() {
@@ -32,10 +32,10 @@ public class RepairerSecondaryActivity extends SecondaryActivity{
     protected void initializeFragment() {
         switch((FragmentType) getIntent().getSerializableExtra("openFragment")){
             case REPAIRER:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(REPAIRER),new RepairerFragment(),REPAIRER.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(REPAIRER),new AuthorityFragment(),REPAIRER.toString());
                 break;
             case CONTACT_CUSTOMER:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_CUSTOMER),new ContactCustomerFragment(),CONTACT_CUSTOMER.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_CUSTOMER),new ComplaintTrackerFragment(),CONTACT_CUSTOMER.toString());
                 break;
             case CONTACT_US:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());

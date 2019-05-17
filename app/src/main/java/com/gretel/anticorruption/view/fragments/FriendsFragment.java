@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.gretel.anticorruption.R;
 
 
-public class OrderTrackerFragment extends Fragment {
+public class FriendsFragment extends Fragment {
 
     @Nullable
     @Override

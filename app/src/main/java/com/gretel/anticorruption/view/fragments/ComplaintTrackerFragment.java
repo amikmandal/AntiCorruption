@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.gretel.anticorruption.R;
 
-public class ContactCustomerFragment extends Fragment {
+public class ComplaintTrackerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

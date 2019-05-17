@@ -7,13 +7,13 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_repairer"
-        android:icon="@drawable/ic_repairer"
-        android:title="@string/title_repairer" />
+        android:id="@+id/authorities"
+        android:icon="@drawable/ic_authority"
+        android:title="@string/title_authorities" />
 
     <item
-        android:id="@+id/navigation_tracker"
-        android:icon="@drawable/ic_track"
-        android:title="@string/title_tracker" />
+        android:id="@+id/navigation_friends"
+        android:icon="@drawable/ic_people"
+        android:title="@string/title_friends" />
 
 </menu>

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.util.AppSupport;
 
-public class ContactRepairerFragment extends Fragment {
+public class FindFriendsFragment extends Fragment {
 
     private ImageView myRepairerImage;
     private TextView myRepairerName;

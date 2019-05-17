@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.gretel.anticorruption.R;
 
-public class RepairerFragment extends Fragment {
+public class AuthorityFragment extends Fragment {
 
     @Nullable
     @Override
