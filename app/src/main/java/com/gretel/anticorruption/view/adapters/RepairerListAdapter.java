@@ -41,7 +41,7 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = mInflater.inflate(R.layout.holder_repairer,viewGroup,false);
+        View row = mInflater.inflate(R.layout.holder_authority,viewGroup,false);
         final RepairerListAdapter.ViewHolder mechanicHolder = new RepairerListAdapter.ViewHolder(row);
         return  mechanicHolder;
     }

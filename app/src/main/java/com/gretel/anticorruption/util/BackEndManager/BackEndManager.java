@@ -1,6 +1,7 @@
 package com.gretel.anticorruption.util.BackEndManager;
 
 import com.gretel.anticorruption.model.Agent.Agent;
+import com.gretel.anticorruption.model.Agent.Report;
 import com.gretel.anticorruption.model.Agent.User;
 
 public interface BackEndManager {
@@ -24,5 +25,11 @@ public interface BackEndManager {
      * @param user specifies the new user
      */
     void editUser(User user);
+
+    String addReport(Report report);
+
+    void addReportToUser(User u, String reportID);
+
+    void addTimestamp(String reportID);
 
 }

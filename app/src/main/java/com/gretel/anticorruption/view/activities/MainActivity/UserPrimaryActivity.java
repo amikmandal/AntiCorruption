@@ -2,9 +2,12 @@ package com.gretel.anticorruption.view.activities.MainActivity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.common.collect.HashBiMap;
+import com.gretel.anticorruption.view.activities.ReportActivity.ReportActivity;
 import com.gretel.anticorruption.view.fragments.HomeFragment;
 import com.gretel.anticorruption.view.fragments.FriendsFragment;
 import com.gretel.anticorruption.view.fragments.AuthorityListFragment;
@@ -36,6 +39,14 @@ public class UserPrimaryActivity extends PrimaryActivity  {
     @Override
     protected void setLayout() {
         setContentView(R.layout.activity_primary_user);
+        FloatingActionButton newReport = findViewById(R.id.new_report);
+        newReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

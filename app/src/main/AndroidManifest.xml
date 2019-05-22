@@ -27,6 +27,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.gretel.anticorruption.view.activities.ReportActivity.ReportActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.gretel.anticorruption.view.activities.MainActivity.UserPrimaryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"

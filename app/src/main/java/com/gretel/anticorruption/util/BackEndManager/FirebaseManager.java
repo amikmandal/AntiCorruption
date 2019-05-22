@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Agent;
+import com.gretel.anticorruption.model.Agent.Report;
 import com.gretel.anticorruption.model.Agent.User;
 import com.gretel.anticorruption.util.LocalStorage;
 
@@ -66,4 +67,19 @@ public class FirebaseManager implements BackEndManager {
         addUser(user,user.getLoginType());
     }
 
+    public String addReport(Report report){
+        Gson gson = new Gson();
+        String json = gson.toJson(report);
+        String reportID = databaseReference.push().getKey();
+        databaseReference.child(reportID).setValue(json);
+        return reportID;
+    }
+
+    public void addReportToUser(User u, String reportID) {
+        databaseReference.child(u.getLoginType()).child(u.getID()).child(reportID).setValue(0-System.currentTimeMillis());
+    }
+
+    public void addTimestamp(String reportID) {
+        databaseReference.child(reportID).setValue(0-System.currentTimeMillis());
+    }
 }

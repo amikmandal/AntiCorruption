@@ -6,8 +6,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/repairer_profile_photo"
         android:layout_margin="5dp" />
 
@@ -15,7 +16,7 @@
         android:id="@+id/repairer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/repairer_profile_photo"
         android:text="Unknown Name"
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/rating_linear_layout"
         android:layout_alignParentRight="true"
-        android:layout_margin="15sp">
+        android:layout_marginRight="15sp">
 
         <TextView
             android:id="@+id/repairer_rating"

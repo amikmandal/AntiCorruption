@@ -8,6 +8,10 @@ import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Authority;
 import com.gretel.anticorruption.model.Agent.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * This class is used to store files locally in Android. Uses SharedPreference.
  * @author Amik Mandal
@@ -141,4 +145,31 @@ public class LocalStorage {
         return true;
     }
 
+    public void addReportToUser(String reportID) {
+        String[] oldReports = loadReports();
+        ArrayList<String> newReports;
+        if(oldReports==null)
+            newReports = new ArrayList<>();
+        else
+            newReports = new ArrayList<String>(Arrays.asList(oldReports));
+        newReports.add(reportID);
+        saveReports(newReports.toArray(new String[0]));
+
+    }
+
+    private void saveReports(String[] reports) {
+        Gson gson = new Gson();
+        String json = gson.toJson(reports);
+        saveString("reports", json);
+    }
+
+    private String[] loadReports() {
+        Gson gson = new Gson();
+        String json = loadReportsJSON();
+        return gson.fromJson(json, String[].class);
+    }
+
+    private String loadReportsJSON() {
+        return loadString("reports");
+    }
 }
