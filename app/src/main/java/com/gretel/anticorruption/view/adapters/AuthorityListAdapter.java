@@ -19,7 +19,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapter.ViewHolder>{
+public class AuthorityListAdapter extends RecyclerView.Adapter<AuthorityListAdapter.ViewHolder>{
 
     private ArrayList<String> myProfilePhotos = new ArrayList<String>();
     private ArrayList<String> myRepairerNames = new ArrayList<String>();
@@ -27,7 +27,7 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     private ArrayList<String> mySpecialities = new ArrayList<String>();
     private Context myContext;
 
-    public RepairerListAdapter(List<Authority> data, Context context){
+    public AuthorityListAdapter(List<Authority> data, Context context){
         for(Authority temp: data){
             myProfilePhotos.add(temp.getDisplayPicture());
             myRepairerNames.add(temp.getName());
@@ -42,8 +42,8 @@ public class RepairerListAdapter extends RecyclerView.Adapter<RepairerListAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = mInflater.inflate(R.layout.holder_authority,viewGroup,false);
-        final RepairerListAdapter.ViewHolder mechanicHolder = new RepairerListAdapter.ViewHolder(row);
-        return  mechanicHolder;
+        final AuthorityListAdapter.ViewHolder authorityHolder = new AuthorityListAdapter.ViewHolder(row);
+        return  authorityHolder;
     }
 
     @Override

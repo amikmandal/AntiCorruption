@@ -1,7 +1,7 @@
 <RelativeLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:id="@+id/repairer_list_relative_layout"
+    android:id="@+id/report_relative_layout"
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -63,6 +63,7 @@
         android:textSize="13sp" />
 
     <LinearLayout
+        android:id="@+id/report_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -83,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center_vertical"
-            android:text="Upvote"
+            android:text="0"
             android:textStyle="bold" />
 
         <View
@@ -99,9 +100,19 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center_vertical"
-            android:text="Downvote"
+            android:text="0"
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/report_linear_layout"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@android:color/darker_gray"/>
 
 </RelativeLayout>

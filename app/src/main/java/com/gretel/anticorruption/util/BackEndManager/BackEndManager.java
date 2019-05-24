@@ -26,10 +26,24 @@ public interface BackEndManager {
      */
     void editUser(User user);
 
+    /**
+     * This method adds a new report to the database
+     * @param report specifies the report object
+     * @return reports the id assigned to the report by firebase
+     */
     String addReport(Report report);
 
+    /**
+     * This method connects the newly added report to the database of the user
+     * @param u specifies the user who created the report
+     * @param reportID specifies the reportID of the user
+     */
     void addReportToUser(User u, String reportID);
 
+    /**
+     * This method assigns a negative timestamp to every report
+     * @param reportID specifies the reportID of the user
+     */
     void addTimestamp(String reportID);
 
 }

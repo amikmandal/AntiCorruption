@@ -9,7 +9,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/repairer_list_recycler_view"
+        android:id="@+id/authority_list_recycler_view"
         >
     </android.support.v7.widget.RecyclerView>
 

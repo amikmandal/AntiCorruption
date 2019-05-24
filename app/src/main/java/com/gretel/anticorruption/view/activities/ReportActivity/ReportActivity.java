@@ -22,7 +22,9 @@ import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.view.activities.MainActivity.UserPrimaryActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class ReportActivity extends AppCompatActivity{
 
@@ -59,6 +61,7 @@ public class ReportActivity extends AppCompatActivity{
         String officer = myOfficerEdit.getText().toString();
         String place = myPlaceEdit.getText().toString();
         String reportText = myReport.getText().toString();
+        String date = new SimpleDateFormat("E MMMM d, yyyy", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
         if(officer.equals("")||place.equals("")||reportText.equals("")||myAuthority.equals("Select an Item")||myAuthority.equals("")){
             new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog))
@@ -72,8 +75,7 @@ public class ReportActivity extends AppCompatActivity{
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }else{
-            Report report = new Report(officer,myAuthority,place,Calendar.getInstance().getTime().toString(),reportText);
-            System.out.println("what what what: "+officer);
+            Report report = new Report(officer,myAuthority,place,date,reportText);
             addReport(report);
         }
     }

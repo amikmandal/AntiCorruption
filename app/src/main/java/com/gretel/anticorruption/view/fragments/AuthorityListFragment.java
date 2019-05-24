@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Authority;
-import com.gretel.anticorruption.view.adapters.RepairerListAdapter;
+import com.gretel.anticorruption.view.adapters.AuthorityListAdapter;
 import com.gretel.anticorruption.R;
 
 import java.util.ArrayList;
@@ -30,18 +30,18 @@ import java.util.List;
 public class AuthorityListFragment extends Fragment {
 
     private RecyclerView myRecyclerView;
-    private RepairerListAdapter myAdapter;
+    private AuthorityListAdapter myAdapter;
 
-    private DatabaseReference myDatabaseMechanics;
+    private DatabaseReference myAuthorityDatabase;
     private List<Authority> myAuthorityList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_repairer_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_authority_list,container,false);
 
         myAuthorityList = new ArrayList<>();
-        myDatabaseMechanics = FirebaseDatabase.getInstance().getReference("repairer");
+        myAuthorityDatabase = FirebaseDatabase.getInstance().getReference("repairer");
 
         initRecyclerView(myAuthorityList,view);
 
@@ -52,7 +52,7 @@ public class AuthorityListFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
-        myDatabaseMechanics.addValueEventListener(new ValueEventListener() {
+        myAuthorityDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -63,7 +63,7 @@ public class AuthorityListFragment extends Fragment {
                     Authority r = gson.fromJson(json, Authority.class);
 
                     myAuthorityList.add(r);
-                    myAdapter = new RepairerListAdapter(myAuthorityList, getActivity().getApplicationContext());
+                    myAdapter = new AuthorityListAdapter(myAuthorityList, getActivity().getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);
                 }
             }
@@ -84,8 +84,8 @@ public class AuthorityListFragment extends Fragment {
     private void initRecyclerView(List<Authority> authorities, View v)
     {
         //call RecyclerView
-        myRecyclerView = v.findViewById(R.id.repairer_list_recycler_view);
-        RepairerListAdapter adapter = new RepairerListAdapter(myAuthorityList,getActivity().getApplicationContext());
+        myRecyclerView = v.findViewById(R.id.authority_list_recycler_view);
+        AuthorityListAdapter adapter = new AuthorityListAdapter(myAuthorityList,getActivity().getApplicationContext());
         myRecyclerView.setAdapter(adapter);
 
         //check this
