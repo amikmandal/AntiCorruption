@@ -54,8 +54,8 @@ public class UserPrimaryActivity extends PrimaryActivity  {
 
     @Override
     protected void initializeFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.primary_fragment_container,new LatestFragment()).addToBackStack(HOME.toString()).commit();
-        myPrevFragment = new LatestFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.primary_fragment_container,new HomeFragment()).addToBackStack(HOME.toString()).commit();
+        myPrevFragment = new HomeFragment();
         myPrevFragmentID = myFragmentIDs.get(HOME);
         myCurrentFragmentID = myPrevFragmentID;
     }
