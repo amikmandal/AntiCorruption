@@ -98,6 +98,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/button_up"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_upvote"/>
@@ -115,6 +116,7 @@
             android:layout_height="30dp"/>
 
         <Button
+            android:id="@+id/button_down"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_downvote"/>

@@ -66,17 +66,32 @@ public class FirebaseManager {
         addUser(user,user.getLoginType());
     }
 
-    public String addReport(Report report){
+    public void addReport(Report report){
         Gson gson = new Gson();
         String json = gson.toJson(report);
-        String reportID = databaseReference.push().getKey();
+        String reportID = report.getReportID();
         databaseReference.child(reportID).child("data").setValue(json);
         databaseReference.child(reportID).child("timestamp").setValue(report.getTimestamp());
         databaseReference.child(reportID).child("rank").setValue(report.getDiff());
-        return reportID;
     }
 
     public void addReportToUser(User u, String reportID, Long timestamp) {
         databaseReference.child(u.getLoginType()).child(u.getID()).child(reportID).setValue(timestamp);
+    }
+
+    public void update(Report report, boolean vote) {
+        String reportID =  report.getReportID();
+        databaseReference.child(reportID).removeValue();
+        if(vote)
+            report.upvote();
+        else
+            report.downvote();
+        addReport(report);
+    }
+
+    public String getReportKey(Report report){
+        String reportID = databaseReference.push().getKey();
+        report.setReportID(reportID);
+        return reportID;
     }
 }

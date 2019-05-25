@@ -130,9 +130,10 @@ public class ReportActivity extends AppCompatActivity{
     private void addReport(Report report, User u){
 
         FirebaseManager firebaseManager = new FirebaseManager("reports",this);
-        String reportID = firebaseManager.addReport(report);
+        String reportID = firebaseManager.getReportKey(report);
+        firebaseManager.addReport(report);
 
-        LocalStorage localStorage = new LocalStorage(getApplicationContext());
+                LocalStorage localStorage = new LocalStorage(getApplicationContext());
 
         if(!myMode){
             firebaseManager = new FirebaseManager("reports by user",this);

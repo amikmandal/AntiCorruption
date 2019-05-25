@@ -2,6 +2,7 @@ package com.gretel.anticorruption.model.Agent;
 
 public class Report {
 
+    private String reportID;
     private String officer;
     private String authority;
     private String place;
@@ -13,6 +14,7 @@ public class Report {
     private Long timestamp;
 
     public Report(String author, String officer, String authority, String place, String reportDate, String report){
+        this.reportID = "0000 0000 0000 0000";
         this.author = author;
         this.officer = officer;
         this.authority = authority;
@@ -53,6 +55,10 @@ public class Report {
     public Long getDiff() { return down - up; }
 
     public Long getTimestamp() { return timestamp; }
+
+    public String getReportID() { return reportID; }
+
+    public void setReportID(String reportID) { this.reportID = reportID; }
 
     public void upvote(){
         up++;

@@ -26,7 +26,7 @@ import com.gretel.anticorruption.util.UserLoader;
 public abstract class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected enum FragmentType{
-        HOME,AUTHORITIES,FRIENDS,USER,COMPLAINT_TRACKER,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,FIND_FRIENDS,CONTACT_CUSTOMER,REPAIRER,
+        HOME,LATEST,HOT,FRIENDS,USER,COMPLAINT_TRACKER,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,FIND_FRIENDS,CONTACT_CUSTOMER,REPAIRER,
     }
 
     protected enum TransitionType {

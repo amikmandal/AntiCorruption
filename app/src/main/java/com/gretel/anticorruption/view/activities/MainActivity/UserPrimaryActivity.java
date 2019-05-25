@@ -9,16 +9,18 @@ import android.view.View;
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.view.activities.ReportActivity.ReportActivity;
 import com.gretel.anticorruption.view.fragments.HomeFragment;
+import com.gretel.anticorruption.view.fragments.HotFragment;
+import com.gretel.anticorruption.view.fragments.LatestFragment;
 import com.gretel.anticorruption.view.fragments.FriendsFragment;
-import com.gretel.anticorruption.view.fragments.AuthorityListFragment;
 import com.gretel.anticorruption.R;
 
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.AUTHORITIES;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.COMPLAINT_TRACKER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.FIND_FRIENDS;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.FRIENDS;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.HOME;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.HOT;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.LATEST;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.USER;
 
 /**
@@ -32,8 +34,9 @@ public class UserPrimaryActivity extends PrimaryActivity  {
     protected void createFragmentTypeMap() {
         myFragmentIDs = HashBiMap.create();
         myFragmentIDs.put(HOME,0);
-        myFragmentIDs.put(AUTHORITIES,1);
-        myFragmentIDs.put(FRIENDS,2);
+        myFragmentIDs.put(LATEST,1);
+        myFragmentIDs.put(HOT,2);
+        myFragmentIDs.put(FRIENDS,3);
     }
 
     @Override
@@ -51,8 +54,8 @@ public class UserPrimaryActivity extends PrimaryActivity  {
 
     @Override
     protected void initializeFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.primary_fragment_container,new HomeFragment()).addToBackStack(HOME.toString()).commit();
-        myPrevFragment = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.primary_fragment_container,new LatestFragment()).addToBackStack(HOME.toString()).commit();
+        myPrevFragment = new LatestFragment();
         myPrevFragmentID = myFragmentIDs.get(HOME);
         myCurrentFragmentID = myPrevFragmentID;
     }
@@ -77,9 +80,13 @@ public class UserPrimaryActivity extends PrimaryActivity  {
                 openNavFragment(new HomeFragment(), myFragmentIDs.get(HOME));
                 createFragment(R.id.primary_fragment_container,myFragmentIDs.get(HOME),new HomeFragment(),HOME.toString());
                 break;
-            case R.id.authorities:
-                openNavFragment(new AuthorityListFragment(), myFragmentIDs.get(AUTHORITIES));
-                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(AUTHORITIES),new AuthorityListFragment(),AUTHORITIES.toString());
+            case R.id.navigation_latest:
+                openNavFragment(new LatestFragment(), myFragmentIDs.get(LATEST));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(LATEST),new LatestFragment(),LATEST.toString());
+                break;
+            case R.id.navigation_hot:
+                openNavFragment(new HotFragment(), myFragmentIDs.get(HOT));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(HOT),new HotFragment(),HOT.toString());
                 break;
             case R.id.navigation_friends:
                 openNavFragment(new FriendsFragment(), myFragmentIDs.get(FRIENDS));

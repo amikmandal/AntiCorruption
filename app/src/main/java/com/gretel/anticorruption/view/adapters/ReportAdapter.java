@@ -7,21 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.model.Agent.Report;
+import com.gretel.anticorruption.util.FirebaseManager;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder>{
 
     private ArrayList<Report> myReports = new ArrayList<Report>();
     private Context myContext;
+
+    private FirebaseManager myFirebaseManager;
 
     public ReportAdapter(List<Report> data, Context context){
         myReports.addAll(data);
@@ -33,21 +33,39 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = mInflater.inflate(R.layout.holder_report,viewGroup,false);
+        myFirebaseManager = new FirebaseManager("reports",myContext);
         final ReportAdapter.ViewHolder reportHolder = new ReportAdapter.ViewHolder(row);
         return  reportHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.myOfficerText.setText(viewHolder.myOfficerText.getText()+myReports.get(position).getOfficer());
-        viewHolder.myAuthorityText.setText(viewHolder.myAuthorityText.getText()+myReports.get(position).getAuthority());
-        viewHolder.myPlaceText.setText(viewHolder.myPlaceText.getText()+myReports.get(position).getPlace());
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int position) {
+        setText(viewHolder,position);
+        viewHolder.myUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myFirebaseManager.update(myReports.get(position),true);
+                setText(viewHolder, position);
+            }
+        });
+        viewHolder.myDownButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myFirebaseManager.update(myReports.get(position),false);
+                setText(viewHolder, position);
+            }
+        });
+    }
+
+    private void setText(@NonNull ViewHolder viewHolder, int position) {
+        viewHolder.myOfficerText.setText("Officer: "+myReports.get(position).getOfficer());
+        viewHolder.myAuthorityText.setText("Of: "+myReports.get(position).getAuthority());
+        viewHolder.myPlaceText.setText("Location: "+myReports.get(position).getPlace());
         viewHolder.myReportText.setText(myReports.get(position).getReport());
-        viewHolder.myDateText.setText(viewHolder.myDateText.getText()+myReports.get(position).getReportDate());
-        viewHolder.myAuthorText.setText(viewHolder.myAuthorText.getText()+myReports.get(position).getAuthor());
+        viewHolder.myDateText.setText(myReports.get(position).getReportDate());
+        viewHolder.myAuthorText.setText("By "+myReports.get(position).getAuthor());
         viewHolder.myUpText.setText(myReports.get(position).getUp().toString());
         viewHolder.myDownText.setText(myReports.get(position).getDown().toString());
-
     }
 
     @Override
@@ -64,6 +82,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         TextView myAuthorText;
         TextView myUpText;
         TextView myDownText;
+        Button myUpButton;
+        Button myDownButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +95,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             myAuthorText=itemView.findViewById(R.id.text_author);
             myUpText=itemView.findViewById(R.id.text_up);
             myDownText=itemView.findViewById(R.id.text_down);
+            myUpButton=itemView.findViewById(R.id.button_up);
+            myDownButton=itemView.findViewById(R.id.button_down);
         }
     }
 }
