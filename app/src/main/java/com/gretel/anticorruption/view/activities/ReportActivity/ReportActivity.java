@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.model.Agent.Report;
 import com.gretel.anticorruption.model.Agent.User;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.view.activities.MainActivity.UserPrimaryActivity;
 
@@ -75,8 +75,16 @@ public class ReportActivity extends AppCompatActivity{
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }else{
-            Report report = new Report(officer,myAuthority,place,date,reportText);
-            addReport(report);
+            String username;
+            LocalStorage localStorage = new LocalStorage(getApplicationContext());
+            User u = localStorage.loadUser();
+            if(u==null||myMode){
+               username = "Anonymous";
+            }else{
+                username = u.getName();
+            }
+            Report report = new Report(username,officer,myAuthority,place,date,reportText);
+            addReport(report,u);
         }
     }
 
@@ -119,20 +127,16 @@ public class ReportActivity extends AppCompatActivity{
         });
     }
 
-    private void addReport(Report report){
+    private void addReport(Report report, User u){
 
         FirebaseManager firebaseManager = new FirebaseManager("reports",this);
         String reportID = firebaseManager.addReport(report);
 
-        firebaseManager = new FirebaseManager("reports by time", this);
-        firebaseManager.addTimestamp(reportID);
-
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
-        User u = localStorage.loadUser();
 
         if(!myMode){
             firebaseManager = new FirebaseManager("reports by user",this);
-            firebaseManager.addReportToUser(u,reportID);
+            firebaseManager.addReportToUser(u,reportID,report.getTimestamp());
         }
 
         localStorage.addReportToUser(reportID);

@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.gretel.anticorruption.view.activities.FormActivity.UserFormActivity;
 import com.gretel.anticorruption.view.activities.MainActivity.AuthorityPrimaryActivity;
 import com.gretel.anticorruption.view.activities.MainActivity.UserPrimaryActivity;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 import com.gretel.anticorruption.util.JSONParser;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.R;

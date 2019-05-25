@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.gretel.anticorruption.model.Agent.Agent;
 import com.gretel.anticorruption.model.Agent.User;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 
 abstract public class FormData {
 

@@ -21,7 +21,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.gretel.anticorruption.model.Agent.User;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.util.EditButtonListener;

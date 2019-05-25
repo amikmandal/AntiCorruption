@@ -19,7 +19,7 @@ import com.gretel.anticorruption.model.Chat.Chat;
 import com.gretel.anticorruption.model.Chat.StringText;
 import com.gretel.anticorruption.model.Agent.User;
 import com.gretel.anticorruption.view.adapters.ChatAdapter;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 import com.gretel.anticorruption.util.LocalStorage;
 
 import java.util.ArrayList;

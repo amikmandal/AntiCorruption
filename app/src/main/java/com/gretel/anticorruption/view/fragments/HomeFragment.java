@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.gretel.anticorruption.R;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
     private ReportAdapter myAdapter;
 
     private DatabaseReference myReportDatabase;
+    private Query myLastQuery;
     private List<Report> myReports;
 
     @Nullable
@@ -38,6 +40,7 @@ public class HomeFragment extends Fragment {
 
         myReports = new ArrayList<>();
         myReportDatabase = FirebaseDatabase.getInstance().getReference("reports");
+        myLastQuery = myReportDatabase.orderByChild("timestamp").limitToLast(2);
 
         initRecyclerView(view);
 
@@ -48,16 +51,15 @@ public class HomeFragment extends Fragment {
     public void onStart(){
         super.onStart();
         myReports.clear();
-        myReportDatabase.addValueEventListener(new ValueEventListener() {
+        myLastQuery.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
 
                     Gson gson = new Gson();
-                    String json = d.getValue(String.class);
+                    String json = d.child("data").getValue(String.class);
                     Report r = gson.fromJson(json, Report.class);
-
                     myReports.add(r);
                     myAdapter = new ReportAdapter(myReports, getActivity().getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);

@@ -1,4 +1,4 @@
-package com.gretel.anticorruption.util.BackEndManager;
+package com.gretel.anticorruption.util;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,14 +12,13 @@ import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Agent;
 import com.gretel.anticorruption.model.Agent.Report;
 import com.gretel.anticorruption.model.Agent.User;
-import com.gretel.anticorruption.util.LocalStorage;
 
 /**
  * This class is responsible of most of the Firebase tasks that can be done outside an activity.
  * @author Amik Mandal
  * @date 2/22/2019
  */
-public class FirebaseManager implements BackEndManager {
+public class FirebaseManager {
 
     private DatabaseReference databaseReference;
     private Context myContext;
@@ -71,15 +70,13 @@ public class FirebaseManager implements BackEndManager {
         Gson gson = new Gson();
         String json = gson.toJson(report);
         String reportID = databaseReference.push().getKey();
-        databaseReference.child(reportID).setValue(json);
+        databaseReference.child(reportID).child("data").setValue(json);
+        databaseReference.child(reportID).child("timestamp").setValue(report.getTimestamp());
+        databaseReference.child(reportID).child("rank").setValue(report.getDiff());
         return reportID;
     }
 
-    public void addReportToUser(User u, String reportID) {
-        databaseReference.child(u.getLoginType()).child(u.getID()).child(reportID).setValue(0-System.currentTimeMillis());
-    }
-
-    public void addTimestamp(String reportID) {
-        databaseReference.child(reportID).setValue(0-System.currentTimeMillis());
+    public void addReportToUser(User u, String reportID, Long timestamp) {
+        databaseReference.child(u.getLoginType()).child(u.getID()).child(reportID).setValue(timestamp);
     }
 }

@@ -2,38 +2,65 @@ package com.gretel.anticorruption.model.Agent;
 
 public class Report {
 
-    private String myOfficer;
-    private String myAuthority;
-    private String myPlace;
-    private String myReportDate;
-    private String myReport;
+    private String officer;
+    private String authority;
+    private String place;
+    private String reportDate;
+    private String report;
+    private String author;
+    private Long up;
+    private Long down;
+    private Long timestamp;
 
-    public Report(String officer, String authority, String place, String reportDate, String report){
-        myOfficer = officer;
-        myAuthority = authority;
-        myPlace = place;
-        myReportDate = reportDate;
-        myReport = report;
+    public Report(String author, String officer, String authority, String place, String reportDate, String report){
+        this.author = author;
+        this.officer = officer;
+        this.authority = authority;
+        this.place = place;
+        this.reportDate = reportDate;
+        this.report = report;
+        up = 0L;
+        down = 0L;
+        timestamp = 0 - System.currentTimeMillis();
     }
 
     public String getOfficer(){
-        return myOfficer;
+        return officer;
     }
 
     public String getAuthority(){
-        return myAuthority;
+        return authority;
     }
 
     public String getPlace(){
-        return myPlace;
+        return place;
     }
 
     public String getReportDate(){
-        return myReportDate;
+        return reportDate;
     }
 
     public String getReport(){
-        return myReport;
+        return report;
     }
+
+    public String getAuthor() { return author; }
+
+    public Long getUp() { return up; }
+
+    public Long getDown() { return down; }
+
+    public Long getDiff() { return down - up; }
+
+    public Long getTimestamp() { return timestamp; }
+
+    public void upvote(){
+        up++;
+    }
+
+    public void downvote(){
+        down++;
+    }
+
 
 }

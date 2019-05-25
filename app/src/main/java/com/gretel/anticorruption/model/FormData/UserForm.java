@@ -3,7 +3,7 @@ package com.gretel.anticorruption.model.FormData;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 
 /**
  * This class helps in keeping track of all the additional data we need for User which we are unable

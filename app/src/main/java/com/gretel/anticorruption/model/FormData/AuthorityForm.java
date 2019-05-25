@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Authority;
 import com.gretel.anticorruption.model.Agent.User;
-import com.gretel.anticorruption.util.BackEndManager.FirebaseManager;
+import com.gretel.anticorruption.util.FirebaseManager;
 
 public class AuthorityForm extends FormData {
 
