@@ -14,6 +14,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:textColor="#000000"
         android:text="Date: "
         android:textSize="13sp" />
 
@@ -28,6 +29,7 @@
         android:layout_marginStart="15dp"
         android:textStyle="bold"
         android:layout_below="@+id/text_date"
+        android:textColor="#000000"
         android:text="Officer: "
         android:textSize="20sp" />
 
@@ -41,6 +43,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="0dp"
+        android:textColor="#000000"
         android:text="Of: "
         android:textSize="15sp" />
 
@@ -54,6 +57,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="0dp"
+        android:textColor="#000000"
         android:text="Location: "
         android:textSize="15sp" />
 
@@ -67,6 +71,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
+        android:textColor="#000000"
         android:text="Today morning around9.20am, i was caught by khaki who has bargade in jollymarg road in kanjurmarg east i.e entrance of jollymarg road from JVLR. The man who has utter black skin and wearing spec demanded 2k for not having transfer receipt of other state (Karnataka) vehicle finally settled with 500 without bill as i didn't have patient to argue since i was in hurry to my office."
         android:textSize="13sp" />
 
@@ -81,6 +86,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
+        android:textColor="#000000"
         android:text="By "
         android:textSize="15sp" />
 

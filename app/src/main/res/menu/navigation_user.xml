@@ -17,7 +17,7 @@
         android:title="@string/title_hot" />
 
     <item
-        android:id="@+id/navigation_friends"
+        android:id="@+id/navigation_authorities"
         android:icon="@drawable/ic_people"
         android:title="@string/title_friends" />
 

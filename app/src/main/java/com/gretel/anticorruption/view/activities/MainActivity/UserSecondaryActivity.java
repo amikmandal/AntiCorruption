@@ -9,10 +9,8 @@ import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.view.fragments.ComplaintTrackerFragment;
 import com.gretel.anticorruption.view.fragments.ContactUsFragment;
-import com.gretel.anticorruption.view.fragments.FindFriendsFragment;
 import com.gretel.anticorruption.view.fragments.UserFragment;
 
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.FIND_FRIENDS;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.COMPLAINT_TRACKER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.USER;
@@ -25,7 +23,6 @@ public class UserSecondaryActivity extends SecondaryActivity {
         myFragmentIDs = HashBiMap.create();
         myFragmentIDs.put(USER,0);
         myFragmentIDs.put(COMPLAINT_TRACKER,1);
-        myFragmentIDs.put(FIND_FRIENDS,2);
         myFragmentIDs.put(CONTACT_US,3);
     }
 
@@ -42,9 +39,6 @@ public class UserSecondaryActivity extends SecondaryActivity {
                 break;
             case COMPLAINT_TRACKER:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(COMPLAINT_TRACKER),new ComplaintTrackerFragment(),COMPLAINT_TRACKER.toString());
-                break;
-            case FIND_FRIENDS:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(FIND_FRIENDS),new FindFriendsFragment(),FIND_FRIENDS.toString());
                 break;
             case CONTACT_US:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());
@@ -76,13 +70,9 @@ public class UserSecondaryActivity extends SecondaryActivity {
                 prepareForNewFragment(item);
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(USER),new UserFragment(),USER.toString());
                 break;
-            case R.id.nav_complaint_tracker:
+            case R.id.nav_my_reports:
                 prepareForNewFragment(item);
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(COMPLAINT_TRACKER),new ComplaintTrackerFragment(),COMPLAINT_TRACKER.toString());
-                break;
-            case R.id.nav_find_friends:
-                prepareForNewFragment(item);
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(FIND_FRIENDS),new FindFriendsFragment(),FIND_FRIENDS.toString());
                 break;
             case R.id.nav_contact_us:
                 prepareForNewFragment(item);

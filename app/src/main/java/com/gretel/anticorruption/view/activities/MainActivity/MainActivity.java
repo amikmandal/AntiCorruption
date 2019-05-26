@@ -26,7 +26,7 @@ import com.gretel.anticorruption.util.UserLoader;
 public abstract class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected enum FragmentType{
-        HOME,LATEST,HOT,FRIENDS,USER,COMPLAINT_TRACKER,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,FIND_FRIENDS,CONTACT_CUSTOMER,REPAIRER,
+        HOME,LATEST,HOT,AUTHORITIES,USER,COMPLAINT_TRACKER,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,CONTACT_CUSTOMER,REPAIRER,
     }
 
     protected enum TransitionType {
@@ -68,7 +68,7 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
                 intent = new Intent(getApplicationContext(),UserPrimaryActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_switch_to_repairer:
+            case R.id.nav_switch_to_authority:
                 LocalStorage localStorage = new LocalStorage(getApplicationContext());
                 if(!localStorage.checkIfRepairerPresent()){
                     intent = new Intent(getApplicationContext(), RepairerFormActivity.class);

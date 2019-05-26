@@ -34,8 +34,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         LayoutInflater mInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = mInflater.inflate(R.layout.holder_report,viewGroup,false);
         myFirebaseManager = new FirebaseManager("reports",myContext);
-        final ReportAdapter.ViewHolder reportHolder = new ReportAdapter.ViewHolder(row);
-        return  reportHolder;
+        return new ReportAdapter.ViewHolder(row);
     }
 
     @Override
