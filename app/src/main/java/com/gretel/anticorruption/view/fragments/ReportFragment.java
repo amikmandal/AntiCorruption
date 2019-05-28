@@ -16,9 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.model.Agent.Report;
+import com.gretel.anticorruption.model.Report.Report;
 import com.gretel.anticorruption.view.adapters.ReportAdapter;
 
 import java.util.ArrayList;
@@ -29,9 +28,12 @@ public abstract class ReportFragment extends Fragment {
     private RecyclerView myRecyclerView;
     private ReportAdapter myAdapter;
 
+    protected View myView;
+
+    protected ValueEventListener myListener;
     protected DatabaseReference myReportDatabase;
     protected Query myLastQuery;
-    private List<Report> myReports;
+    protected List<Report> myReports;
 
     @Nullable
     @Override
@@ -40,8 +42,11 @@ public abstract class ReportFragment extends Fragment {
 
         myReports = new ArrayList<>();
         myReportDatabase = FirebaseDatabase.getInstance().getReference("reports");
+        myListener = getListener();
         setQuery();
         //myLastQuery = myReportDatabase.orderByChild("timestamp").limitToLast(2);
+
+        myView = view;
 
         initRecyclerView(view);
 
@@ -56,15 +61,36 @@ public abstract class ReportFragment extends Fragment {
     public void onStart(){
         super.onStart();
         myReports.clear();
-        myLastQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        myLastQuery.addListenerForSingleValueEvent(myListener);
+    }
+
+    protected abstract void setText(Long count);
+
+    /**
+     * This method initializes the Recycler View for the home fragment
+     * @param v specifies the view to which the recycler view for the list will be attached
+     */
+    protected void initRecyclerView(View v)
+    {
+        //call RecyclerView
+        myRecyclerView = v.findViewById(R.id.report_recycler_view);
+        ReportAdapter adapter = new ReportAdapter(myReports,getActivity().getApplicationContext());
+        myRecyclerView.setAdapter(adapter);
+
+        //check this
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+    }
+
+    private ValueEventListener getListener(){
+        return new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot d: dataSnapshot.getChildren()) {
 
-                    Gson gson = new Gson();
-                    String json = d.child("data").getValue(String.class);
-                    Report r = gson.fromJson(json, Report.class);
+                setText(dataSnapshot.getChildrenCount());
+
+                for(DataSnapshot d: dataSnapshot.getChildren()) {
+                    Report r = d.getValue(Report.class);
                     myReports.add(r);
                     myAdapter = new ReportAdapter(myReports, getActivity().getApplicationContext());
                     myRecyclerView.setAdapter(myAdapter);
@@ -75,23 +101,7 @@ public abstract class ReportFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
-        });
-
-    }
-
-    /**
-     * This method initializes the Recycler View for the home fragment
-     * @param v specifies the view to which the recycler view for the list will be attached
-     */
-    private void initRecyclerView(View v)
-    {
-        //call RecyclerView
-        myRecyclerView = v.findViewById(R.id.latest_report_recycler_view);
-        ReportAdapter adapter = new ReportAdapter(myReports,getActivity().getApplicationContext());
-        myRecyclerView.setAdapter(adapter);
-
-        //check this
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        };
     }
 
 }

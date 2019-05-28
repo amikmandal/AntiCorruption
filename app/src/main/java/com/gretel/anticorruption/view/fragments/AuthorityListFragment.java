@@ -3,92 +3,69 @@ package com.gretel.anticorruption.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.gretel.anticorruption.model.Agent.Authority;
-import com.gretel.anticorruption.view.adapters.AuthorityListAdapter;
 import com.gretel.anticorruption.R;
 
-import java.util.ArrayList;
-import java.util.List;
+public class AuthorityListFragment extends ReportFragment {
 
-/**
- * This implements the Fragment to display a list of Repairers.
- * @author Amik Mandal
- */
-public class AuthorityListFragment extends Fragment {
+    private String mySelectedAuthority;
 
-    private RecyclerView myRecyclerView;
-    private AuthorityListAdapter myAdapter;
-
-    private DatabaseReference myAuthorityDatabase;
-    private List<Authority> myAuthorityList;
+    private TextView myReportCount;
+    private Spinner mySelectAuthority;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_authority_list,container,false);
 
-        myAuthorityList = new ArrayList<>();
-        myAuthorityDatabase = FirebaseDatabase.getInstance().getReference("repairer");
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        initRecyclerView(myAuthorityList,view);
+        myReportCount = view.findViewById(R.id.text_authority);
+        mySelectAuthority = view.findViewById(R.id.select_authority);
+
+        setSpinner();
 
         return view;
     }
 
     @Override
-    public void onStart(){
-        super.onStart();
-
-        myAuthorityDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot d: dataSnapshot.getChildren()) {
-
-                    Gson gson = new Gson();
-                    String json = d.getValue(String.class);
-                    Authority r = gson.fromJson(json, Authority.class);
-
-                    myAuthorityList.add(r);
-                    myAdapter = new AuthorityListAdapter(myAuthorityList, getActivity().getApplicationContext());
-                    myRecyclerView.setAdapter(myAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
+    protected void setQuery() {
+        myLastQuery = myReportDatabase.orderByChild("authority").equalTo(mySelectedAuthority).limitToFirst(100);
     }
 
-    /**
-     * This method initializes the Recycler View for the app
-     * @param d specifies the data object to be used to display the list of authorities
-     * @param v specifies the view to which the recycler view for the list will be attached
-     */
-    private void initRecyclerView(List<Authority> authorities, View v)
-    {
-        //call RecyclerView
-        myRecyclerView = v.findViewById(R.id.authority_list_recycler_view);
-        AuthorityListAdapter adapter = new AuthorityListAdapter(myAuthorityList,getActivity().getApplicationContext());
-        myRecyclerView.setAdapter(adapter);
+    public void setText(Long count) {
+        myReportCount.setText(count + " reports found");
+    }
 
-        //check this
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+    @Override
+    protected int getFragmentLayout() {
+        return R.layout.fragment_authority_list;
+    }
+
+    private void setSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.agencies, android.R.layout.simple_list_item_1);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySelectAuthority.setAdapter(adapter);
+        mySelectAuthority.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mySelectedAuthority = parent.getItemAtPosition(position).toString();
+                myReports.clear();
+                initRecyclerView(myView);
+                setQuery();
+                myLastQuery.addListenerForSingleValueEvent(myListener);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mySelectedAuthority = "Select an item";
+            }
+        });
     }
 }

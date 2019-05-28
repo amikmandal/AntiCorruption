@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.gretel.anticorruption.model.Agent.Agent;
-import com.gretel.anticorruption.model.Agent.Report;
+import com.gretel.anticorruption.model.Report.Report;
 import com.gretel.anticorruption.model.Agent.User;
 
 /**
@@ -67,12 +67,7 @@ public class FirebaseManager {
     }
 
     public void addReport(Report report){
-        Gson gson = new Gson();
-        String json = gson.toJson(report);
-        String reportID = report.getReportID();
-        databaseReference.child(reportID).child("data").setValue(json);
-        databaseReference.child(reportID).child("timestamp").setValue(report.getTimestamp());
-        databaseReference.child(reportID).child("rank").setValue(report.getDiff());
+        databaseReference.child(report.getId()).setValue(report);
     }
 
     public void addReportToUser(User u, String reportID, Long timestamp) {
@@ -80,7 +75,7 @@ public class FirebaseManager {
     }
 
     public void update(Report report, boolean vote) {
-        String reportID =  report.getReportID();
+        String reportID =  report.getId();
         databaseReference.child(reportID).removeValue();
         if(vote)
             report.upvote();
@@ -89,9 +84,9 @@ public class FirebaseManager {
         addReport(report);
     }
 
-    public String getReportKey(Report report){
+    public String getReportKey(){
         String reportID = databaseReference.push().getKey();
-        report.setReportID(reportID);
         return reportID;
     }
+
 }

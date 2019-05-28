@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.model.Agent.Report;
+import com.gretel.anticorruption.model.Report.Report;
 import com.gretel.anticorruption.util.FirebaseManager;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         viewHolder.myAuthorityText.setText("Of: "+myReports.get(position).getAuthority());
         viewHolder.myPlaceText.setText("Location: "+myReports.get(position).getPlace());
         viewHolder.myReportText.setText(myReports.get(position).getReport());
-        viewHolder.myDateText.setText(myReports.get(position).getReportDate());
+        viewHolder.myDateText.setText(myReports.get(position).getDate());
         viewHolder.myAuthorText.setText("By "+myReports.get(position).getAuthor());
         viewHolder.myUpText.setText(myReports.get(position).getUp().toString());
         viewHolder.myDownText.setText(myReports.get(position).getDown().toString());

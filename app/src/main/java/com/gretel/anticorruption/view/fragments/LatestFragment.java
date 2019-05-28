@@ -6,11 +6,16 @@ public class LatestFragment extends ReportFragment {
 
     @Override
     protected void setQuery() {
-        myLastQuery = myReportDatabase.orderByChild("timestamp").limitToLast(100);
+        myLastQuery = myReportDatabase.orderByChild("time").limitToLast(100);
     }
 
     @Override
     protected int getFragmentLayout() {
         return R.layout.fragment_latest;
+    }
+
+    @Override
+    protected void setText(Long count) {
+
     }
 }

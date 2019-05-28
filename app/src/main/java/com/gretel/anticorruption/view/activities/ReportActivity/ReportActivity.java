@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.model.Agent.Report;
+import com.gretel.anticorruption.model.Report.Report;
 import com.gretel.anticorruption.model.Agent.User;
 import com.gretel.anticorruption.util.FirebaseManager;
 import com.gretel.anticorruption.util.LocalStorage;
@@ -130,16 +130,16 @@ public class ReportActivity extends AppCompatActivity{
     private void addReport(Report report, User u){
 
         FirebaseManager firebaseManager = new FirebaseManager("reports",this);
-        String reportID = firebaseManager.getReportKey(report);
+        String reportID = firebaseManager.getReportKey();
+        report.setId(reportID);
+        report.setUser(u.getID());
         firebaseManager.addReport(report);
-
-                LocalStorage localStorage = new LocalStorage(getApplicationContext());
-
         if(!myMode){
             firebaseManager = new FirebaseManager("reports by user",this);
-            firebaseManager.addReportToUser(u,reportID,report.getTimestamp());
+            firebaseManager.addReportToUser(u,reportID,report.getTime());
         }
 
+        LocalStorage localStorage = new LocalStorage(getApplicationContext());
         localStorage.addReportToUser(reportID);
 
         Toast.makeText(this, reportID+" was added successfully", Toast.LENGTH_SHORT).show();
