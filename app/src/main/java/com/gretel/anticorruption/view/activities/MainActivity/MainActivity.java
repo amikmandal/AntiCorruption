@@ -26,7 +26,7 @@ import com.gretel.anticorruption.util.UserLoader;
 public abstract class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected enum FragmentType{
-        HOME,LATEST,HOT,AUTHORITIES,USER,COMPLAINT_TRACKER,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,CONTACT_CUSTOMER,REPAIRER,
+        HOME,LATEST,HOT,AUTHORITIES,USER,MY_REPORTS,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,CONTACT_CUSTOMER,REPAIRER,
     }
 
     protected enum TransitionType {
@@ -100,6 +100,8 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
      */
     protected void addUIElements() {
 
+        System.out.println("order check ---> MainActivity-addUIElements");
+
         UserLoader userLoader = new UserLoader(this,getApplicationContext());
         userLoader.execute();
 
@@ -131,6 +133,8 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
      * @param fragmentName specifies the fragment name to be associated with in the stack
      */
     protected void createFragment(int fragmentContainer, int fragmentID, Fragment fragment, String fragmentName){
+
+        System.out.println("order check ---> MainActivity-createFragment");
 
         TransitionType transitionType = determineTransition(fragmentID);
 

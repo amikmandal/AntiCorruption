@@ -32,19 +32,21 @@ public abstract class ReportFragment extends Fragment {
 
     protected ValueEventListener myListener;
     protected DatabaseReference myReportDatabase;
-    protected Query myLastQuery;
+    protected Query myQuery;
     protected List<Report> myReports;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        System.out.println("order check ---> ReportFragment-onCreateView");
+
         View view = inflater.inflate(getFragmentLayout(),container,false);
 
         myReports = new ArrayList<>();
         myReportDatabase = FirebaseDatabase.getInstance().getReference("reports");
         myListener = getListener();
         setQuery();
-        //myLastQuery = myReportDatabase.orderByChild("timestamp").limitToLast(2);
 
         myView = view;
 
@@ -59,9 +61,10 @@ public abstract class ReportFragment extends Fragment {
 
     @Override
     public void onStart(){
-        super.onStart();
+        System.out.println("order check ---> ReportFragment-onStart");
         myReports.clear();
-        myLastQuery.addListenerForSingleValueEvent(myListener);
+        super.onStart();
+        myQuery.addListenerForSingleValueEvent(myListener);
     }
 
     protected abstract void setText(Long count);

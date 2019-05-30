@@ -30,6 +30,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home,container,false);
 
+        System.out.println("order check ---> HomeFragment-onCreateView");
+
         myReportNumber = view.findViewById(R.id.reports_number);
         Button newReport = view.findViewById(R.id.new_report);
 
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
+        System.out.println("order check ---> HomeFragment-onStart");
         myReportDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override

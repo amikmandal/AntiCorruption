@@ -17,6 +17,7 @@ abstract public class SecondaryActivity extends MainActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("order check ---> SecondaryActivity-onCreate");
         createFragmentTypeMap();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setLayout();
@@ -36,6 +37,7 @@ abstract public class SecondaryActivity extends MainActivity{
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
+        System.out.println("order check ---> SecondaryActivity-onAttachFragment");
         if(fragment instanceof EditButtonListener){
             myEditButtonListener = (EditButtonListener) fragment;
         }

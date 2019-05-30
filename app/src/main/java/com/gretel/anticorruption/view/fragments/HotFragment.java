@@ -6,7 +6,7 @@ public class HotFragment extends ReportFragment {
 
     @Override
     protected void setQuery() {
-        myLastQuery = myReportDatabase.orderByChild("rank").limitToFirst(100);
+        myQuery = myReportDatabase.orderByChild("rank").limitToFirst(100);
     }
 
     @Override

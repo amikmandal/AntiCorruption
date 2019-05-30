@@ -6,7 +6,7 @@ public class LatestFragment extends ReportFragment {
 
     @Override
     protected void setQuery() {
-        myLastQuery = myReportDatabase.orderByChild("time").limitToLast(100);
+        myQuery = myReportDatabase.orderByChild("time").limitToLast(100);
     }
 
     @Override

@@ -65,6 +65,8 @@ public class UserFragment extends Fragment implements EditButtonListener {
 
         final View view = inflater.inflate(R.layout.fragment_user,container,false);
 
+        System.out.println("order check ---> UserFragment-onCreateView");
+
         myContext = getActivity().getApplicationContext();
 
         myProfilePhoto = view.findViewById(R.id.user_profile_photo);
@@ -202,6 +204,7 @@ public class UserFragment extends Fragment implements EditButtonListener {
     @Override
     public void onStart(){
         super.onStart();
+        System.out.println("order check ---> UserFragment-onStart");
         setDefault();
 
     }

@@ -4,9 +4,9 @@ import android.view.View;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.view.fragments.ComplaintTrackerFragment;
 import com.gretel.anticorruption.view.fragments.ContactUsFragment;
 import com.gretel.anticorruption.view.fragments.AuthorityFragment;
+import com.gretel.anticorruption.view.fragments.MyReportsFragment;
 
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_CUSTOMER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
@@ -35,7 +35,7 @@ public class AuthoritySecondaryActivity extends SecondaryActivity{
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(REPAIRER),new AuthorityFragment(),REPAIRER.toString());
                 break;
             case CONTACT_CUSTOMER:
-                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_CUSTOMER),new ComplaintTrackerFragment(),CONTACT_CUSTOMER.toString());
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_CUSTOMER),new MyReportsFragment(),CONTACT_CUSTOMER.toString());
                 break;
             case CONTACT_US:
                 createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());

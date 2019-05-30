@@ -36,7 +36,7 @@ public class AuthorityListFragment extends ReportFragment {
 
     @Override
     protected void setQuery() {
-        myLastQuery = myReportDatabase.orderByChild("authority").equalTo(mySelectedAuthority).limitToFirst(100);
+        myQuery = myReportDatabase.orderByChild("authority").equalTo(mySelectedAuthority).limitToFirst(100);
     }
 
     public void setText(Long count) {
@@ -59,7 +59,7 @@ public class AuthorityListFragment extends ReportFragment {
                 myReports.clear();
                 initRecyclerView(myView);
                 setQuery();
-                myLastQuery.addListenerForSingleValueEvent(myListener);
+                myQuery.addListenerForSingleValueEvent(myListener);
             }
 
             @Override

@@ -17,6 +17,7 @@ abstract public class PrimaryActivity extends MainActivity implements BottomNavi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("order check ---> PrimaryActivity-onCreate");
         createFragmentTypeMap();
         setLayout();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);

@@ -15,11 +15,11 @@ import com.gretel.anticorruption.view.fragments.LatestFragment;
 import com.gretel.anticorruption.R;
 
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.AUTHORITIES;
-import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.COMPLAINT_TRACKER;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.CONTACT_US;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.HOME;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.HOT;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.LATEST;
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.MY_REPORTS;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.USER;
 
 /**
@@ -53,6 +53,7 @@ public class UserPrimaryActivity extends PrimaryActivity  {
 
     @Override
     protected void initializeFragment() {
+        System.out.println("order check ---> UserPrimaryActivity-initializeFragment");
         getSupportFragmentManager().beginTransaction().replace(R.id.primary_fragment_container,new HomeFragment()).addToBackStack(HOME.toString()).commit();
         myPrevFragment = new HomeFragment();
         myPrevFragmentID = myFragmentIDs.get(HOME);
@@ -70,7 +71,7 @@ public class UserPrimaryActivity extends PrimaryActivity  {
                 openDrawerFragment(item,CONTACT_US);
                 break;
             case R.id.nav_my_reports:
-                openDrawerFragment(item,COMPLAINT_TRACKER);
+                openDrawerFragment(item,MY_REPORTS);
                 break;
             case R.id.navigation_home:
                 openNavFragment(new HomeFragment(), myFragmentIDs.get(HOME));
