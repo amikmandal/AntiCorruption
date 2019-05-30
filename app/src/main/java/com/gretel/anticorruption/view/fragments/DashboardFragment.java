@@ -26,8 +26,8 @@ public class DashboardFragment extends MainFragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AuthorityPrimaryActivity)getActivity()). openNavFragment(new RequestListFragment(), 1);
-                ((AuthorityPrimaryActivity)getActivity()).createFragment(R.id.primary_fragment_container,1,new RequestListFragment(),REQUEST_LIST.toString());
+                ((AuthorityPrimaryActivity)getActivity()). openNavFragment(new MyAuthorityFragment(), 1);
+                ((AuthorityPrimaryActivity)getActivity()).createFragment(R.id.primary_fragment_container,1,new MyAuthorityFragment(),REQUEST_LIST.toString());
             }
         };
     }

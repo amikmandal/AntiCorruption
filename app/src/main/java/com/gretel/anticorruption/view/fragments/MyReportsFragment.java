@@ -17,7 +17,7 @@ public class MyReportsFragment extends ReportFragment {
 
     @Override
     protected int getFragmentLayout() {
-        return R.layout.fragment_my_complaints;
+        return R.layout.fragment_my_reports;
     }
 
     @Override

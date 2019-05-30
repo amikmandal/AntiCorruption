@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.view.fragments.DashboardFragment;
-import com.gretel.anticorruption.view.fragments.RequestListFragment;
+import com.gretel.anticorruption.view.fragments.MyAuthorityFragment;
 
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.DASHBOARD;
 import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.REPAIRER;
@@ -47,8 +47,8 @@ public class AuthorityPrimaryActivity extends PrimaryActivity {
                 createFragment(R.id.primary_fragment_container,myFragmentIDs.get(DASHBOARD),new DashboardFragment(),DASHBOARD.toString());
                 break;
             case R.id.navigation_request_list:
-                openNavFragment(new RequestListFragment(), myFragmentIDs.get(REQUEST_LIST));
-                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(REQUEST_LIST),new RequestListFragment(),REQUEST_LIST.toString());
+                openNavFragment(new MyAuthorityFragment(), myFragmentIDs.get(REQUEST_LIST));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(REQUEST_LIST),new MyAuthorityFragment(),REQUEST_LIST.toString());
                 break;
             case R.id.nav_review:
                 break;

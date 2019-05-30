@@ -45,7 +45,7 @@ public class ByAuthorityFragment extends ReportFragment {
 
     @Override
     protected int getFragmentLayout() {
-        return R.layout.fragment_authority_list;
+        return R.layout.fragment_by_authority;
     }
 
     private void setSpinner() {
