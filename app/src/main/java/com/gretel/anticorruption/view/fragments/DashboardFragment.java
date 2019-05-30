@@ -1,20 +1,70 @@
 package com.gretel.anticorruption.view.fragments;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.gretel.anticorruption.R;
+import com.gretel.anticorruption.model.Agent.Authority;
+import com.gretel.anticorruption.util.LocalStorage;
+import com.gretel.anticorruption.view.activities.MainActivity.AuthorityPrimaryActivity;
 
-public class DashboardFragment extends Fragment {
+import static com.gretel.anticorruption.view.activities.MainActivity.MainActivity.FragmentType.REQUEST_LIST;
 
-    @Nullable
+public class DashboardFragment extends MainFragment {
+
+    private Query myQuery;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contact_us,container,false);
+    protected View.OnClickListener getButtonListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((AuthorityPrimaryActivity)getActivity()). openNavFragment(new RequestListFragment(), 1);
+                ((AuthorityPrimaryActivity)getActivity()).createFragment(R.id.primary_fragment_container,1,new RequestListFragment(),REQUEST_LIST.toString());
+            }
+        };
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_dashboard;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        LocalStorage localStorage = new LocalStorage(context);
+        Authority a = localStorage.loadAuthority();
+        DatabaseReference reportDatabase = FirebaseDatabase.getInstance().getReference("reports");
+        myQuery = reportDatabase.orderByChild("authority").equalTo(a.getAuthorityName());
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long reportCount = dataSnapshot.getChildrenCount();
+                if(reportCount>Integer.MAX_VALUE)
+                    reportCount=Integer.MAX_VALUE;
+                startCountAnimation((int) reportCount);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
     }
 }

@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkIfLoggedIn() {
         LocalStorage localStorage = new LocalStorage(getApplicationContext());
 
-        if(localStorage.checkIfRepairerPresent()){
+        if(localStorage.checkIfAuthorityPresent()){
             Intent intent = new Intent(getApplicationContext(),AuthorityPrimaryActivity.class);
             startActivity(intent);
         } else if(localStorage.checkIfUserPresent()){

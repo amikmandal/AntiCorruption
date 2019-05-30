@@ -18,14 +18,14 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.view.activities.FormActivity.RepairerFormActivity;
+import com.gretel.anticorruption.view.activities.FormActivity.AuthorityFormActivity;
 import com.gretel.anticorruption.view.activities.LoginActivity.LoginActivity;
 import com.gretel.anticorruption.util.LocalStorage;
 import com.gretel.anticorruption.util.UserLoader;
 
 public abstract class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    protected enum FragmentType{
+    public enum FragmentType{
         HOME,LATEST,HOT,AUTHORITIES,USER,MY_REPORTS,FRIEND_REQUESTS,CONTACT_US,DASHBOARD,REQUEST_LIST,CONTACT_CUSTOMER,REPAIRER,
     }
 
@@ -70,8 +70,8 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.nav_switch_to_authority:
                 LocalStorage localStorage = new LocalStorage(getApplicationContext());
-                if(!localStorage.checkIfRepairerPresent()){
-                    intent = new Intent(getApplicationContext(), RepairerFormActivity.class);
+                if(!localStorage.checkIfAuthorityPresent()){
+                    intent = new Intent(getApplicationContext(), AuthorityFormActivity.class);
                 } else {
                     intent = new Intent(getApplicationContext(), AuthorityPrimaryActivity.class);
                 }
@@ -132,7 +132,7 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
      * @param fragment specifies the fragment to be displayed
      * @param fragmentName specifies the fragment name to be associated with in the stack
      */
-    protected void createFragment(int fragmentContainer, int fragmentID, Fragment fragment, String fragmentName){
+    public void createFragment(int fragmentContainer, int fragmentID, Fragment fragment, String fragmentName){
 
         System.out.println("order check ---> MainActivity-createFragment");
 
@@ -164,7 +164,7 @@ public abstract class MainActivity extends AppCompatActivity implements Navigati
 
         String loginType = localStorage.loadString("loginType");
         localStorage.removeUser();
-        localStorage.removeRepairer();
+        localStorage.removeAuthority();
 
         if(loginType.equals("facebook")){
             LoginManager.getInstance().logOut();

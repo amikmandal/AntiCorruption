@@ -52,7 +52,10 @@ abstract public class FormActivity extends AppCompatActivity {
         if(userData.containsKey("index"))
             index = Integer.parseInt(userData.getString("index"));
 
-        doNecessary(tempFormData,index,userData);
+        int failCheck = doNecessary(tempFormData,index,userData);
+
+        if(failCheck==-1)
+            return;
 
         index++;
 
@@ -64,7 +67,7 @@ abstract public class FormActivity extends AppCompatActivity {
             if(myFormType==USER_FORM){
                 intent = new Intent(getApplicationContext(),UserFormActivity.class);
             } else {
-                intent = new Intent(getApplicationContext(),RepairerFormActivity.class);
+                intent = new Intent(getApplicationContext(),AuthorityFormActivity.class);
             }
             intent.putExtras(userData);
             startActivity(intent);
@@ -82,7 +85,7 @@ abstract public class FormActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),UserPrimaryActivity.class);
                 startActivity(intent);
             } else {
-                localStorage.saveRepairer((Authority) a);
+                localStorage.saveAuthority((Authority) a);
 
                 Intent intent = new Intent(getApplicationContext(),AuthorityPrimaryActivity.class);
                 startActivity(intent);
@@ -92,7 +95,7 @@ abstract public class FormActivity extends AppCompatActivity {
 
     }
 
-    protected abstract void doNecessary(FormData tempFormData, Integer index, Bundle userData);
+    protected abstract int doNecessary(FormData tempFormData, Integer index, Bundle userData);
 
 
 }

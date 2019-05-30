@@ -55,7 +55,7 @@ public class UserFormActivity extends FormActivity {
 
 
     @Override
-    protected void doNecessary(FormData tempFormData, Integer index, Bundle userData) {
+    protected int doNecessary(FormData tempFormData, Integer index, Bundle userData) {
 
         UserForm tempUserForm = (UserForm) tempFormData;
 
@@ -64,5 +64,7 @@ public class UserFormActivity extends FormActivity {
         } else {
             userData.putString(index.toString(), myInfo.getText().toString());
         }
+
+        return 0;
     }
 }

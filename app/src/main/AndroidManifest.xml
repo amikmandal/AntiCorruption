@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gretel.anticorruption.view.activities.FormActivity.RepairerFormActivity"
+            android:name="com.gretel.anticorruption.view.activities.FormActivity.AuthorityFormActivity"
             android:label="@string/title_activity_form"
             android:parentActivityName="com.gretel.anticorruption.view.activities.LoginActivity.LoginActivity"
             android:windowSoftInputMode="adjustResize">

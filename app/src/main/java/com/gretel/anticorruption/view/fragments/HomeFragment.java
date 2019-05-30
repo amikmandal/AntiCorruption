@@ -1,6 +1,7 @@
 package com.gretel.anticorruption.view.fragments;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,38 +21,36 @@ import com.google.firebase.database.ValueEventListener;
 import com.gretel.anticorruption.R;
 import com.gretel.anticorruption.view.activities.ReportActivity.ReportActivity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends MainFragment {
 
-    private TextView myReportNumber;
     private DatabaseReference myReportDatabase;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_home,container,false);
-
-        System.out.println("order check ---> HomeFragment-onCreateView");
-
-        myReportNumber = view.findViewById(R.id.reports_number);
-        Button newReport = view.findViewById(R.id.new_report);
-
+    public void onAttach(Context context) {
+        super.onAttach(context);
         myReportDatabase = FirebaseDatabase.getInstance().getReference("reports");
+    }
 
-        newReport.setOnClickListener(new View.OnClickListener() {
+    @Override
+    protected View.OnClickListener getButtonListener() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ReportActivity.class);
                 startActivity(intent);
             }
-        });
+        };
+    }
 
-        return view;
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_home;
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        System.out.println("order check ---> HomeFragment-onStart");
+
         myReportDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -68,16 +67,5 @@ public class HomeFragment extends Fragment {
             }
         });
 
-    }
-
-    private void startCountAnimation(int count) {
-        ValueAnimator animator = ValueAnimator.ofInt(count);
-        animator.setDuration(2000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                myReportNumber.setText(animation.getAnimatedValue().toString());
-            }
-        });
-        animator.start();
     }
 }

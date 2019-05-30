@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.view.activities.ReportActivity.ReportActivity;
-import com.gretel.anticorruption.view.fragments.AuthorityListFragment;
+import com.gretel.anticorruption.view.fragments.ByAuthorityFragment;
 import com.gretel.anticorruption.view.fragments.HomeFragment;
 import com.gretel.anticorruption.view.fragments.HotFragment;
 import com.gretel.anticorruption.view.fragments.LatestFragment;
@@ -41,7 +41,7 @@ public class UserPrimaryActivity extends PrimaryActivity  {
     @Override
     protected void setLayout() {
         setContentView(R.layout.activity_primary_user);
-        FloatingActionButton newReport = findViewById(R.id.new_report);
+        FloatingActionButton newReport = findViewById(R.id.main_button);
         newReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +86,8 @@ public class UserPrimaryActivity extends PrimaryActivity  {
                 createFragment(R.id.primary_fragment_container,myFragmentIDs.get(HOT),new HotFragment(),HOT.toString());
                 break;
             case R.id.navigation_authorities:
-                openNavFragment(new AuthorityListFragment(), myFragmentIDs.get(AUTHORITIES));
-                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(AUTHORITIES),new AuthorityListFragment(),AUTHORITIES.toString());
+                openNavFragment(new ByAuthorityFragment(), myFragmentIDs.get(AUTHORITIES));
+                createFragment(R.id.primary_fragment_container,myFragmentIDs.get(AUTHORITIES),new ByAuthorityFragment(),AUTHORITIES.toString());
                 break;
             case R.id.nav_review:
                 break;

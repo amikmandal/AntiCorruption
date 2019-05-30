@@ -7,9 +7,7 @@ import android.view.View;
 
 import com.google.common.collect.HashBiMap;
 import com.gretel.anticorruption.R;
-import com.gretel.anticorruption.view.fragments.HomeFragment;
 import com.gretel.anticorruption.view.fragments.ContactUsFragment;
-import com.gretel.anticorruption.view.fragments.LatestFragment;
 import com.gretel.anticorruption.view.fragments.MyReportsFragment;
 import com.gretel.anticorruption.view.fragments.UserFragment;
 
@@ -38,16 +36,13 @@ public class UserSecondaryActivity extends SecondaryActivity {
         System.out.println("order check ---> UserSecondary-initializeFragment");
         switch((FragmentType) getIntent().getSerializableExtra("openFragment")){
             case USER:
-                getSupportFragmentManager().beginTransaction().replace(R.id.secondary_fragment_container,new UserFragment()).addToBackStack(USER.toString()).commit();
-                myCurrentFragmentID = myFragmentIDs.get(USER);
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(USER),new UserFragment(),USER.toString());
                 break;
             case MY_REPORTS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.secondary_fragment_container,new MyReportsFragment()).addToBackStack(MY_REPORTS.toString()).commit();
-                myCurrentFragmentID = myFragmentIDs.get(MY_REPORTS);
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(MY_REPORTS),new MyReportsFragment(),MY_REPORTS.toString());
                 break;
             case CONTACT_US:
-                getSupportFragmentManager().beginTransaction().replace(R.id.secondary_fragment_container,new ContactUsFragment()).addToBackStack(CONTACT_US.toString()).commit();
-                myCurrentFragmentID = myFragmentIDs.get(CONTACT_US);
+                createFragment(R.id.secondary_fragment_container,myFragmentIDs.get(CONTACT_US),new ContactUsFragment(),CONTACT_US.toString());
                 break;
         }
     }
@@ -55,7 +50,6 @@ public class UserSecondaryActivity extends SecondaryActivity {
     @Override
     protected void addToolBarButton() {
         if(myCurrentFragmentID==null)
-            System.out.println("well fuck me");
         switch (myFragmentIDs.inverse().get(myCurrentFragmentID)){
             case USER:
                 myToolbarButton.setBackgroundResource(R.drawable.ic_edit);

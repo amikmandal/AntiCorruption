@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.gretel.anticorruption.R;
 
-public class AuthorityListFragment extends ReportFragment {
+public class ByAuthorityFragment extends ReportFragment {
 
     private String mySelectedAuthority;
 

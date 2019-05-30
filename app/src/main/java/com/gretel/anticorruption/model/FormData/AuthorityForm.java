@@ -10,19 +10,18 @@ import com.gretel.anticorruption.util.FirebaseManager;
 
 public class AuthorityForm extends FormData {
 
-    private static final String AUTHORITY_NAME = "What is the name of the authority you represent?";
-    private static final String POSITION = "What position do you hold in the authority?";
-    private static final String FIELD = "What field does your authority deal with it?";
+    private static final String AUTHORITY_NAME = "What is the authority you represent?";
+    private static final String POSITION = "What is your designation?";
 
     public AuthorityForm(Context context){
         super("user",context);
-        String[] requirements = {AUTHORITY_NAME,POSITION,FIELD};
+        String[] requirements = {AUTHORITY_NAME,POSITION};
         myRequirements = requirements;
     }
 
     @Override
     protected FirebaseManager getFirebaseDatabase(Context context) {
-        return new FirebaseManager("repairer", context);
+        return new FirebaseManager("authority", context);
     }
 
     @Override
@@ -40,11 +39,12 @@ public class AuthorityForm extends FormData {
                 case 1:
                     position = data.getString(Integer.toString(i));
                     break;
-                case 2:
-                    field = data.getString(Integer.toString(i));
-                    break;
             }
         }
-        myAgent = new Authority(u,authorityName,position,rating,field);
+        myAgent = new Authority(u,authorityName,position);
+    }
+
+    public static String getAuthorityName() {
+        return AUTHORITY_NAME;
     }
 }

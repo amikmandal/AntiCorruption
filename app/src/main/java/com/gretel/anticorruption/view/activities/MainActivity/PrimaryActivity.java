@@ -92,7 +92,7 @@ abstract public class PrimaryActivity extends MainActivity implements BottomNavi
      * @param prevFragment
      * @param prevID
      */
-    protected void openNavFragment(Fragment prevFragment, int prevID) {
+    public void openNavFragment(Fragment prevFragment, int prevID) {
         myPrevFragment = prevFragment;
         myPrevFragmentID = prevID;
     }

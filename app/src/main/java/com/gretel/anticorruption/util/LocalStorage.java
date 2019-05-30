@@ -98,47 +98,47 @@ public class LocalStorage {
     }
 
     /**
-     * Method to store an repairer locally
-     * @param r specifies the repairer to be saved
+     * Method to store an authority locally
+     * @param r specifies the authority to be saved
      */
-    public void saveRepairer(Authority r) {
+    public void saveAuthority(Authority r) {
 
         Gson gson = new Gson();
         String json = gson.toJson(r);
-        saveString("myRepairer", json);
+        saveString("myAuthority", json);
 
     }
 
     /**
      * Method to retrieve an user that is saved locally
-     * @return the repairer stored locally
+     * @return the authority stored locally
      */
-    public Authority loadRepairer(){
+    public Authority loadAuthority(){
 
         Gson gson = new Gson();
-        String json = loadRepairerJSON();
+        String json = loadAuthorityJSON();
         return gson.fromJson(json, Authority.class);
 
     }
 
-    public String loadRepairerJSON() {
-        return loadString("myRepairer");
+    public String loadAuthorityJSON() {
+        return loadString("myAuthority");
     }
 
     /**
      * Method to delete saved data of Authority
      */
-    public void removeRepairer(){
-        myEditor.remove("myRepairer").apply();
+    public void removeAuthority(){
+        myEditor.remove("myAuthority").apply();
     }
 
-    public void editRepairer(Authority r){
+    public void editAuthority(Authority r){
         removeUser();
-        saveRepairer(r);
+        saveAuthority(r);
     }
 
-    public boolean checkIfRepairerPresent(){
-        String checkJSON = loadRepairerJSON();
+    public boolean checkIfAuthorityPresent(){
+        String checkJSON = loadAuthorityJSON();
         if (checkJSON.equals("")){
             return false;
         }
